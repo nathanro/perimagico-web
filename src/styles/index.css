@@ -1,16 +1,20 @@
 :root {
-  /* Color Palette */
-  --color-primary: #89CFF0; /* Azul Baby */
-  --color-secondary: #FFD700; /* Amarillo */
-  --color-accent-orange: #FF8C00; /* Naranja */
-  --color-accent-magenta: #FF00FF; /* Magenta */
-  
-  /* Neutral Colors */
-  --color-bg: #0A0A0A;
-  --color-text: #FFFFFF;
-  --color-text-muted: #A0A0A0;
-  --color-card-bg: rgba(255, 255, 255, 0.05);
-  
+  /* Color Palette - Peri Mágico */
+  --color-primary: #89CFF0;
+  /* Azul Baby */
+  --color-secondary: #FFD700;
+  /* Amarillo */
+  --color-accent-orange: #FF8C00;
+  /* Naranja */
+  --color-accent-magenta: #FF00FF;
+  /* Magenta */
+
+  /* Structural Colors */
+  --color-black: #111111;
+  --color-white: #FFFFFF;
+  --color-gray-100: #F5F5F5;
+  --color-gray-800: #222222;
+
   /* Fonts */
   --font-main: 'Outfit', sans-serif;
 }
@@ -23,22 +27,41 @@
 
 body {
   font-family: var(--font-main);
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  background-color: var(--color-white);
+  color: var(--color-black);
   overflow-x: hidden;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
-  line-height: 1.2;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 800;
+  /* Use extra bold for that theme park look */
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+}
+
+h2 {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+h3 {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
 }
 
 a {
   text-decoration: none;
   color: inherit;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 button {
@@ -48,44 +71,56 @@ button {
   font-family: inherit;
 }
 
-/* Glassmorphism Utilities */
-.glass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-}
-
-.glass-dark {
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
 /* Base Layout Containers */
 .container {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 0 2rem;
 }
 
 .section-padding {
-  padding: 6rem 0;
+  padding: 5rem 0;
 }
 
-/* Typography Scale */
-.text-hero {
-  font-size: clamp(3rem, 8vw, 6rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
+/* Theme Park Specific Utilities */
+.bg-black-section {
+  background-color: var(--color-black);
+  color: var(--color-white);
 }
 
-.text-gradient {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent-magenta));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.bg-white-section {
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+
+/* Diagonal Background Shapes */
+.angled-bg-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.angled-shape {
+  position: absolute;
+  z-index: 0;
+  transform: skewY(-6deg);
+  transform-origin: 0;
+}
+
+/* Vibrant Typography */
+.text-magenta {
+  color: var(--color-accent-magenta);
+}
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-secondary {
+  color: var(--color-secondary);
+}
+
+.text-orange {
+  color: var(--color-accent-orange);
 }
 
 /* Buttons */
@@ -93,40 +128,69 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem 2rem;
-  font-weight: 600;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 800;
   border-radius: 99px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  gap: 0.5rem;
+  /* Pill shape */
+  transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 3px solid transparent;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
 }
 
 .btn-primary {
   background-color: var(--color-primary);
-  color: #000;
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(137, 207, 240, 0.3);
+  color: var(--color-black);
 }
 
 .btn-magenta {
   background-color: var(--color-accent-magenta);
-  color: #fff;
+  color: var(--color-white);
 }
 
-.btn-magenta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(255, 0, 255, 0.3);
+.btn-black {
+  background-color: var(--color-black);
+  color: var(--color-white);
 }
 
-.btn-outline {
+.btn-outline-yellow {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #fff;
+  border-color: var(--color-secondary);
+  color: var(--color-secondary);
 }
 
-.btn-outline:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: #fff;
+.btn-outline-yellow:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-black);
+}
+
+/* Cards */
+.card-solid {
+  background-color: var(--color-white);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border-radius: 0;
+  /* Funtastic uses sharp square cards or simple shapes */
+  overflow: hidden;
+}
+
+.card-vibrant {
+  background-color: var(--color-primary);
+  color: var(--color-black);
+  padding: 2.5rem;
+}
+
+/* Top Banner Bar */
+.top-notice-bar {
+  background-color: var(--color-primary);
+  color: var(--color-black);
+  text-align: center;
+  padding: 0.5rem;
+  font-weight: 700;
+  font-size: 0.9rem;
 }

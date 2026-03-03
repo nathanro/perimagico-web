@@ -1,87 +1,71 @@
 import { motion } from 'framer-motion';
-import { Zap, ShieldCheck, Heart, Sparkles } from 'lucide-react';
 import Layout from '../components/Layout';
 
 const Attractions = () => {
-    const categories = [
-        {
-            title: 'Grandes Emociones',
-            description: 'Nuestras atracciones más icónicas para los valientes.',
-            items: ['Guácala', 'Huracán', 'Globos', 'Fire Chief', 'Bumpo']
-        },
-        {
-            title: 'Aventura Junior',
-            description: 'Diversión perfecta para los más pequeños de la familia.',
-            items: ['Cactus', 'Canoa', 'Scrambler', 'Jumpin', 'Mini pista', 'Grillo', 'Barón rojo', 'Mini rueda', 'Dakar', 'Tazas', 'Apache', 'Mirror Maze', 'Volantín']
-        },
-        {
-            title: 'Xtreme & Especiales',
-            description: 'Desafíos adicionales para llevar la diversión al siguiente nivel.',
-            items: ['Tirolesa', 'Xtreme', 'Reptour', 'Carros eléctricos', 'Bungy', 'Sendero del Terror']
-        }
+    const attractions = [
+        { name: 'Guácala', img: 'https://images.unsplash.com/photo-1579515024463-e3a47b192c73?q=80&w=600&auto=format&fit=crop' },
+        { name: 'Huracán', img: 'https://images.unsplash.com/photo-1505312015328-912b5cd37eef?q=80&w=600&auto=format&fit=crop' },
+        { name: 'Ninja Parkour', img: 'https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?q=80&w=600&auto=format&fit=crop' },
+        { name: 'Inflatables', img: 'https://images.unsplash.com/photo-1555091763-718816f0ce35?q=80&w=600&auto=format&fit=crop' },
+        { name: 'Carros Eléctricos', img: 'https://images.unsplash.com/photo-1605806616949-1e87b487cb2a?q=80&w=600&auto=format&fit=crop' },
+        { name: 'Tirolesa', img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=600&auto=format&fit=crop' },
+        { name: 'Mini Rueda', img: 'https://images.unsplash.com/photo-1540304353456-11f87964e7c7?q=80&w=600&auto=format&fit=crop' },
+        { name: 'Bungy', img: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=600&auto=format&fit=crop' },
+        { name: 'Sendero del Terror', img: 'https://images.unsplash.com/photo-1560662105-57f8ad6ae2d1?q=80&w=600&auto=format&fit=crop' },
     ];
 
     return (
         <Layout>
-            <section className="pt-40 pb-20 bg-black">
+            <section className="pt-40 pb-20 bg-white">
+                <div className="container relative z-10 text-center mb-16">
+                    <h1 className="text-6xl md:text-8xl text-black font-black uppercase tracking-tighter mb-4">
+                        DESCUBRE LAS <br /><span className="text-magenta text-[1.2em]" style={{ color: 'var(--color-accent-magenta)' }}>ATRACCIONES</span>
+                    </h1>
+                    <div className="w-32 h-2 mx-auto bg-black mb-8" />
+                    <p className="text-xl font-bold max-w-3xl mx-auto text-black">
+                        Contamos con más de 10 atracciones principales, juegos extremos, infantiles y de destreza. Hay algo para cada miembro de la familia.
+                    </p>
+                </div>
+
+                {/* 6 Grid (based on Reference 4) */}
                 <div className="container">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-center max-w-3xl mx-auto mb-20"
-                    >
-                        <h1 className="text-6xl font-black mb-6">NUESTRAS <span className="text-gradient">ATRACCIONES</span></h1>
-                        <p className="text-text-muted text-lg">
-                            Desde emociones fuertes hasta aventuras suaves para los más pequeños.
-                            En Peri Mágico tenemos algo especial para cada miembro de la familia.
-                        </p>
-                    </motion.div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {attractions.map((attr, idx) => (
+                            <div key={idx} className="relative h-[300px] overflow-hidden group border-8 border-white shadow-2xl cursor-pointer">
+                                <img src={attr.img} alt={attr.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
 
-                    {categories.map((cat, catIdx) => (
-                        <div key={cat.title} className="mb-24">
-                            <div className="flex items-center gap-4 mb-10">
-                                <div className="h-px flex-1 bg-white/10" />
-                                <h2 className="text-2xl font-black tracking-widest uppercase">{cat.title}</h2>
-                                <div className="h-px flex-1 bg-white/10" />
-                            </div>
+                                {/* Colorful blocky overlay logic like Ninja Warrior Course block */}
+                                <div className="absolute inset-0 transition-colors duration-300 mix-blend-multiply opacity-50 group-hover:opacity-70"
+                                    style={{ backgroundColor: idx % 3 === 0 ? 'var(--color-accent-magenta)' : idx % 3 === 1 ? 'var(--color-primary)' : 'var(--color-secondary)' }}
+                                />
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                                {cat.items.map((item, idx) => (
-                                    <motion.div
-                                        key={item}
-                                        initial={{ opacity: 0, scale: 0.95 }}
-                                        whileInView={{ opacity: 1, scale: 1 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: idx * 0.05 }}
-                                        className="glass p-6 group hover:border-primary/40 transition-all cursor-default"
-                                    >
-                                        <div className="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                                            {catIdx === 0 ? <Zap className="text-magenta" size={24} /> : catIdx === 1 ? <Heart className="text-primary" size={24} /> : <ShieldCheck className="text-secondary" size={24} />}
-                                        </div>
-                                        <h3 className="text-xl font-bold mb-2 uppercase tracking-tight group-hover:text-white transition-colors">{item}</h3>
-                                        <p className="text-xs text-text-muted leading-relaxed">
-                                            Experimenta la adrenalina y la magia de {item} en un ambiente seguro y divertido.
-                                        </p>
-                                    </motion.div>
-                                ))}
-                            </div>
-                        </div>
-                    ))}
+                                <div className="absolute inset-0 flex items-center justify-center p-4 z-10">
+                                    <h3 className="text-white text-3xl font-black uppercase text-center drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] leading-tight flex-1">
+                                        {attr.name}
+                                    </h3>
 
-                    {/* Restrictions Info */}
-                    <div className="glass p-10 mt-20 bg-gradient-to-r from-red-500/5 to-transparent border-red-500/10">
-                        <h3 className="text-xl font-black mb-6 flex items-center gap-2">
-                            <Sparkles className="text-secondary" /> RESTRICCIONES DE SEGURIDAD
-                        </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm text-text-muted">
-                            <div className="space-y-2">
-                                <p><strong className="text-white uppercase">Tirolesa, Bungy y Xtreme:</strong> Mínimo 15 kg, máximo 60 kg.</p>
-                                <p><strong className="text-white uppercase">Carros eléctricos:</strong> Mínimo 15 kg, máximo 40 kg.</p>
+                                    <div className="absolute bottom-4 right-4 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-4 group-hover:translate-y-0">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M5 12h14m-7-7 7 7-7 7" />
+                                        </svg>
+                                    </div>
+                                </div>
                             </div>
-                            <p>
-                                * Por seguridad, algunas atracciones tienen restricciones de altura y peso.
-                                Favor de consultar con nuestro staff antes de abordar.
+                        ))}
+                    </div>
+
+                    {/* Pricing Addons Notice block, heavy styled */}
+                    <div className="mt-20 p-12 bg-black border-4 border-secondary text-white transform rotate-1 scale-100 hover:scale-105 transition-transform flex flex-col md:flex-row items-center justify-between">
+                        <div className="md:w-2/3 mb-6 md:mb-0">
+                            <h3 className="text-4xl font-black uppercase mb-4 text-secondary" style={{ color: 'var(--color-secondary)' }}>Atracciones & Adicionales</h3>
+                            <p className="font-bold text-lg leading-relaxed">
+                                Juegos individuales de chicos ($40) y grandes ($50). Actividades como Reptour, Virtual, Cerámica y Trampolines tienen costo preferencial con Brazalete. Las ventas individuales comienzan a partir de las 06:00 PM.
                             </p>
+                        </div>
+                        <div>
+                            <button className="btn btn-magenta text-xl py-4 px-8 border-4 border-transparent hover:border-white">
+                                Ver Adicionales
+                            </button>
                         </div>
                     </div>
                 </div>

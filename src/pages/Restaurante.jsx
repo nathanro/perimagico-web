@@ -1,81 +1,61 @@
 import { motion } from 'framer-motion';
-import { Utensils, Sandwich, Pizza as PizzaIcon, Coffee, Info } from 'lucide-react';
+import { Utensils, Pizza as PizzaIcon, Coffee } from 'lucide-react';
 import Layout from '../components/Layout';
 
 const Restaurante = () => {
     const menu = [
         { category: 'Pizzas', items: ['Pepperoni Clásica', 'Hawaiana Tropical', 'Tres Quesos', 'Vegetariana Premium'] },
-        { category: 'Sandwiches & Snacks', items: ['Club Sandwich', 'Panini Italiano', 'Nachos con Queso', 'Papas a la Francesa'] },
+        { category: 'Snacks', items: ['Club Sandwich', 'Panini Italiano', 'Nachos con Queso', 'Papas a la Francesa'] },
         { category: 'Bebidas', items: ['Refrescos 2L', 'Aguas Frescas', 'Malteadas', 'Café & Té'] },
     ];
 
     return (
         <Layout>
-            <section className="pt-40 pb-24 bg-black">
-                <div className="container">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="flex flex-col md:flex-row gap-12 items-center mb-24"
-                    >
-                        <div className="flex-1">
-                            <span className="text-primary font-bold tracking-widest uppercase mb-4 block" style={{ color: 'var(--color-primary)' }}>Gastronomía</span>
-                            <h1 className="text-6xl font-black mb-6 uppercase">FANTASTIC <span className="text-gradient">FOOD BAR</span></h1>
-                            <p className="text-text-muted text-lg mb-8">
-                                Toda esa energía gastada saltando, bailando y escalando en nuestras atracciones necesita ser repuesta.
-                                Disfruta de nuestra selección de comida favorita para toda la familia.
-                            </p>
-                            <div className="flex gap-4">
-                                <button className="btn btn-primary">VER MENÚ COMPLETO</button>
-                            </div>
-                        </div>
-                        <div className="flex-1 h-[500px] w-full relative rounded-3xl overflow-hidden glass">
-                            <img
-                                src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=2070&auto=format&fit=crop"
-                                alt="Food Bar Pizza"
-                                className="w-full h-full object-cover"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-                        </div>
-                    </motion.div>
+            {/* Header section identical to Funtastic Depot image */}
+            <section className="bg-white pt-40 pb-12 relative overflow-hidden flex flex-col items-center">
+                <div className="w-full h-8 bg-black mb-8 transform -skew-y-2 absolute top-32 z-0" />
 
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        {menu.map((cat, idx) => (
-                            <motion.div
-                                key={cat.category}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: idx * 0.1 }}
-                                className="glass p-8"
-                            >
-                                <div className="flex items-center gap-3 mb-8 pb-4 border-b border-white/10">
-                                    {idx === 0 ? <PizzaIcon /> : idx === 1 ? <Utensils /> : <Coffee />}
-                                    <h3 className="text-2xl font-black uppercase text-secondary" style={{ color: 'var(--color-secondary)' }}>{cat.category}</h3>
-                                </div>
-                                <ul className="space-y-4">
-                                    {cat.items.map((item) => (
-                                        <li key={item} className="flex justify-between items-center group">
-                                            <span className="font-bold group-hover:text-primary transition-colors">{item}</span>
-                                            <div className="h-px flex-1 mx-4 bg-white/5 group-hover:bg-white/20" />
-                                        </li>
-                                    ))}
-                                </ul>
-                            </motion.div>
-                        ))}
+                <div className="bg-magenta p-10 text-white w-11/12 md:w-3/4 max-w-5xl relative z-10 transform -rotate-2 shadow-[15px_15px_0_0_#000] border-4 border-black mb-16" style={{ backgroundColor: 'var(--color-accent-magenta)' }}>
+                    <h1 className="text-5xl md:text-8xl font-black uppercase mb-6 tracking-tighter text-center">PERI MÁGICO<br /><span className="text-secondary" style={{ color: 'var(--color-secondary)' }}>FOOD BAR</span></h1>
+                    <p className="font-bold text-xl md:text-2xl text-center leading-relaxed">
+                        ¡La diversión da hambre! Disfruta de una rebanada de pizza, tu panini favorito, papas fritas y mucho más.
+                    </p>
+                </div>
+
+                <div className="container grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div className="relative h-[400px] border-8 border-black shadow-[15px_15px_0_0_var(--color-primary)] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=2070&auto=format&fit=crop" className="w-full h-full object-cover" alt="Pizza" />
+                        <div className="absolute top-4 left-4 bg-primary text-black font-black uppercase px-6 py-2 text-2xl border-2 border-black transform -rotate-3" style={{ backgroundColor: 'var(--color-primary)' }}>
+                            Deli!
+                        </div>
                     </div>
 
-                    <div className="mt-20 p-8 glass text-center border-orange-500/20 bg-orange-500/5">
-                        <h4 className="text-xl font-bold mb-4 flex items-center justify-center gap-2">
-                            <Info className="text-orange-500" /> OPCIONES PARA MIEMBROS
-                        </h4>
-                        <p className="text-text-muted text-sm max-w-2xl mx-auto">
-                            Nuestros miembros disfrutan de descuentos exclusivos y promociones especiales en el Food Bar todos los días.
-                            ¡Pregunta por nuestras membresías en recepción!
-                        </p>
+                    <div className="space-y-8">
+                        {menu.map((cat, idx) => (
+                            <div key={idx} className="bg-black text-white p-8 border-4 border-white shadow-[10px_10px_0_0_var(--color-secondary)]">
+                                <div className="flex items-center gap-4 mb-6 border-b-4 border-white/20 pb-4">
+                                    {idx === 0 ? <PizzaIcon size={32} className="text-secondary" style={{ color: 'var(--color-secondary)' }} /> : idx === 1 ? <Utensils size={32} className="text-magenta" style={{ color: 'var(--color-accent-magenta)' }} /> : <Coffee size={32} className="text-primary" style={{ color: 'var(--color-primary)' }} />}
+                                    <h3 className="text-4xl font-black uppercase">{cat.category}</h3>
+                                </div>
+                                <ul className="space-y-3 font-bold text-lg">
+                                    {cat.items.map(item => <li key={item}>• {item}</li>)}
+                                </ul>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>
+
+            {/* Membership Banner */}
+            <section className="bg-black text-white py-12 border-y-8 border-primary" style={{ borderColor: 'var(--color-primary)' }}>
+                <div className="container text-center">
+                    <h2 className="text-4xl font-black uppercase mb-4 text-secondary" style={{ color: 'var(--color-secondary)' }}>Beneficios de Membresía</h2>
+                    <p className="text-xl font-bold max-w-3xl mx-auto">
+                        ¡Nuestros miembros obtienen el 15% de descuento en el Food Bar todos los días! Pregunta en taquilla cómo obtener tu tarjeta.
+                    </p>
+                </div>
+            </section>
+
         </Layout>
     );
 };
