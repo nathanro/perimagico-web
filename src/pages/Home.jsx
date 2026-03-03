@@ -5,10 +5,10 @@ import Layout from '../components/Layout';
 const Home = () => {
 
     const experienceCards = [
-        { title: 'Atracciones Extremas', img: 'https://images.unsplash.com/photo-1540304353456-11f87964e7c7?q=80&w=600&auto=format&fit=crop', color: 'bg-primary' },
-        { title: 'Experiencia', img: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=600&auto=format&fit=crop', color: 'bg-magenta' },
-        { title: 'Magia', desc: 'Es una presentación mágica que sumerge a la audiencia en la fiesta de sus sueños.', img: 'https://images.unsplash.com/photo-1560662105-57f8ad6ae2d1?q=80&w=600&auto=format&fit=crop', color: 'bg-orange-500' },
-        { title: 'Familia', img: 'https://images.unsplash.com/photo-1601758228041-f3b18d2daeb9?q=80&w=600&auto=format&fit=crop', color: 'bg-secondary' },
+        { title: 'Atracciones Extremas', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-1.webp', color: 'bg-primary' },
+        { title: 'Experiencia', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-2.webp', color: 'bg-magenta' },
+        { title: 'Magia', desc: 'Es una presentación mágica que sumerge a la audiencia en la fiesta de sus sueños.', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-3.webp', color: 'bg-orange-500' },
+        { title: 'Familia', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-4.webp', color: 'bg-secondary' },
     ];
 
     const pricingPackages = [
@@ -37,12 +37,12 @@ const Home = () => {
     ];
 
     const attractionsPreview = [
-        { name: 'Guácala', img: 'https://images.unsplash.com/photo-1579515024463-e3a47b192c73?q=80&w=600&auto=format&fit=crop' },
-        { name: 'Ninja Parkour', img: 'https://images.unsplash.com/photo-1505312015328-912b5cd37eef?q=80&w=600&auto=format&fit=crop' },
-        { name: 'Inflatables', img: 'https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?q=80&w=600&auto=format&fit=crop' },
-        { name: 'Carros Eléctricos', img: 'https://images.unsplash.com/photo-1555091763-718816f0ce35?q=80&w=600&auto=format&fit=crop' },
-        { name: 'Sendero del Terror', img: 'https://images.unsplash.com/photo-1605806616949-1e87b487cb2a?q=80&w=600&auto=format&fit=crop' },
-        { name: 'Food Bar', img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=600&auto=format&fit=crop' },
+        { name: 'Guácala', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-5.webp' },
+        { name: 'Ninja Parkour', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-6.webp' },
+        { name: 'Inflatables', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-7.webp' },
+        { name: 'Carros Eléctricos', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-8.webp' },
+        { name: 'Sendero del Terror', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-9.webp' },
+        { name: 'Food Bar', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/pizza.png' },
     ];
 
     return (
@@ -157,8 +157,8 @@ const Home = () => {
                         nuggets y más.
                     </p>
                 </div>
-                <div className="w-full lg:w-2/3 h-[500px] absolute right-0 top-0 z-0 hidden lg:block">
-                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=2070&auto=format&fit=crop" className="w-full h-full object-cover" alt="Pizza" />
+                <div className="w-full lg:w-2/3 h-[500px] absolute right-0 top-0 z-0 hidden lg:block bg-black flex items-center justify-center p-8">
+                    <img src="https://piccolomondo.com.mx/wp-content/uploads/2024/01/pizza.png" className="w-auto h-full max-h-[400px] object-contain drop-shadow-2xl transform rotate-3" alt="Pizza" />
                 </div>
             </section>
 

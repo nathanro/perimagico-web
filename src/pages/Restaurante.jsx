@@ -23,8 +23,8 @@ const Restaurante = () => {
                 </div>
 
                 <div className="container grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                    <div className="relative h-[400px] border-8 border-black shadow-[15px_15px_0_0_var(--color-primary)] overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=2070&auto=format&fit=crop" className="w-full h-full object-cover" alt="Pizza" />
+                    <div className="relative h-[400px] border-8 border-black shadow-[15px_15px_0_0_var(--color-primary)] overflow-hidden bg-black flex items-center justify-center p-8">
+                        <img src="https://piccolomondo.com.mx/wp-content/uploads/2024/01/pizza.png" className="w-auto h-full max-h-[300px] object-contain drop-shadow-2xl" alt="Pizza" />
                         <div className="absolute top-4 left-4 bg-primary text-black font-black uppercase px-6 py-2 text-2xl border-2 border-black transform -rotate-3" style={{ backgroundColor: 'var(--color-primary)' }}>
                             Deli!
                         </div>

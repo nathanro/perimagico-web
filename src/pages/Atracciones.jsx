@@ -3,15 +3,15 @@ import Layout from '../components/Layout';
 
 const Attractions = () => {
     const attractions = [
-        { name: 'Guácala', img: 'https://images.unsplash.com/photo-1579515024463-e3a47b192c73?q=80&w=600&auto=format&fit=crop' },
-        { name: 'Huracán', img: 'https://images.unsplash.com/photo-1505312015328-912b5cd37eef?q=80&w=600&auto=format&fit=crop' },
-        { name: 'Ninja Parkour', img: 'https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?q=80&w=600&auto=format&fit=crop' },
-        { name: 'Inflatables', img: 'https://images.unsplash.com/photo-1555091763-718816f0ce35?q=80&w=600&auto=format&fit=crop' },
-        { name: 'Carros Eléctricos', img: 'https://images.unsplash.com/photo-1605806616949-1e87b487cb2a?q=80&w=600&auto=format&fit=crop' },
-        { name: 'Tirolesa', img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=600&auto=format&fit=crop' },
-        { name: 'Mini Rueda', img: 'https://images.unsplash.com/photo-1540304353456-11f87964e7c7?q=80&w=600&auto=format&fit=crop' },
-        { name: 'Bungy', img: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=600&auto=format&fit=crop' },
-        { name: 'Sendero del Terror', img: 'https://images.unsplash.com/photo-1560662105-57f8ad6ae2d1?q=80&w=600&auto=format&fit=crop' },
+        { name: 'Guácala', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-5.webp' },
+        { name: 'Huracán', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-6.webp' },
+        { name: 'Ninja Parkour', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-7.webp' },
+        { name: 'Inflatables', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-8.webp' },
+        { name: 'Carros Eléctricos', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-9.webp' },
+        { name: 'Tirolesa', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-10.webp' },
+        { name: 'Mini Rueda', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-11.webp' },
+        { name: 'Bungy', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-12.webp' },
+        { name: 'Sendero del Terror', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-13.webp' },
     ];
 
     return (

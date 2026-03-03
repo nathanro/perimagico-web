@@ -7,7 +7,7 @@ const Hero = () => {
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-black/40 z-10" />
                 <img
-                    src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?q=80&w=2070&auto=format&fit=crop"
+                    src="https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1.webp"
                     alt="Peri Mágico Experiences"
                     className="w-full h-full object-cover"
                 />
