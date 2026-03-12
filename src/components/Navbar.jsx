@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Play } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -12,57 +12,76 @@ const Navbar = () => {
     }, []);
 
     const navLinks = [
-        { name: 'ATRACCIONES', path: '#atracciones' },
-        { name: 'PRECIOS', path: '#precios' },
-        { name: 'CONTACTO', path: '#contacto' },
+        { name: 'Atracciones', path: '#atracciones' },
+        { name: 'Waiver', path: '#' },
+        { name: 'Precios', path: '#precios' },
+        { name: 'Membresía', path: '#membresia' },
+        { name: 'Trabaja con Nosotros', path: '#' },
+        { name: 'Eventos y Grupos', path: '#eventos' },
+        { name: 'Franquicia', path: '#' },
+        { name: 'FAQs', path: '#' },
+        { name: 'Contacto', path: '#contacto' },
     ];
 
     return (
         <div className="fixed w-full z-50 flex flex-col">
-            {/* Top Promo Banner (Primary/Green mapping) */}
-            <div className="bg-primary text-white text-center font-bold text-[13px] md:text-sm py-2 tracking-wider uppercase">
+            {/* Top Promo Banner (Green with Yellow Text like Funtastic) */}
+            <div className="bg-[#4CAF50] text-[#FFD700] text-center font-bold text-[13px] md:text-sm py-2 tracking-wider uppercase shadow-md relative z-10">
                 ¡La magia del fin de semana comienza aquí!
             </div>
 
             {/* Main Navbar (Solid Black) */}
             <nav className={`bg-black transition-all duration-300 ${isScrolled ? 'py-2 shadow-lg' : 'py-3'}`}>
-                <div className="container flex justify-between items-center">
+                <div className="container flex justify-between items-center gap-4">
                     
-                    {/* Left: Logo & Sub-Nav */}
-                    <div className="flex flex-col items-start gap-1">
-                        <a href="#top" className="flex-shrink-0 flex items-center h-12 md:h-14">
+                    {/* Left: Logo */}
+                    <div className="flex-shrink-0">
+                        <a href="#top" className="flex items-center h-12 md:h-14">
                             <img
                                 src="https://piccolomondo.com.mx/wp-content/uploads/2024/01/Recurso-1-e1705974571200.png"
                                 alt="Peri Mágico Logo"
                                 className="h-full object-contain"
                             />
                         </a>
-                        {/* Sub-Navigation (Call, Map, Contact) - Only visible on desktop like Funtastic */}
-                        <div className="hidden md:flex items-center gap-5 mt-1">
-                            <a href="tel:5558182348" className="text-white text-[10px] md:text-xs font-bold uppercase flex items-center gap-1 hover:text-white/80 transition-colors">
-                                <Play size={10} fill="white" strokeWidth={0} /> Llamar
-                            </a>
-                            <a href="#ubicacion" className="text-white text-[10px] md:text-xs font-bold uppercase flex items-center gap-1 hover:text-white/80 transition-colors">
-                                <Play size={10} fill="white" strokeWidth={0} /> Mapa
-                            </a>
-                            <a href="#contacto" className="text-white text-[10px] md:text-xs font-bold uppercase flex items-center gap-1 hover:text-white/80 transition-colors">
-                                <Play size={10} fill="white" strokeWidth={0} /> Contacto
-                            </a>
-                        </div>
                     </div>
 
-                    {/* Right: Hamburger Menu */}
-                    <button className="text-white p-2 hover:opacity-80 transition-opacity" onClick={() => setIsOpen(!isOpen)}>
-                        <Menu size={36} strokeWidth={1.5} />
-                    </button>
+                    {/* Middle: Desktop Navigation Links */}
+                    <div className="hidden lg:flex items-center gap-4 xl:gap-5 flex-wrap justify-center flex-1 ml-4">
+                        {navLinks.map((link) => (
+                            <a 
+                                key={link.name} 
+                                href={link.path}
+                                className="text-white text-[11px] xl:text-xs font-bold hover:text-secondary transition-colors uppercase whitespace-nowrap"
+                            >
+                                {link.name}
+                            </a>
+                        ))}
+                    </div>
+
+                    {/* Right: CTAs and Mobile Menu Toggle */}
+                    <div className="flex items-center gap-3">
+                        <div className="hidden md:flex items-center gap-2">
+                            <a href="#" className="bg-[#22c55e] border-2 border-[#22c55e] text-white px-4 py-2 md:px-5 md:py-2 rounded-full font-bold text-xs hover:bg-transparent hover:text-[#22c55e] transition-all uppercase whitespace-nowrap flex items-center justify-center">
+                                Tour Virtual
+                            </a>
+                            <a href="#precios" className="bg-[#dc2626] border-2 border-[#dc2626] text-white px-4 py-2 md:px-5 md:py-2 rounded-full font-bold text-xs hover:bg-transparent hover:text-[#dc2626] transition-all uppercase whitespace-nowrap flex items-center justify-center">
+                                Reservar
+                            </a>
+                        </div>
+                        
+                        {/* Hamburger Menu (Always visible for mobile, or when screen is small) */}
+                        <button className="text-white p-2 hover:opacity-80 transition-opacity lg:hidden" onClick={() => setIsOpen(!isOpen)}>
+                            <Menu size={32} strokeWidth={1.5} />
+                        </button>
+                    </div>
                     
                 </div>
             </nav>
 
-            {/* Overlay Navigation Menu (Full Screen Overlay like Funtastic) */}
-            <div className={`fixed inset-0 bg-black z-[60] flex flex-col justify-between transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+            {/* Overlay Navigation Menu (Mobile) */}
+            <div className={`fixed inset-0 bg-black z-[60] flex flex-col justify-between transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'} overflow-y-auto`}>
                 {/* Close Button top right */}
-                <div className="flex justify-between items-center p-6 border-b border-white/10">
+                <div className="flex justify-between items-center p-6 border-b border-white/10 shrink-0">
                     <img
                         src="https://piccolomondo.com.mx/wp-content/uploads/2024/01/Recurso-1-e1705974571200.png"
                         alt="Peri Mágico Logo"
@@ -73,24 +92,26 @@ const Navbar = () => {
                     </button>
                 </div>
 
-                <div className="flex-1 flex flex-col justify-center px-10 gap-8 max-w-lg mx-auto w-full">
+                <div className="flex-1 flex flex-col justify-start px-8 py-8 gap-6 w-full">
                     {navLinks.map((link) => (
                         <a
                             key={link.name}
                             href={link.path}
-                            className="text-white text-5xl font-black uppercase tracking-tight hover:opacity-75 transition-opacity text-left"
+                            className="text-white text-2xl font-black uppercase tracking-tight hover:text-secondary transition-colors text-left"
                             onClick={() => setIsOpen(false)}
                         >
                             {link.name}
                         </a>
                     ))}
-                </div>
-
-                {/* Bottom CTA like Funtastic's "Virtual Tour" green button */}
-                <div className="p-8 pb-16 max-w-lg mx-auto w-full">
-                    <a href="#precios" className="btn btn-primary w-full py-5 text-2xl font-black rounded-full text-center text-white" onClick={() => setIsOpen(false)}>
-                        VIRTUAL TOUR
-                    </a>
+                    
+                    <div className="flex flex-col gap-4 mt-8">
+                        <a href="#" className="bg-[#22c55e] text-white w-full py-4 rounded-full font-black text-xl text-center hover:brightness-110 transition-all uppercase">
+                            Tour Virtual
+                        </a>
+                        <a href="#precios" className="bg-[#dc2626] text-white w-full py-4 rounded-full font-black text-xl text-center hover:brightness-110 transition-all uppercase">
+                            Reservar
+                        </a>
+                    </div>
                 </div>
             </div>
             

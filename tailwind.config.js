@@ -9,6 +9,7 @@ export default {
                 primary: 'var(--color-primary)',
                 secondary: 'var(--color-secondary)',
                 magenta: 'var(--color-accent-magenta)',
+                green: 'var(--color-accent-green)',
             },
             fontFamily: {
                 sans: ['Outfit', 'sans-serif'],

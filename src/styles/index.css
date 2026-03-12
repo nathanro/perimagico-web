@@ -3,15 +3,11 @@
 @tailwind utilities;
 
 :root {
-  /* Color Palette - Peri Mágico */
-  --color-primary: #4488FF;
-  /* Azul Logo acts as Funtastic's Green */
-  --color-secondary: #FFD700;
-  /* Amarillo Logo acts as Funtastic's Yellow */
-  --color-accent-orange: #FF8C00;
-  /* Naranja */
-  --color-accent-magenta: #E22222;
-  /* Rojo Logo acts as Funtastic's Red */
+  /* Color Palette - Funtastic Depot Theme (Exact matches) */
+  --color-primary: #dc2626; /* Funtastic Red (Primary Dark Red) */
+  --color-secondary: #FFD700; /* Funtastic Yellow */
+  --color-accent-green: #22c55e; /* Funtastic Green */
+  --color-accent-magenta: #dc2626; /* Map to primary red */
 
   /* Structural Colors */
   --color-black: #000000;
