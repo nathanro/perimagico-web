@@ -5,16 +5,16 @@
 :root {
   /* Color Palette - Peri Mágico */
   --color-primary: #4488FF;
-  /* Azul Logo */
+  /* Azul Logo acts as Funtastic's Green */
   --color-secondary: #FFD700;
-  /* Amarillo Logo */
+  /* Amarillo Logo acts as Funtastic's Yellow */
   --color-accent-orange: #FF8C00;
   /* Naranja */
   --color-accent-magenta: #E22222;
-  /* Rojo Logo */
+  /* Rojo Logo acts as Funtastic's Red */
 
   /* Structural Colors */
-  --color-black: #111111;
+  --color-black: #000000;
   --color-white: #FFFFFF;
   --color-gray-100: #F5F5F5;
   --color-gray-800: #222222;
@@ -48,22 +48,10 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 800;
-  /* Use extra bold for that theme park look */
+  font-weight: 900;
+  /* Funtastic uses Arbour-Black, VERY bold */
   line-height: 1.1;
   letter-spacing: -0.02em;
-}
-
-h1 {
-  font-size: clamp(3rem, 6vw, 4.5rem);
-}
-
-h2 {
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
-}
-
-h3 {
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
 }
 
 a {
@@ -79,39 +67,16 @@ button {
   font-family: inherit;
 }
 
-/* Base Layout Containers */
 .container {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 2rem;
 }
 
-.section-padding {
-  padding: 5rem 0;
-}
-
-/* Theme Park Specific Utilities */
-.bg-black-section {
-  background-color: var(--color-black);
-  color: var(--color-white);
-}
-
-.bg-white-section {
-  background-color: var(--color-white);
-  color: var(--color-black);
-}
-
-/* Diagonal Background Shapes */
-.angled-bg-container {
-  position: relative;
-  overflow: hidden;
-}
-
-.angled-shape {
-  position: absolute;
-  z-index: 0;
-  transform: skewY(-6deg);
-  transform-origin: 0;
+/* Diagonal Transition Helper */
+.diagonal-bottom-clip {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 5vw), 0 100%);
+  padding-bottom: 5vw;
 }
 
 /* Vibrant Typography */
@@ -127,11 +92,7 @@ button {
   color: var(--color-secondary);
 }
 
-.text-orange {
-  color: var(--color-accent-orange);
-}
-
-/* Buttons */
+/* Buttons - Funtastic Style */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -139,22 +100,21 @@ button {
   padding: 1rem 2.5rem;
   font-size: 1.1rem;
   font-weight: 800;
-  border-radius: 99px;
-  /* Pill shape */
-  transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+  border-radius: 9999px; /* Pill shape */
+  transition: transform 0.2s ease, filter 0.2s ease;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  border: 3px solid transparent;
+  text-align: center;
 }
 
 .btn:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
   filter: brightness(1.1);
 }
 
 .btn-primary {
   background-color: var(--color-primary);
-  color: var(--color-black);
+  color: var(--color-white);
 }
 
 .btn-magenta {
@@ -167,38 +127,9 @@ button {
   color: var(--color-white);
 }
 
-.btn-outline-yellow {
-  background: transparent;
-  border-color: var(--color-secondary);
-  color: var(--color-secondary);
-}
-
-.btn-outline-yellow:hover {
-  background-color: var(--color-secondary);
-  color: var(--color-black);
-}
-
-/* Cards */
-.card-solid {
-  background-color: var(--color-white);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  border-radius: 0;
-  /* Funtastic uses sharp square cards or simple shapes */
+/* Cards - Funtastic uses ~15px border radius */
+.card {
+  border-radius: 20px;
   overflow: hidden;
-}
-
-.card-vibrant {
-  background-color: var(--color-primary);
-  color: var(--color-black);
-  padding: 2.5rem;
-}
-
-/* Top Banner Bar */
-.top-notice-bar {
-  background-color: var(--color-primary);
-  color: var(--color-black);
-  text-align: center;
-  padding: 0.5rem;
-  font-weight: 700;
-  font-size: 0.9rem;
+  position: relative;
 }

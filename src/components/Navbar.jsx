@@ -1,9 +1,15 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Menu, X, Play } from 'lucide-react';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => setIsScrolled(window.scrollY > 0);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const navLinks = [
         { name: 'ATRACCIONES', path: '#atracciones' },
@@ -12,79 +18,82 @@ const Navbar = () => {
     ];
 
     return (
-        <div className="fixed w-full z-50">
-            {/* Top Banner (Azul Baby / Green equivalent) */}
-            <div className="bg-primary text-black text-center font-bold text-sm py-2 tracking-wide uppercase" style={{ backgroundColor: 'var(--color-primary)' }}>
-                ¡Diversión y magia familiar todos los fines de semana!
+        <div className="fixed w-full z-50 flex flex-col">
+            {/* Top Promo Banner (Primary/Green mapping) */}
+            <div className="bg-primary text-white text-center font-bold text-[13px] md:text-sm py-2 tracking-wider uppercase">
+                ¡La magia del fin de semana comienza aquí!
             </div>
 
-            {/* Main Navbar (Black) */}
-            <nav className="bg-black py-4 border-b-4 border-secondary" style={{ borderBottomColor: 'var(--color-secondary)' }}>
+            {/* Main Navbar (Solid Black) */}
+            <nav className={`bg-black transition-all duration-300 ${isScrolled ? 'py-2 shadow-lg' : 'py-3'}`}>
                 <div className="container flex justify-between items-center">
-                    {/* Logo */}
-                    <Link to="/" className="flex-shrink-0 flex items-center h-16">
-                        <img
-                            src="https://piccolomondo.com.mx/wp-content/uploads/2024/01/Recurso-1-e1705974571200.png"
-                            alt="Peri Mágico Logo"
-                            className="h-full object-contain transform hover:scale-105 transition-transform"
-                        />
-                    </Link>
-
-                    {/* Desktop Menu */}
-                    <div className="hidden xl:flex items-center gap-6 flex-1 justify-center">
-                        {navLinks.map((link) => (
-                            <a
-                                key={link.name}
-                                href={link.path}
-                                className="text-white text-sm font-bold hover:text-primary transition-colors uppercase tracking-wider whitespace-nowrap"
-                            >
-                                {link.name}
-                            </a>
-                        ))}
-                    </div>
-
-                    {/* Right Actions */}
-                    <div className="hidden xl:flex items-center gap-4 flex-shrink-0">
-                        <a href="https://wa.me/525558182348" target="_blank" rel="noopener noreferrer" className="btn btn-magenta text-sm px-6 py-3 flex items-center gap-2" style={{ backgroundColor: '#25D366', color: 'white' }}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
-                            {/* Not literal WhatsApp icon, just a phone to represent contact for now, but background is WhatsApp green */}
-                            55 5818 2348
+                    
+                    {/* Left: Logo & Sub-Nav */}
+                    <div className="flex flex-col items-start gap-1">
+                        <a href="#top" className="flex-shrink-0 flex items-center h-12 md:h-14">
+                            <img
+                                src="https://piccolomondo.com.mx/wp-content/uploads/2024/01/Recurso-1-e1705974571200.png"
+                                alt="Peri Mágico Logo"
+                                className="h-full object-contain"
+                            />
                         </a>
+                        {/* Sub-Navigation (Call, Map, Contact) - Only visible on desktop like Funtastic */}
+                        <div className="hidden md:flex items-center gap-5 mt-1">
+                            <a href="tel:5558182348" className="text-white text-[10px] md:text-xs font-bold uppercase flex items-center gap-1 hover:text-white/80 transition-colors">
+                                <Play size={10} fill="white" strokeWidth={0} /> Llamar
+                            </a>
+                            <a href="#ubicacion" className="text-white text-[10px] md:text-xs font-bold uppercase flex items-center gap-1 hover:text-white/80 transition-colors">
+                                <Play size={10} fill="white" strokeWidth={0} /> Mapa
+                            </a>
+                            <a href="#contacto" className="text-white text-[10px] md:text-xs font-bold uppercase flex items-center gap-1 hover:text-white/80 transition-colors">
+                                <Play size={10} fill="white" strokeWidth={0} /> Contacto
+                            </a>
+                        </div>
                     </div>
 
-                    {/* Mobile Toggle */}
-                    <button className="xl:hidden text-white p-2" onClick={() => setIsOpen(!isOpen)}>
-                        {isOpen ? <X size={32} /> : <Menu size={32} />}
+                    {/* Right: Hamburger Menu */}
+                    <button className="text-white p-2 hover:opacity-80 transition-opacity" onClick={() => setIsOpen(!isOpen)}>
+                        <Menu size={36} strokeWidth={1.5} />
+                    </button>
+                    
+                </div>
+            </nav>
+
+            {/* Overlay Navigation Menu (Full Screen Overlay like Funtastic) */}
+            <div className={`fixed inset-0 bg-black z-[60] flex flex-col justify-between transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+                {/* Close Button top right */}
+                <div className="flex justify-between items-center p-6 border-b border-white/10">
+                    <img
+                        src="https://piccolomondo.com.mx/wp-content/uploads/2024/01/Recurso-1-e1705974571200.png"
+                        alt="Peri Mágico Logo"
+                        className="h-10 object-contain"
+                    />
+                    <button className="text-white p-2 hover:opacity-80 transition-opacity" onClick={() => setIsOpen(false)}>
+                        <X size={40} strokeWidth={1.5} />
                     </button>
                 </div>
 
-                {/* Mobile Menu */}
-                {isOpen && (
-                    <div className="absolute top-full left-0 w-full bg-black py-6 flex flex-col items-center gap-6 border-t-4 border-magenta xl:hidden shadow-2xl">
-                        {navLinks.map((link) => (
-                            <a
-                                key={link.name}
-                                href={link.path}
-                                className="text-white text-xl font-bold hover:text-primary uppercase"
-                                onClick={() => setIsOpen(false)}
-                            >
-                                {link.name}
-                            </a>
-                        ))}
-                        <a href="https://wa.me/525558182348" target="_blank" rel="noopener noreferrer" className="btn w-4/5 text-center mt-4 flex justify-center items-center gap-2" style={{ backgroundColor: '#25D366', color: 'white' }} onClick={() => setIsOpen(false)}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
-                            55 5818 2348
+                <div className="flex-1 flex flex-col justify-center px-10 gap-8 max-w-lg mx-auto w-full">
+                    {navLinks.map((link) => (
+                        <a
+                            key={link.name}
+                            href={link.path}
+                            className="text-white text-5xl font-black uppercase tracking-tight hover:opacity-75 transition-opacity text-left"
+                            onClick={() => setIsOpen(false)}
+                        >
+                            {link.name}
                         </a>
-                    </div>
-                )}
-            </nav>
-            {/* Color ribbon accent under nav */}
-            <div className="h-3 w-full flex">
-                <div className="h-full flex-1" style={{ backgroundColor: 'var(--color-primary)' }} />
-                <div className="h-full flex-1" style={{ backgroundColor: 'var(--color-secondary)' }} />
-                <div className="h-full flex-1" style={{ backgroundColor: 'var(--color-accent-orange)' }} />
-                <div className="h-full flex-1" style={{ backgroundColor: 'var(--color-accent-magenta)' }} />
+                    ))}
+                </div>
+
+                {/* Bottom CTA like Funtastic's "Virtual Tour" green button */}
+                <div className="p-8 pb-16 max-w-lg mx-auto w-full">
+                    <a href="#precios" className="btn btn-primary w-full py-5 text-2xl font-black rounded-full text-center text-white" onClick={() => setIsOpen(false)}>
+                        VIRTUAL TOUR
+                    </a>
+                </div>
             </div>
+            
         </div>
     );
 };
