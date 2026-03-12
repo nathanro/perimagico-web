@@ -16,7 +16,7 @@ const Hero = () => {
                 />
             </div>
 
-            <div className="container relative z-20 flex flex-col h-full justify-center items-center md:items-end md:text-right w-full pt-10 pb-48">
+            <div className="container relative z-20 flex flex-col h-full justify-center items-center md:items-end md:text-right w-full pt-[15vh] pb-[45vh] md:pb-64">
                 {/* Main Content: Big Call to Action overlaying image */}
                 <div className="w-full md:w-2/3 flex flex-col items-center md:items-end text-center md:text-right">
                     <div className="bg-white p-6 transform -rotate-2 mb-6 border-4 border-black relative shadow-[8px_8px_0_0_rgba(0,0,0,1)]">
@@ -30,11 +30,11 @@ const Hero = () => {
                         Diversión sin límites para toda la familia: juegos mecánicos, atracciones extremas, arcade y mucho más en el parque techado más emocionante de México.
                     </p>
 
-                    <div className="flex flex-col md:flex-row justify-center md:justify-end gap-4 w-full md:max-w-xl">
-                        <a href="#eventos" className="btn w-full md:w-auto text-lg px-8 py-4 rounded-[50px] shadow-lg flex justify-center items-center gap-2 font-black" style={{ backgroundColor: '#ffcc00', color: 'black' }}>
-                            🎂 ¡Cotiza tu cumpleaños!
+                    <div className="flex flex-col md:flex-row justify-center md:justify-end gap-6 w-full md:max-w-xl">
+                        <a href="#contacto" className="btn w-full md:w-auto text-lg px-8 py-4 rounded-[50px] shadow-[4px_4px_0_0_rgba(0,0,0,1)] hover:translate-y-1 hover:shadow-none flex justify-center items-center gap-2 font-black uppercase transition-all" style={{ backgroundColor: '#ffcc00', color: 'black' }}>
+                            🎂 Cotiza tu fiesta
                         </a>
-                        <a href="#precios" className="btn w-full md:w-auto text-lg px-8 py-4 rounded-[50px] border-4 border-black hover:border-white transition-colors flex justify-center items-center gap-2 font-black" style={{ backgroundColor: 'transparent', color: 'white' }}>
+                        <a href="#precios" className="btn w-full md:w-auto text-lg px-8 py-4 rounded-[50px] border-4 border-white hover:bg-white hover:text-black transition-colors flex justify-center items-center gap-2 font-black uppercase" style={{ backgroundColor: 'transparent', color: 'white' }}>
                             Ver boletos
                         </a>
                     </div>
@@ -42,28 +42,32 @@ const Hero = () => {
             </div>
 
             {/* Bottom Horizontal Days & Hours Panel */}
-            <div className="absolute bottom-[8vw] md:bottom-[10vw] left-0 w-full z-40">
-                <div className="container">
-                    <div className="bg-black/90 backdrop-blur-md p-4 md:p-6 border-l-8 border-secondary rounded-xl flex flex-col lg:flex-row items-center justify-between gap-6 shadow-2xl" style={{ borderLeftColor: 'var(--color-secondary)' }}>
-                        <h2 className="text-white text-2xl md:text-3xl font-black uppercase whitespace-nowrap mb-0">
-                            Días & Horarios
-                        </h2>
+            <div className="absolute bottom-12 md:bottom-20 left-0 w-full z-40 bg-black border-y-4 border-secondary/50 pt-4 pb-4 md:pb-6 shadow-[0_-10px_30px_rgba(0,0,0,0.8)]">
+                <div className="container px-4 lg:px-8">
+                    <div className="flex flex-col lg:flex-row items-center justify-between gap-6 md:gap-10">
+                        {/* Title Section */}
+                        <div className="flex items-center gap-4 w-full lg:w-auto justify-center lg:justify-start">
+                            <h2 className="text-white text-2xl md:text-3xl font-black uppercase tracking-wide flex items-center gap-2 mb-0 shrink-0">
+                                Días & Horarios
+                            </h2>
+                        </div>
 
-                        <div className="flex flex-wrap md:flex-nowrap justify-center lg:justify-end gap-4 md:gap-8 w-full text-white font-bold text-[15px]">
-                            <div className="flex flex-col items-center min-w-[100px]">
-                                <span className="text-gray-400 text-xs font-bold tracking-wider mb-1">Lunes</span>
-                                <span className="text-red-500">Cerrado</span>
+                        {/* Hours Section */}
+                        <div className="flex flex-wrap md:flex-nowrap justify-center lg:justify-end gap-6 md:gap-10 w-full text-white font-bold text-sm md:text-base">
+                            <div className="flex flex-col items-center">
+                                <span className="text-gray-400 text-xs md:text-sm font-bold tracking-wider mb-1">Lunes</span>
+                                <span className="text-red-500 font-black">Cerrado</span>
                             </div>
-                            <div className="flex flex-col items-center min-w-[100px] border-l border-white/20 pl-4 md:pl-8">
-                                <span className="text-gray-400 text-xs font-bold tracking-wider mb-1">Martes - Jueves</span>
+                            <div className="flex flex-col items-center border-l-2 border-white/10 pl-6 md:pl-10">
+                                <span className="text-gray-400 text-xs md:text-sm font-bold tracking-wider mb-1">Martes - Jueves</span>
                                 <span>1:00 pm - 8:00 pm</span>
                             </div>
-                            <div className="flex flex-col items-center min-w-[100px] border-l border-white/20 pl-4 md:pl-8">
-                                <span className="text-gray-400 text-xs font-bold tracking-wider mb-1">Viernes</span>
+                            <div className="flex flex-col items-center border-l-2 border-white/10 pl-6 md:pl-10">
+                                <span className="text-gray-400 text-xs md:text-sm font-bold tracking-wider mb-1">Viernes</span>
                                 <span>1:00 pm - 8:30 pm</span>
                             </div>
-                            <div className="flex flex-col items-center min-w-[120px] border-l border-white/20 pl-4 md:pl-8">
-                                <span className="text-gray-400 text-xs font-bold tracking-wider mb-1">Sábado - Domingo</span>
+                            <div className="flex flex-col items-center border-l-2 border-white/10 pl-6 md:pl-10">
+                                <span className="text-gray-400 text-xs md:text-sm font-bold tracking-wider mb-1">Sábado - Domingo</span>
                                 <span>12:00 pm - 9:00 pm</span>
                             </div>
                         </div>

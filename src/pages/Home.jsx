@@ -172,7 +172,7 @@ const Home = () => {
             </section>
 
             {/* Food Bar Section Preview - Based on Reference 5 */}
-            <section className="bg-white py-24 border-t-8 shadow-inner overflow-hidden flex flex-col" style={{ borderTopColor: 'var(--color-accent-magenta)' }}>
+            <section id="menu" className="bg-white py-24 border-t-8 shadow-inner overflow-hidden flex flex-col" style={{ borderTopColor: 'var(--color-accent-magenta)' }}>
                 <div className="container relative z-10">
                     <div className="flex flex-col lg:flex-row items-center gap-16">
                         {/* Left side: Image */}
@@ -194,9 +194,9 @@ const Home = () => {
                             <p className="text-gray-700 font-bold text-lg md:text-xl mb-8 leading-relaxed">
                                 Toda la energía que quemas saltando, corriendo y aventándote en nuestras atracciones necesita recargarse. ¡Tenemos todo lo que necesitas en nuestra área de alimentos! Descansa un momento y disfruta de tus comidas favoritas para volver a la acción.
                             </p>
-                            <button className="btn btn-primary px-10 py-4 text-xl border-4 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)] hover:translate-y-1 hover:shadow-[2px_2px_0_0_rgba(0,0,0,1)] uppercase">
+                            <a href="#menu" className="btn btn-primary px-10 py-4 text-xl border-4 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)] hover:translate-y-1 hover:shadow-[2px_2px_0_0_rgba(0,0,0,1)] uppercase inline-block">
                                 Ver Menú
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
