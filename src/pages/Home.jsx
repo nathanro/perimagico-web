@@ -126,7 +126,7 @@ const Home = () => {
             </section>
 
             {/* Attractions Grid - Based on Reference 4 */}
-            <section id="atracciones" className="bg-white py-24" style={{ backgroundImage: 'linear-gradient(45deg, #f5f5f5 25%, transparent 25%, transparent 75%, #f5f5f5 75%, #f5f5f5), linear-gradient(45deg, #f5f5f5 25%, transparent 25%, transparent 75%, #f5f5f5 75%, #f5f5f5)', backgroundSize: '20px 20px', backgroundPosition: '0 0, 10px 10px' }}>
+            <section id="atracciones" className="bg-gray-50 py-24 border-y-8 border-black">
                 <div className="container">
                     <div className="mb-12 text-center">
                         <h2 className="text-black text-5xl md:text-6xl font-black uppercase mb-4">Nuestras Atracciones</h2>
