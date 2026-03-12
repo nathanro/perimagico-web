@@ -4,14 +4,14 @@
 
 :root {
   /* Color Palette - Peri Mágico */
-  --color-primary: #89CFF0;
-  /* Azul Baby */
+  --color-primary: #4488FF;
+  /* Azul Logo */
   --color-secondary: #FFD700;
-  /* Amarillo */
+  /* Amarillo Logo */
   --color-accent-orange: #FF8C00;
   /* Naranja */
-  --color-accent-magenta: #FF00FF;
-  /* Magenta */
+  --color-accent-magenta: #E22222;
+  /* Rojo Logo */
 
   /* Structural Colors */
   --color-black: #111111;

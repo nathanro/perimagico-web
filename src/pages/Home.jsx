@@ -1,6 +1,7 @@
-import { ArrowRight, MessageCircle } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Hero from '../components/Hero';
 import Layout from '../components/Layout';
+import ContactForm from '../components/ContactForm';
 
 const Home = () => {
 
@@ -47,44 +48,44 @@ const Home = () => {
 
     return (
         <Layout>
+            <div id="top"></div>
             <Hero />
 
             {/* Live The Experience Section */}
-            <section className="bg-white py-24 relative overflow-hidden">
+            <section id="experiencia" className="bg-white py-24 relative overflow-hidden">
                 {/* Dynamic Angles Background */}
                 <div className="absolute top-1/2 left-0 w-[120%] h-64 -translate-y-1/2 -rotate-3" style={{ backgroundColor: 'var(--color-secondary)' }} />
                 <div className="absolute top-1/2 left-0 w-[120%] h-32 -translate-y-1/2 rotate-2" style={{ backgroundColor: 'var(--color-accent-magenta)' }} />
 
-                <div className="container relative z-10">
-                    <div className="mb-12">
-                        <h2 className="text-magenta text-6xl md:text-7xl font-black mb-6 uppercase" style={{ color: 'var(--color-accent-magenta)' }}>Vive La<br />Experiencia</h2>
-                        <p className="text-xl md:text-2xl font-bold max-w-4xl text-black">
+                <div className="container relative z-10 flex flex-col lg:flex-row items-center gap-12">
+                    {/* Left: Text */}
+                    <div className="lg:w-1/3 text-center lg:text-left">
+                        <h2 className="text-magenta text-5xl md:text-6xl font-black mb-6 uppercase leading-tight" style={{ color: 'var(--color-accent-magenta)' }}>Vive La<br />Experiencia</h2>
+                        <p className="text-lg md:text-xl font-bold text-black mb-8">
                             Experiencia única y sin igual en un Centro de Entretenimiento Familiar techado que cuenta con <span className="text-magenta">atracciones increíbles</span> y <span className="text-secondary">magia en vivo</span> con luces y efectos para toda la familia.
                         </p>
+                        <button className="btn btn-magenta px-10 py-3 text-lg rounded-full shadow-lg" style={{ backgroundColor: 'var(--color-accent-magenta)' }}>VER MÁS</button>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 mb-8 border-4 border-black bg-black">
+                    {/* Right: Grid */}
+                    <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
                         {experienceCards.map((card, idx) => (
-                            <div key={idx} className="relative h-[400px] md:h-[500px] overflow-hidden group border-r-4 border-black last:border-r-0">
-                                <img src={card.img} alt={card.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors" />
-
-                                <div className="absolute bottom-6 left-6 right-6">
-                                    {card.desc && <p className="text-white text-sm font-bold mb-4 bg-black/60 p-2">{card.desc}</p>}
-                                    <h3 className="text-white text-3xl font-black tracking-tighter uppercase drop-shadow-lg">{card.title}</h3>
+                            <div key={idx} className="flex flex-col bg-white overflow-hidden shadow-xl transform transition-transform hover:-translate-y-2 group">
+                                <div className="h-[200px] md:h-[250px] overflow-hidden">
+                                    <img src={card.img} alt={card.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                                </div>
+                                <div className={`p-6 flex flex-col justify-center min-h-[120px] ${card.color}`}>
+                                    <h3 className="text-white text-2xl font-black uppercase tracking-tight text-shadow-sm">{card.title}</h3>
+                                    {card.desc && <p className="text-white/95 text-sm font-bold mt-2 leading-snug">{card.desc}</p>}
                                 </div>
                             </div>
                         ))}
-                    </div>
-
-                    <div className="flex justify-end">
-                        <button className="btn btn-magenta px-8" style={{ backgroundColor: 'var(--color-accent-magenta)' }}>VER MÁS</button>
                     </div>
                 </div>
             </section>
 
             {/* Prices & Packages Section - Based on Reference 3 */}
-            <section className="bg-black py-24">
+            <section id="precios" className="bg-black py-24">
                 <div className="container">
                     <div className="flex flex-col lg:flex-row gap-12 items-center">
                         {/* Left Header */}
@@ -125,20 +126,22 @@ const Home = () => {
             </section>
 
             {/* Attractions Grid - Based on Reference 4 */}
-            <section className="bg-white py-24" style={{ backgroundImage: 'linear-gradient(45deg, #f5f5f5 25%, transparent 25%, transparent 75%, #f5f5f5 75%, #f5f5f5), linear-gradient(45deg, #f5f5f5 25%, transparent 25%, transparent 75%, #f5f5f5 75%, #f5f5f5)', backgroundSize: '20px 20px', backgroundPosition: '0 0, 10px 10px' }}>
+            <section id="atracciones" className="bg-white py-24" style={{ backgroundImage: 'linear-gradient(45deg, #f5f5f5 25%, transparent 25%, transparent 75%, #f5f5f5 75%, #f5f5f5), linear-gradient(45deg, #f5f5f5 25%, transparent 25%, transparent 75%, #f5f5f5 75%, #f5f5f5)', backgroundSize: '20px 20px', backgroundPosition: '0 0, 10px 10px' }}>
                 <div className="container">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="mb-12 text-center">
+                        <h2 className="text-black text-5xl md:text-6xl font-black uppercase mb-4">Nuestras Atracciones</h2>
+                        <p className="text-xl font-bold max-w-2xl mx-auto">Diversión garantizada para niños y adultos. ¡Descubre todo lo que tenemos preparado para ti!</p>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                         {attractionsPreview.map((attr, idx) => (
-                            <div key={idx} className="relative h-[250px] md:h-[300px] overflow-hidden group bg-black cursor-pointer shadow-xl border-4 border-white transform transition-transform hover:-translate-y-2">
-                                <img src={attr.img} alt={attr.name} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300 group-hover:scale-110" />
-                                {/* Color Overlay logic -> Alternate colors for fun blocky look */}
-                                <div className="absolute inset-0 mix-blend-multiply opacity-40 transition-opacity group-hover:opacity-0"
-                                    style={{ backgroundColor: idx % 3 === 0 ? 'var(--color-primary)' : idx % 3 === 1 ? 'var(--color-secondary)' : 'var(--color-accent-magenta)' }} />
-
-                                <div className="absolute inset-0 flex items-center justify-center p-6 text-center z-10">
-                                    <h3 className="text-white text-3xl font-black uppercase tracking-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+                            <div key={idx} className="flex flex-col group transform transition-all duration-300 hover:scale-[1.02]">
+                                <div className="bg-black text-center py-4 border-4 border-black border-b-0">
+                                    <h3 className="text-white text-xl md:text-2xl font-black uppercase tracking-tight">
                                         {attr.name}
                                     </h3>
+                                </div>
+                                <div className="relative h-[200px] md:h-[250px] overflow-hidden shadow-xl border-4 border-black bg-black">
+                                    <img src={attr.img} alt={attr.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                                 </div>
                             </div>
                         ))}
@@ -147,27 +150,63 @@ const Home = () => {
             </section>
 
             {/* Food Bar Section Preview - Based on Reference 5 */}
-            <section className="bg-white py-12 relative overflow-hidden flex flex-col">
-                {/* Red Banner across the top left */}
-                <div className="bg-magenta p-12 text-white w-full lg:w-3/4 relative z-10 transform -rotate-1 shadow-2xl" style={{ backgroundColor: 'var(--color-accent-magenta)' }}>
-                    <h2 className="text-5xl md:text-7xl font-black uppercase mb-6">Peri Mágico<br />Food Bar</h2>
-                    <p className="font-bold text-lg md:text-xl max-w-2xl leading-relaxed">
-                        Toda esa energía que quemas saltando, bailando, escalando y jugando en nuestras atracciones necesita reponerse,
-                        y tenemos tus comidas favoritas. Toma un descanso y disfruta de una rebanada de pizza, tu panini favorito, papas fritas,
-                        nuggets y más.
-                    </p>
-                </div>
-                <div className="w-full lg:w-2/3 h-[500px] absolute right-0 top-0 z-0 hidden lg:block bg-black flex items-center justify-center p-8">
-                    <img src="https://piccolomondo.com.mx/wp-content/uploads/2024/01/pizza.png" className="w-auto h-full max-h-[400px] object-contain drop-shadow-2xl transform rotate-3" alt="Pizza" />
+            <section className="bg-white py-24 border-t-8 shadow-inner overflow-hidden flex flex-col" style={{ borderTopColor: 'var(--color-accent-magenta)' }}>
+                <div className="container relative z-10">
+                    <div className="flex flex-col lg:flex-row items-center gap-16">
+                        {/* Left side: Image */}
+                        <div className="lg:w-1/2 w-full">
+                            <div className="relative border-4 border-black p-4 bg-gray-100 shadow-[12px_12px_0_0_var(--color-accent-magenta)] transform -rotate-2 group hover:rotate-0 transition-transform duration-500">
+                                <img src="https://piccolomondo.com.mx/wp-content/uploads/2024/01/pizza.png" className="w-full h-auto max-h-[500px] object-cover group-hover:scale-105 transition-transform duration-500" alt="Peri Mágico Food Bar" />
+                            </div>
+                        </div>
+
+                        {/* Right side: Text */}
+                        <div className="lg:w-1/2 w-full text-center lg:text-left">
+                            <div className="bg-magenta inline-block text-white px-6 py-2 rounded-full font-black text-sm uppercase tracking-wider mb-6" style={{ backgroundColor: 'var(--color-accent-magenta)' }}>
+                                Zona de Alimentos
+                            </div>
+                            <h2 className="text-black text-5xl md:text-6xl font-black uppercase mb-6 leading-none">
+                                Peri Mágico<br />
+                                <span className="text-magenta" style={{ color: 'var(--color-accent-magenta)' }}>Food Bar</span>
+                            </h2>
+                            <p className="text-gray-700 font-bold text-lg md:text-xl mb-8 leading-relaxed">
+                                Toda esa energía que quemas saltando, bailando, escalando y jugando en nuestras atracciones necesita reponerse,
+                                y tenemos tus comidas favoritas. Toma un descanso y disfruta de una rebanada de pizza, tu panini favorito, papas fritas,
+                                nuggets y más.
+                            </p>
+                            <button className="btn btn-primary px-10 py-4 text-xl border-4 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)] hover:translate-y-1 hover:shadow-[2px_2px_0_0_rgba(0,0,0,1)] uppercase">
+                                Ver Menú
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            {/* Floating Chat WhatsApp icon simulation (Funtastic Depot style) */}
-            <div className="fixed bottom-8 right-8 z-50">
-                <button className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform cursor-pointer border-4 border-white">
-                    <MessageCircle size={32} color="#fff" fill="#fff" />
-                </button>
-            </div>
+            {/* Ubicación Section */}
+            <section id="ubicacion" className="bg-black py-20 relative">
+                <div className="container">
+                    <div className="mb-10 text-center">
+                        <h2 className="text-white text-5xl md:text-6xl font-black uppercase mb-4">¿Cómo Llegar?</h2>
+                        <p className="text-gray-300 font-bold text-lg flex items-center justify-center gap-2">
+                            <span className="text-magenta text-xl" style={{ color: 'var(--color-accent-magenta)' }}>📍</span> Centro Comercial Galerias Perinorte, Cuautitlán Izcalli, Mex.
+                        </p>
+                    </div>
+                    <div className="w-full h-[400px] md:h-[500px] border-4 border-white shadow-[8px_8px_0_0_var(--color-secondary)] overflow-hidden">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3758.336153924707!2d-99.1918386249339!3d19.61287958169996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f56b7cd5a3a7%3A0xe78ab7c8e0eaa3ec!2sGaler%C3%ADas%20Perinorte!5e0!3m2!1sen!2smx!4v1709664553255!5m2!1sen!2smx"
+                            width="100%"
+                            height="100%"
+                            style={{ border: 0 }}
+                            allowFullScreen=""
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
+                            title="Ubicación Peri Mágico"
+                        ></iframe>
+                    </div>
+                </div>
+            </section>
+
+            <ContactForm />
 
         </Layout>
     );
