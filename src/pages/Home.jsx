@@ -6,50 +6,69 @@ import ContactForm from '../components/ContactForm';
 const Home = () => {
 
     const experienceCards = [
-        { title: 'Atracciones Extremas', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-1.webp', color: 'bg-primary' },
-        { title: 'Experiencia', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-2.webp', color: 'bg-magenta' },
-        { title: 'Magia', desc: 'Es una presentación mágica que sumerge a la audiencia en la fiesta de sus sueños.', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-3.webp', color: 'bg-orange-500' },
-        { title: 'Familia', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-4.webp', color: 'bg-secondary' },
+        { title: 'Parque Techado', desc: 'Diversión sin importar el clima. Nuestro parque interior alberga decenas de juegos mecánicos y atracciones extremas para toda la familia.', img: '/images/upscaled/Image-1-1.png', color: 'bg-primary' },
+        { title: 'Atracciones Extremas', desc: 'Tirolesa, Bungee, Xtreme, Sendero del Terror y más. Adrenalina pura para los más valientes sin importar la edad.', img: '/images/upscaled/Image-1-2.png', color: 'bg-magenta' },
+        { title: 'Zona Arcade', desc: 'Pon a prueba tus habilidades en nuestra área de arcade con los mejores videojuegos y gana premios increíbles.', img: '/images/upscaled/Image-1-3.png', color: 'bg-orange-500' },
+        { title: 'Experiencia Familiar', desc: 'Desde los más pequeños hasta los adultos, en Perimágico toda la familia encuentra diversión y momentos mágicos inolvidables.', img: '/images/upscaled/Image-1-4.png', color: 'bg-secondary' },
     ];
 
     const pricingPackages = [
         {
-            title: 'Acceso General / Individual',
+            title: 'ACCESO',
             price: '$235',
-            desc: 'Acceso al parque, solo 4 juegos mecánicos y/o extremos (1 sola vez). No incluye atracciones premium.',
+            desc: 'Entrada al parque + 4 juegos mecánicos y/o extremos (1 sola vez). No incluye atracciones.',
             color: 'var(--color-primary)',
             popular: false
         },
         {
-            title: 'DAY PASS PLATINUM',
-            price: '$450',
-            desc: '¡Para una experiencia completa y máxima diversión! Tendrás acceso ilimitado a juegos mecánicos, extremos y TODAS las atracciones especiales.',
+            title: 'DAY PASS',
+            price: '$350',
+            desc: 'Entrada al parque + todos los juegos mecánicos y extremos ilimitados. No incluye atracciones.',
             color: 'var(--color-secondary)',
             textColor: 'var(--color-black)',
             popular: true
         },
         {
-            title: 'Paquetes Familiares',
-            price: 'Desde $1,200',
-            desc: '¡Que comience la fiesta! Paquetes exclusivos para membresias y grupos de 4 personas. Incluye alimentos y créditos de Arcade en versión Premium.',
+            title: 'DAY PASS PLATINUM',
+            price: '$450',
+            desc: 'La experiencia completa: juegos ilimitados + atracciones ilimitadas. ¡El máximo de diversión!',
             color: 'var(--color-primary)',
             popular: false
         }
     ];
 
     const attractionsPreview = [
-        { name: 'Guácala', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-5.webp' },
-        { name: 'Ninja Parkour', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-6.webp' },
-        { name: 'Inflatables', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-7.webp' },
-        { name: 'Carros Eléctricos', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-8.webp' },
-        { name: 'Sendero del Terror', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/Image-1-9.webp' },
-        { name: 'Food Bar', img: 'https://piccolomondo.com.mx/wp-content/uploads/2024/01/pizza.png' },
+        { name: 'Guácala', img: '/images/upscaled/Image-1-5.png' },
+        { name: 'Ninja Parkour', img: '/images/upscaled/Image-1-6.png' },
+        { name: 'Inflatables', img: '/images/upscaled/Image-1-7.png' },
+        { name: 'Carros Eléctricos', img: '/images/upscaled/Image-1-8.png' },
+        { name: 'Sendero del Terror', img: '/images/upscaled/Image-1-9.png' },
+        { name: 'Food Bar', img: '/images/upscaled/pizza.png' },
     ];
 
     return (
         <Layout>
             <div id="top"></div>
             <Hero />
+
+            {/* Sobre Nosotros Section */}
+            <section className="bg-black py-20 border-b-8 border-gray-900 text-center relative z-20">
+                <div className="container max-w-4xl mx-auto px-4">
+                    <p className="text-orange-500 font-bold tracking-widest uppercase mb-4 text-sm">SOBRE NOSOTROS</p>
+                    <h2 className="text-yellow-300 text-4xl md:text-5xl font-black mb-8">
+                        ¡Bienvenido a Perimágico!
+                    </h2>
+                    <p className="text-gray-300 font-medium text-lg md:text-xl leading-relaxed mb-6">
+                        El lugar donde la diversión cobra vida y la emoción nunca se detiene. Sumérgete en un mundo lleno de magia y alegría, donde la adrenalina se fusiona con la risa, creando momentos inolvidables para toda la familia.
+                    </p>
+                    <p className="text-gray-300 font-medium text-lg md:text-xl leading-relaxed mb-8">
+                        En nuestro parque de diversiones encontrarás una mezcla perfecta de juegos mecánicos que desafían la gravedad, emocionantes atracciones extremas que te harán palpitar el corazón y una amplia variedad de juegos de arcade para poner a prueba tus habilidades.
+                    </p>
+                    <p className="text-yellow-400 font-bold text-xl md:text-2xl">
+                        ¡Prepárate para vivir la magia en cada rincón de Perimágico!
+                    </p>
+                </div>
+            </section>
 
             {/* Live The Experience Section */}
             <section id="experiencia" className="bg-white py-24 relative overflow-hidden">
@@ -60,9 +79,10 @@ const Home = () => {
                 <div className="container relative z-10 flex flex-col lg:flex-row items-center gap-12">
                     {/* Left: Text */}
                     <div className="lg:w-1/3 text-center lg:text-left">
-                        <h2 className="text-magenta text-5xl md:text-6xl font-black mb-6 uppercase leading-tight" style={{ color: 'var(--color-accent-magenta)' }}>Vive La<br />Experiencia</h2>
-                        <p className="text-lg md:text-xl font-bold text-black mb-8">
-                            Experiencia única y sin igual en un Centro de Entretenimiento Familiar techado que cuenta con <span className="text-magenta">atracciones increíbles</span> y <span className="text-secondary">magia en vivo</span> con luces y efectos para toda la familia.
+                        <p className="text-orange-500 font-bold tracking-widest text-sm uppercase mb-2">VIVE LA EXPERIENCIA</p>
+                        <h2 className="text-magenta text-5xl md:text-6xl font-black mb-6 leading-tight" style={{ color: 'var(--color-accent-magenta)' }}>Diversión<br />para todos</h2>
+                        <p className="text-lg md:text-xl font-bold text-gray-800 mb-8">
+                            Un destino único para crear recuerdos inolvidables y compartir risas y aventuras con amigos y seres queridos.
                         </p>
                         <button className="btn btn-magenta px-10 py-3 text-lg rounded-full shadow-lg" style={{ backgroundColor: 'var(--color-accent-magenta)' }}>VER MÁS</button>
                     </div>
@@ -90,9 +110,10 @@ const Home = () => {
                     <div className="flex flex-col lg:flex-row gap-12 items-center">
                         {/* Left Header */}
                         <div className="lg:w-1/4 text-center lg:text-left">
-                            <h2 className="text-white text-5xl md:text-6xl font-black mb-6 uppercase leading-none">Precios &<br />Paquetes</h2>
+                            <p className="text-orange-500 font-bold tracking-widest text-sm uppercase mb-4">TARIFAS</p>
+                            <h2 className="text-white text-5xl md:text-6xl font-black mb-6 leading-none">Boletos &<br />Paquetes</h2>
                             <p className="text-white font-bold text-lg mb-8">
-                                ¡Sumérgete en la diversión HOY!<br />La magia está a un clic de distancia.
+                                ¡Empieza la diversión hoy! El juego comienza a un solo clic de distancia.
                             </p>
                             <button className="btn btn-primary px-8 border-4 border-primary hover:bg-transparent hover:text-primary transition-all rounded-full text-black">
                                 VER PRECIOS
@@ -129,8 +150,9 @@ const Home = () => {
             <section id="atracciones" className="bg-gray-50 py-24 border-y-8 border-black">
                 <div className="container">
                     <div className="mb-12 text-center">
+                        <p className="text-orange-500 font-bold tracking-widest text-sm uppercase mb-2">PARQUE TECHADO</p>
                         <h2 className="text-black text-5xl md:text-6xl font-black uppercase mb-4">Nuestras Atracciones</h2>
-                        <p className="text-xl font-bold max-w-2xl mx-auto">Diversión garantizada para niños y adultos. ¡Descubre todo lo que tenemos preparado para ti!</p>
+                        <p className="text-xl font-bold max-w-2xl mx-auto">¡Descubre nuestras atracciones únicas donde toda la familia la va a pasar increíble!</p>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                         {attractionsPreview.map((attr, idx) => (
@@ -156,7 +178,7 @@ const Home = () => {
                         {/* Left side: Image */}
                         <div className="lg:w-1/2 w-full">
                             <div className="relative border-4 border-black p-4 bg-gray-100 shadow-[12px_12px_0_0_var(--color-accent-magenta)] transform -rotate-2 group hover:rotate-0 transition-transform duration-500">
-                                <img src="https://piccolomondo.com.mx/wp-content/uploads/2024/01/pizza.png" className="w-full h-auto max-h-[500px] object-cover group-hover:scale-105 transition-transform duration-500" alt="Peri Mágico Food Bar" />
+                                <img src="/images/upscaled/pizza.png" className="w-full h-auto max-h-[500px] object-cover group-hover:scale-105 transition-transform duration-500" alt="Peri Mágico Food Bar" />
                             </div>
                         </div>
 
@@ -165,14 +187,12 @@ const Home = () => {
                             <div className="bg-magenta inline-block text-white px-6 py-2 rounded-full font-black text-sm uppercase tracking-wider mb-6" style={{ backgroundColor: 'var(--color-accent-magenta)' }}>
                                 Zona de Alimentos
                             </div>
-                            <h2 className="text-black text-5xl md:text-6xl font-black uppercase mb-6 leading-none">
-                                Peri Mágico<br />
-                                <span className="text-magenta" style={{ color: 'var(--color-accent-magenta)' }}>Food Bar</span>
+                            <h2 className="text-black text-4xl md:text-6xl font-black mb-6 leading-none">
+                                Área de <br />
+                                <span className="text-magenta" style={{ color: 'var(--color-accent-magenta)' }}>Alimentos</span>
                             </h2>
                             <p className="text-gray-700 font-bold text-lg md:text-xl mb-8 leading-relaxed">
-                                Toda esa energía que quemas saltando, bailando, escalando y jugando en nuestras atracciones necesita reponerse,
-                                y tenemos tus comidas favoritas. Toma un descanso y disfruta de una rebanada de pizza, tu panini favorito, papas fritas,
-                                nuggets y más.
+                                Toda la energía que quemas saltando, corriendo y aventándote en nuestras atracciones necesita recargarse. ¡Tenemos todo lo que necesitas en nuestra área de alimentos! Descansa un momento y disfruta de tus comidas favoritas para volver a la acción.
                             </p>
                             <button className="btn btn-primary px-10 py-4 text-xl border-4 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)] hover:translate-y-1 hover:shadow-[2px_2px_0_0_rgba(0,0,0,1)] uppercase">
                                 Ver Menú

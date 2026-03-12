@@ -73,17 +73,27 @@ const Footer = () => {
                         </ul>
                     </div>
 
-                    {/* WhatsApp CTA */}
+                    {/* Newsletter Subscription */}
                     <div className="flex flex-col justify-center">
-                        <div className="bg-[#25D366]/10 p-6 rounded-2xl border-2 border-[#25D366]/30 text-center">
-                            <h4 className="text-lg font-black uppercase mb-4 text-white">¿Tienes Preguntas?</h4>
-                            <p className="text-sm font-bold text-gray-300 mb-6">
-                                Habla directamente con nuestro equipo para reservas o dudas rápidas.
+                        <div className="bg-white/5 p-6 rounded-2xl border-2 border-white/10 text-center">
+                            <h4 className="text-xl font-black uppercase mb-4 text-yellow-300">Suscríbete</h4>
+                            <p className="text-sm font-bold text-gray-300 mb-6 leading-relaxed">
+                                Déjanos tu correo y recibe las últimas novedades, eventos especiales, promociones y descuentos increíbles.
                             </p>
-                            <a href="https://wa.me/525558182348" target="_blank" rel="noopener noreferrer" className="btn w-full border-4 border-transparent hover:border-white shadow-[4px_4px_0_0_rgba(255,255,255,0.2)] hover:shadow-none hover:translate-y-1 transition-all flex justify-center items-center gap-2" style={{ backgroundColor: '#25D366', color: 'white' }}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
-                                55 5818 2348
-                            </a>
+                            <form className="flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>
+                                <input
+                                    type="email"
+                                    placeholder="Tu correo electrónico"
+                                    className="w-full bg-black border-2 border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-yellow-400 font-bold"
+                                    required
+                                />
+                                <button
+                                    type="submit"
+                                    className="w-full bg-yellow-400 text-black font-black uppercase py-3 rounded-lg hover:bg-yellow-300 transition-colors border-2 border-transparent shadow-[4px_4px_0_0_rgba(255,255,255,0.2)] hover:shadow-none hover:translate-y-1"
+                                >
+                                    Suscribirse
+                                </button>
+                            </form>
                         </div>
                     </div>
 
