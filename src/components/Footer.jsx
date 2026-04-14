@@ -57,7 +57,7 @@ const Footer = () => {
                         <span className="text-gray-600 hidden md:inline">|</span>
                         <a href="#" className="text-white text-sm md:text-base font-black uppercase hover:text-secondary transition-colors">Waiver</a>
                         <span className="text-gray-600 hidden md:inline">|</span>
-                        <a href="#precios" className="text-white text-sm md:text-base font-black uppercase hover:text-secondary transition-colors">Precios</a>
+                        <a href="#precios" className="text-white text-sm md:text-base font-black uppercase hover:text-secondary transition-colors">Paquetes</a>
                         <span className="text-gray-600 hidden md:inline">|</span>
                         <a href="#eventos" className="text-white text-sm md:text-base font-black uppercase hover:text-secondary transition-colors">Membresía</a>
                         <span className="text-gray-600 hidden md:inline">|</span>

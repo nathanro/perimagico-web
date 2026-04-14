@@ -14,7 +14,7 @@ const Navbar = () => {
     const navLinks = [
         { name: 'Atracciones', path: '#atracciones' },
         { name: 'Waiver', path: '#' },
-        { name: 'Precios', path: '#precios' },
+        { name: 'Paquetes', path: '#precios' },
         { name: 'Membresía', path: '#membresia' },
         { name: 'Trabaja con Nosotros', path: '#' },
         { name: 'Eventos y Grupos', path: '#eventos' },

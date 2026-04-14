@@ -15,23 +15,37 @@ const Home = () => {
 
     const pricingPackages = [
         {
-            title: 'ACCESO GENERAL',
-            price: '$235',
-            desc: 'Entrada al parque + 4 juegos mecánicos (1 sola vez). No incluye atracciones extremas.',
-            bottomColor: 'var(--color-primary)', // Red
+            title: 'ACCESO',
+            price: '$249',
+            includes: ['4 juegos mecánicos O extremos a elección', 'Acceso al parque'],
+            addons: ['+$100 Flotyland por 1 hr', '+$149 Flotyland por 2 hrs'],
+            bottomColor: 'var(--color-primary)',
+            highlight: false,
         },
         {
             title: 'DAY PASS',
-            price: '$350',
-            desc: 'Entrada al parque + juegos mecánicos y extremos ilimitados.',
-            bottomColor: 'var(--color-secondary)', // Yellow
+            price: '$349',
+            includes: ['Juegos mecánicos ilimitados', 'Juegos extremos ilimitados'],
+            addons: ['+$100 Flotyland por 1 hr', '+$149 Flotyland por 2 hrs'],
+            bottomColor: 'var(--color-secondary)',
             textColor: 'text-black',
+            highlight: true,
         },
         {
             title: 'DAY PASS PLATINUM',
-            price: '$450',
-            desc: 'La experiencia completa: juegos y atracciones ilimitadas.',
-            bottomColor: 'var(--color-primary)', // Red
+            price: '$549',
+            includes: ['Juegos mecánicos ilimitados', 'Juegos extremos ilimitados', 'Atracciones de Flotyland'],
+            addons: [],
+            bottomColor: 'var(--color-primary)',
+            highlight: false,
+        },
+        {
+            title: 'DAY PASS FAMILIAR PLATINUM',
+            price: '$1,999',
+            includes: ['Day Pass Platinum para 4 personas', '1 pizza familiar', '1 refresco 2L', '4 bolsas de palomitas'],
+            addons: [],
+            bottomColor: '#111',
+            highlight: false,
         }
     ];
 
@@ -181,8 +195,9 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* 3. PRECIOS & PAQUETES */}
-            <section id="precios" className="bg-[#8b0000] relative py-24 sm:py-32 overflow-hidden border-y-8 border-black">
+            {/* 3. PAQUETES - Hero Flyer + Pricing Cards + Info */}
+            <section id="precios" className="bg-[#8b0000] relative overflow-hidden border-y-8 border-black">
+
                 {/* Geometric Red/Yellow decor background */}
                 <svg className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
                     <circle cx="20" cy="20" r="15" fill="var(--color-secondary)" />
@@ -191,38 +206,66 @@ const Home = () => {
                     <polygon points="90,80 100,100 80,100" fill="var(--color-secondary)" />
                 </svg>
 
-                <div className="container px-4 relative z-10">
-                    <div className="flex flex-col lg:flex-row gap-12 items-start">
-                        
-                        <div className="w-full lg:w-1/4">
-                            <h2 className="text-white text-5xl md:text-6xl font-black uppercase mb-6 leading-[0.9] tracking-tighter drop-shadow-lg">
-                                PRECIOS Y<br/>PAQUETES
-                            </h2>
-                            <p className="text-white font-bold mb-8 uppercase tracking-wide text-lg drop-shadow-md">
-                                ¡Diviértete HOY!<br/>
-                                La diversión está a un clic de distancia.
-                            </p>
-                            <a href="#contacto" className="btn bg-black text-white px-8 py-3 rounded-full uppercase hover:brightness-110 transition-all text-sm font-black shadow-[4px_4px_0_0_rgba(0,0,0,0.5)] border-2 border-white/20 inline-block">
-                                VER MÁS
-                            </a>
+                {/* Promotional Flyer Image - Hero Banner */}
+                <div className="relative z-10 pt-20 pb-12 px-4">
+                    <div className="container">
+                        <h2 className="text-white text-5xl md:text-7xl font-black uppercase mb-4 leading-[0.9] tracking-tighter drop-shadow-lg text-center">
+                            PAQUETES
+                        </h2>
+                        <p className="text-white/80 font-bold text-lg md:text-xl text-center mb-12 uppercase tracking-wide">
+                            ¡Elige tu paquete y vive la magia!
+                        </p>
+                    </div>
+                    <div className="container flex justify-center">
+                        <div className="w-full max-w-3xl border-8 border-black shadow-[12px_12px_0_0_rgba(0,0,0,0.6)] hover:-translate-y-1 transition-transform duration-300">
+                            <img
+                                src="/images/flyer-paquetes-perimagico.jpg"
+                                alt="Paquetes Perimágico - Flyer Promocional"
+                                className="w-full h-auto block"
+                            />
                         </div>
+                    </div>
+                </div>
 
-                        {/* Funtastic Two-Tone Pricing Cards */}
-                        <div className="w-full lg:w-3/4 grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* Pricing Cards */}
+                <div className="relative z-10 py-16 px-4">
+                    <div className="container">
+                        <h3 className="text-white text-3xl md:text-4xl font-black uppercase mb-10 tracking-tighter text-center drop-shadow-md">
+                            PAQUETES PRINCIPALES
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
                             {pricingPackages.map((pkg, idx) => (
-                                <div key={idx} className="flex flex-col h-full border-4 border-black shadow-[8px_8px_0_0_rgba(0,0,0,0.5)] hover:-translate-y-2 transition-all duration-300">
-                                    <div className="bg-[#1a1a1a] text-white p-8 flex flex-col justify-center items-center h-48 border-b-4 border-black">
-                                        <h3 className="text-2xl md:text-3xl font-black uppercase text-center leading-tight tracking-tighter">
+                                <div key={idx} className={`flex flex-col h-full border-4 border-black shadow-[8px_8px_0_0_rgba(0,0,0,0.5)] hover:-translate-y-2 transition-all duration-300 ${pkg.highlight ? 'ring-4 ring-secondary ring-offset-4 ring-offset-[#8b0000]' : ''}`}>
+                                    <div className="bg-[#1a1a1a] text-white p-6 flex flex-col justify-center items-center h-40 border-b-4 border-black">
+                                        <h4 className="text-xl md:text-2xl font-black uppercase text-center leading-tight tracking-tighter">
                                             {pkg.title}
-                                        </h3>
-                                        <span className="text-gray-400 text-sm font-bold mt-2 uppercase">Starting at</span>
+                                        </h4>
+                                        <span className="text-gray-400 text-xs font-bold mt-2 uppercase">Desde</span>
                                     </div>
-                                    <div className="p-8 flex-1 flex flex-col items-center justify-between" style={{ backgroundColor: pkg.bottomColor, color: pkg.textColor || 'white' }}>
-                                        <div className="text-[48px] md:text-[56px] text-secondary font-black mb-6 tracking-tighter leading-none drop-shadow-md">{pkg.price}</div>
-                                        <p className="font-bold text-center text-sm md:text-base leading-relaxed mb-8 opacity-95 flex-1">
-                                            {pkg.desc}
-                                        </p>
-                                        <button className="w-full py-4 text-lg font-black rounded-full uppercase transition-all bg-primary text-white border-2 border-white/20 shadow-[4px_4px_0_0_rgba(0,0,0,0.3)] hover:-translate-y-1 hover:brightness-110">
+                                    <div className="p-6 flex-1 flex flex-col items-center justify-between" style={{ backgroundColor: pkg.bottomColor, color: pkg.textColor ? 'black' : 'white' }}>
+                                        <div className="text-[40px] md:text-[48px] font-black mb-4 tracking-tighter leading-none drop-shadow-md" style={{ color: pkg.textColor ? '#1a1a1a' : 'var(--color-secondary)' }}>
+                                            {pkg.price}
+                                        </div>
+                                        <div className="w-full mb-4">
+                                            <p className="text-xs font-black uppercase tracking-wider mb-2 opacity-70">Incluye:</p>
+                                            <ul className="space-y-1.5">
+                                                {pkg.includes.map((item, i) => (
+                                                    <li key={i} className="font-bold text-sm flex items-start gap-2">
+                                                        <span className="mt-0.5 shrink-0">✓</span>
+                                                        <span>{item}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        {pkg.addons.length > 0 && (
+                                            <div className="w-full mb-6 border-t border-white/20 pt-3">
+                                                <p className="text-xs font-black uppercase tracking-wider mb-2 opacity-70">Add-ons:</p>
+                                                {pkg.addons.map((addon, i) => (
+                                                    <p key={i} className="font-bold text-xs opacity-90">{addon}</p>
+                                                ))}
+                                            </div>
+                                        )}
+                                        <button className="w-full py-3 text-base font-black rounded-full uppercase transition-all bg-primary text-white border-2 border-white/20 shadow-[4px_4px_0_0_rgba(0,0,0,0.3)] hover:-translate-y-1 hover:brightness-110 mt-auto">
                                             Reservar Ahora
                                         </button>
                                     </div>
@@ -231,6 +274,128 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* Flotyland + Arcade Cards */}
+                <div className="relative z-10 pb-16 px-4">
+                    <div className="container">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                            {/* Flotyland Card */}
+                            <div className="bg-[#1a1a1a] border-4 border-black p-8 shadow-[8px_8px_0_0_rgba(0,0,0,0.5)]">
+                                <h4 className="text-secondary text-3xl font-black uppercase tracking-tighter mb-6">FLOTYLAND</h4>
+                                <div className="flex items-baseline gap-3 mb-3">
+                                    <span className="text-white text-3xl font-black">$269</span>
+                                    <span className="text-gray-400 font-bold text-sm">/ 1 hora</span>
+                                </div>
+                                <p className="text-gray-400 font-bold text-sm leading-relaxed">
+                                    Ilimitado entre semana, fuera de vacaciones, puentes y días festivos.
+                                </p>
+                            </div>
+
+                            {/* Arcade Card */}
+                            <div className="bg-[#1a1a1a] border-4 border-black p-8 shadow-[8px_8px_0_0_rgba(0,0,0,0.5)]">
+                                <h4 className="text-secondary text-3xl font-black uppercase tracking-tighter mb-6">ARCADE</h4>
+                                <div className="space-y-3 mb-4">
+                                    <div className="flex items-baseline justify-between">
+                                        <span className="text-white font-black text-lg">500 créditos</span>
+                                        <span className="text-secondary font-black text-2xl">$300</span>
+                                    </div>
+                                    <div className="flex items-baseline justify-between">
+                                        <span className="text-white font-black text-lg">1,000 créditos</span>
+                                        <span className="text-secondary font-black text-2xl">$500</span>
+                                    </div>
+                                </div>
+                                <p className="text-gray-400 font-bold text-sm">
+                                    1 Crédito = $1 Peso
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Info Grid: Horarios, Ubicación, Contacto, Restricciones */}
+                <div className="relative z-10 pb-20 px-4">
+                    <div className="container">
+                        <h3 className="text-white text-3xl md:text-4xl font-black uppercase mb-10 tracking-tighter text-center drop-shadow-md">
+                            INFORMACIÓN
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+
+                            {/* Horarios */}
+                            <div className="bg-white border-4 border-black p-8 shadow-[8px_8px_0_0_rgba(0,0,0,0.5)]">
+                                <h4 className="text-primary text-2xl font-black uppercase tracking-tighter mb-6 flex items-center gap-3">
+                                    <span className="text-3xl">🕐</span> HORARIOS
+                                </h4>
+                                <div className="space-y-3">
+                                    <div className="flex justify-between items-center border-b border-gray-200 pb-2">
+                                        <span className="font-black text-sm uppercase">Lunes a Jueves</span>
+                                        <span className="font-bold text-sm">1:00 PM - 8:00 PM</span>
+                                    </div>
+                                    <div className="flex justify-between items-center border-b border-gray-200 pb-2">
+                                        <span className="font-black text-sm uppercase">Viernes</span>
+                                        <span className="font-bold text-sm">1:00 PM - 8:30 PM</span>
+                                    </div>
+                                    <div className="flex justify-between items-center">
+                                        <span className="font-black text-sm uppercase">Sáb, Dom, Vacaciones</span>
+                                        <span className="font-bold text-sm">12:00 PM - 9:00 PM</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Ubicación */}
+                            <div className="bg-white border-4 border-black p-8 shadow-[8px_8px_0_0_rgba(0,0,0,0.5)]">
+                                <h4 className="text-primary text-2xl font-black uppercase tracking-tighter mb-6 flex items-center gap-3">
+                                    <span className="text-3xl">📍</span> UBICACIÓN
+                                </h4>
+                                <p className="font-bold text-gray-700 text-sm leading-relaxed">
+                                    Galerías Perinorte, Hacienda de Sierra Vieja 2, Hacienda del Parque, 54769 Cuautitlán Izcalli, Estado de México
+                                </p>
+                            </div>
+
+                            {/* Contacto */}
+                            <div className="bg-white border-4 border-black p-8 shadow-[8px_8px_0_0_rgba(0,0,0,0.5)]">
+                                <h4 className="text-primary text-2xl font-black uppercase tracking-tighter mb-6 flex items-center gap-3">
+                                    <span className="text-3xl">📞</span> CONTACTO
+                                </h4>
+                                <div className="space-y-3">
+                                    <p className="font-bold text-sm flex items-center gap-2">
+                                        <span>Teléfono:</span>
+                                        <a href="tel:5558182348" className="text-primary hover:underline">55 5818 2348</a>
+                                    </p>
+                                    <p className="font-bold text-sm flex items-center gap-2">
+                                        <span>Facebook:</span>
+                                        <a href="https://www.facebook.com/perimagico" target="_blank" rel="noreferrer" className="text-primary hover:underline">perimagico</a>
+                                    </p>
+                                    <p className="font-bold text-sm flex items-center gap-2">
+                                        <span>Instagram:</span>
+                                        <a href="https://www.instagram.com/perimagicooficial" target="_blank" rel="noreferrer" className="text-primary hover:underline">@perimagicooficial</a>
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Restricciones */}
+                            <div className="bg-white border-4 border-black p-8 shadow-[8px_8px_0_0_rgba(0,0,0,0.5)]">
+                                <h4 className="text-primary text-2xl font-black uppercase tracking-tighter mb-6 flex items-center gap-3">
+                                    <span className="text-3xl">⚠️</span> RESTRICCIONES
+                                </h4>
+                                <ul className="space-y-2">
+                                    <li className="font-bold text-sm text-gray-700 flex items-start gap-2">
+                                        <span className="text-primary mt-0.5 shrink-0">•</span>
+                                        <span>Prohibida la entrada a juegos para menores de 80 cm</span>
+                                    </li>
+                                    <li className="font-bold text-sm text-gray-700 flex items-start gap-2">
+                                        <span className="text-primary mt-0.5 shrink-0">•</span>
+                                        <span>No permitido para embarazadas, personas con problemas cardíacos o lesiones</span>
+                                    </li>
+                                    <li className="font-bold text-sm text-gray-700 flex items-start gap-2">
+                                        <span className="text-primary mt-0.5 shrink-0">•</span>
+                                        <span>Todos los visitantes (incluso acompañantes) deben pagar mínimo el acceso al parque</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </section>
 
             {/* 4. SECCIÓN ATRACCIONES (Con descripciones largas) */}
