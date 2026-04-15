@@ -105,8 +105,8 @@ const Home = () => {
                             <a href="#eventos" className="bg-transparent text-secondary border-[4px] border-secondary text-lg hover:bg-secondary hover:text-black hover:border-transparent uppercase shadow-[4px_4px_0_0_rgba(255,194,14,1)] hover:translate-y-1 hover:shadow-none font-black text-center px-10 py-3 rounded-full transition-all flex justify-center items-center">
                                 Fiestas de Cumpleaños
                             </a>
-                            <a href="#precios" className="bg-primary text-white text-lg uppercase hover:brightness-110 font-black text-center shadow-[4px_4px_0_0_rgba(0,0,0,1)] hover:translate-y-1 hover:shadow-none border-[4px] border-transparent px-14 py-3 rounded-full transition-all flex justify-center items-center">
-                                Reservar Ahora
+                            <a href="https://wa.me/5215558182348" target="_blank" rel="noopener noreferrer" className="bg-primary text-white text-lg uppercase hover:brightness-110 font-black text-center shadow-[4px_4px_0_0_rgba(0,0,0,1)] hover:translate-y-1 hover:shadow-none border-[4px] border-transparent px-14 py-3 rounded-full transition-all flex justify-center items-center">
+                                Informes
                             </a>
                         </div>
                     </div>
@@ -265,9 +265,9 @@ const Home = () => {
                                                 ))}
                                             </div>
                                         )}
-                                        <button className="w-full py-3 text-base font-black rounded-full uppercase transition-all bg-primary text-white border-2 border-white/20 shadow-[4px_4px_0_0_rgba(0,0,0,0.3)] hover:-translate-y-1 hover:brightness-110 mt-auto">
-                                            Reservar Ahora
-                                        </button>
+                                        <a href="https://wa.me/5215558182348" target="_blank" rel="noopener noreferrer" className="w-full py-3 text-base font-black rounded-full uppercase transition-all bg-primary text-white border-2 border-white/20 shadow-[4px_4px_0_0_rgba(0,0,0,0.3)] hover:-translate-y-1 hover:brightness-110 mt-auto block text-center">
+                                            Informes
+                                        </a>
                                     </div>
                                 </div>
                             ))}
@@ -359,7 +359,7 @@ const Home = () => {
                                 <div className="space-y-3">
                                     <p className="font-bold text-sm flex items-center gap-2">
                                         <span>Teléfono:</span>
-                                        <a href="tel:5558182348" className="text-primary hover:underline">55 5818 2348</a>
+                                        <a href="https://wa.me/5215558182348" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">+52 1 55 5818 2348</a>
                                     </p>
                                     <p className="font-bold text-sm flex items-center gap-2">
                                         <span>Facebook:</span>

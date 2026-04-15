@@ -95,7 +95,7 @@ const Footer = () => {
                         <span className="text-xl">📍</span> Centro Comercial Galerias Perinorte, Cuautitlán Izcalli, Mex.
                     </div>
                     <div className="flex items-center gap-2">
-                        <span className="text-xl">📞</span> <a href="tel:5558182348" className="hover:text-white hover:underline transition-colors">55 5818 2348</a>
+                        <span className="text-xl">📞</span> <a href="https://wa.me/5215558182348" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline transition-colors">+52 1 55 5818 2348</a>
                     </div>
                     <div className="flex items-center gap-2">
                         <span className="text-xl">✉️</span> <a href="mailto:ventas@perimagico.com.mx" className="hover:text-white hover:underline transition-colors">ventas@perimagico.com.mx</a>

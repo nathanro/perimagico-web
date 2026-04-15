@@ -64,8 +64,8 @@ const Navbar = () => {
                             <a href="#" className="bg-[#22c55e] border-2 border-[#22c55e] text-white px-4 py-2 md:px-5 md:py-2 rounded-full font-bold text-xs hover:bg-transparent hover:text-[#22c55e] transition-all uppercase whitespace-nowrap flex items-center justify-center">
                                 Tour Virtual
                             </a>
-                            <a href="#precios" className="bg-[#dc2626] border-2 border-[#dc2626] text-white px-4 py-2 md:px-5 md:py-2 rounded-full font-bold text-xs hover:bg-transparent hover:text-[#dc2626] transition-all uppercase whitespace-nowrap flex items-center justify-center">
-                                Reservar
+                            <a href="https://wa.me/5215558182348" target="_blank" rel="noopener noreferrer" className="bg-[#dc2626] border-2 border-[#dc2626] text-white px-4 py-2 md:px-5 md:py-2 rounded-full font-bold text-xs hover:bg-transparent hover:text-[#dc2626] transition-all uppercase whitespace-nowrap flex items-center justify-center">
+                                Informes
                             </a>
                         </div>
                         
@@ -108,8 +108,8 @@ const Navbar = () => {
                         <a href="#" className="bg-[#22c55e] text-white w-full py-4 rounded-full font-black text-xl text-center hover:brightness-110 transition-all uppercase">
                             Tour Virtual
                         </a>
-                        <a href="#precios" className="bg-[#dc2626] text-white w-full py-4 rounded-full font-black text-xl text-center hover:brightness-110 transition-all uppercase">
-                            Reservar
+                        <a href="https://wa.me/5215558182348" target="_blank" rel="noopener noreferrer" className="bg-[#dc2626] text-white w-full py-4 rounded-full font-black text-xl text-center hover:brightness-110 transition-all uppercase">
+                            Informes
                         </a>
                     </div>
                 </div>
