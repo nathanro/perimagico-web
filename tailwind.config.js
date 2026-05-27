@@ -8,8 +8,8 @@ export default {
             colors: {
                 primary: 'var(--color-primary)',
                 secondary: 'var(--color-secondary)',
-                magenta: 'var(--color-accent-magenta)',
-                green: 'var(--color-accent-green)',
+                brandblue: 'var(--color-blue)',
+                brandcyan: 'var(--color-cyan)',
             },
             fontFamily: {
                 sans: ['Outfit', 'sans-serif'],

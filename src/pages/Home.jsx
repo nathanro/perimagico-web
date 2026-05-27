@@ -1,283 +1,424 @@
+import { useState, useRef, useEffect } from 'react';
+import { Play, Pause, ChevronLeft, ChevronRight, Instagram, MapPin, Volume2, VolumeX } from 'lucide-react';
 import Layout from '../components/Layout';
 import ContactForm from '../components/ContactForm';
 
 const Home = () => {
+    const [isPlaying, setIsPlaying] = useState(true);
+    const [isMuted, setIsMuted] = useState(true);
+    const videoRef = useRef(null);
+    const carouselRef = useRef(null);
 
-    const attractions = [
-        { title: 'Atracciones Extremas', desc: 'Siente la adrenalina pura en nuestros emocionantes juegos mecánicos diseñados para desafiar tus límites y darte la mayor diversión.', img: '/images/upscaled/Image-1-2.png' },
-        { title: 'Zona Arcade', desc: 'Disfruta de cientos de videojuegos clásicos y modernos. Gana tickets y canjéalos por increíbles premios en nuestra exclusiva tienda.', img: '/images/upscaled/Image-1-3.png' },
-        { title: 'Guácala', desc: 'Una experiencia interactiva y viscosa donde los más pequeños podrán divertirse a lo grande experimentando texturas únicas.', img: '/images/upscaled/Image-1-5.png' },
-        { title: 'Ninja Parkour', desc: 'Demuestra tu agilidad y destreza en nuestro circuito de obstáculos. ¡Compite con tus amigos y descubre quién es el más rápido!', img: '/images/upscaled/Image-1-6.png' },
-        { title: 'Inflatables', desc: 'Un parque de inflables gigante para saltar, rebotar y deslizarse sin parar. Máxima seguridad y diversión garantizada para niños.', img: '/images/upscaled/Image-1-7.png' },
-        { title: 'Carros Eléctricos', desc: 'Ponte al volante en nuestra pista de carritos chocones. Una atracción clásica que nunca pasa de moda para toda la familia.', img: '/images/upscaled/Image-1-8.png' },
-        { title: 'Sendero del Terror', desc: 'Recorre un camino espeluznante lleno de misterios y sorpresas espantosas. Solo para los más valientes del parque.', img: '/images/upscaled/Image-1-9.png' },
+    const togglePlay = () => {
+        if (videoRef.current) {
+            if (isPlaying) {
+                videoRef.current.pause();
+            } else {
+                videoRef.current.play().catch(err => console.log("Play failed: ", err));
+            }
+            setIsPlaying(!isPlaying);
+        }
+    };
+
+    const toggleMute = () => {
+        if (videoRef.current) {
+            videoRef.current.muted = !isMuted;
+            setIsMuted(!isMuted);
+        }
+    };
+
+    // Scroll carousel left/right
+    const scrollCarousel = (direction) => {
+        if (carouselRef.current) {
+            const scrollAmount = 350; // width of card + gap
+            carouselRef.current.scrollBy({
+                left: direction === 'left' ? -scrollAmount : scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+    };
+
+    const games = [
+        {
+            title: 'Reptour',
+            img: '/images/juegos/Reptour.png',
+            desc: 'Espacio único donde descubrirás de cerca la majestuosidad de serpientes, lagartos y reptiles asombrosos. Aprende sobre sus misterios, rompe mitos y vive una experiencia cara a cara con la naturaleza más salvaje.'
+        },
+        {
+            title: 'Piccolo Ludo',
+            img: '/images/juegos/Piccolo Ludo.png',
+            desc: 'Pensado para los más pequeños, donde la diversión, el juego y la imaginación se combinan en un entorno seguro, colorido e interactivo. Un lugar ideal para explorar, aprender y disfrutar en familia.'
+        },
+        {
+            title: 'Juegos Mecánicos',
+            img: '/images/juegos/Juegos mecanicos.png',
+            desc: 'Los Juegos Mecánicos de Perimágico ofrecen adrenalina, diversión y experiencias inolvidables para todas las edades. Desde atracciones familiares hasta juegos llenos de emoción, cada experiencia está diseñada para disfrutar en un ambiente seguro, dinámico y lleno de energía.'
+        },
+        {
+            title: 'Sendero Jurásico',
+            img: '/images/juegos/Sendero Jurasico.png',
+            desc: '¡Rugidos, ruedas y velocidad! Ven a competir en la pista más divertida de Perimágico a bordo de increíbles cuatriciclos con diseño de dinosaurio. Una carrera prehistórica pensada para toda la familia.'
+        },
+        {
+            title: 'Arcade',
+            img: '/images/juegos/Arcade.png',
+            desc: 'Nuestro sector de juegos arcade combina diversión, adrenalina y tecnología para todas las edades. Disfruta de videojuegos clásicos y modernos, desafíos interactivos y experiencias llenas de emoción en un ambiente vibrante y familiar.'
+        },
+        {
+            title: 'Flotyland',
+            img: '/images/juegos/Flotyland.png',
+            desc: 'Espacio ideal para los más pequeños dentro de Perimágico. Un sector lleno de color, diversión y juegos diseñados para que los niños exploren, salten y disfruten en un entorno seguro y mágico junto a toda la familia.'
+        }
     ];
 
-    const pricingPackages = [
+    const tickets = [
         {
-            title: 'ACCESO GENERAL',
-            price: '$235',
-            desc: 'Entrada al parque + 4 juegos mecánicos (1 sola vez). No incluye atracciones extremas.',
-            bottomColor: 'var(--color-primary)', // Red
+            name: 'Acceso Adulto',
+            img: '/images/accesos/Acceso Adulto.png',
+            path: '#contacto'
         },
         {
-            title: 'DAY PASS',
-            price: '$350',
-            desc: 'Entrada al parque + juegos mecánicos y extremos ilimitados.',
-            bottomColor: 'var(--color-secondary)', // Yellow
-            textColor: 'text-black',
+            name: 'Day Pass',
+            img: '/images/accesos/Day Pass.png',
+            path: '#contacto'
         },
         {
-            title: 'DAY PASS PLATINUM',
-            price: '$450',
-            desc: 'La experiencia completa: juegos y atracciones ilimitadas.',
-            bottomColor: 'var(--color-primary)', // Red
+            name: 'Day Pass Platinum',
+            img: '/images/accesos/Day Pass Platinum.png',
+            path: '#contacto'
+        },
+        {
+            name: 'Day Pass Familiar Platinum',
+            img: '/images/accesos/Day Pass Familiar Platinum.png',
+            isRecommended: true,
+            path: '#contacto'
         }
+    ];
+
+    const instagramPosts = [
+        { img: '/images/upscaled/Image-1-3.png', likes: 142, comments: 12 },
+        { img: '/images/upscaled/Image-1-4.png', likes: 98, comments: 5 },
+        { img: '/images/upscaled/Image-1-5.png', likes: 210, comments: 24 },
+        { img: '/images/upscaled/Image-1-6.png', likes: 185, comments: 15 },
+        { img: '/images/upscaled/Image-1-7.png', likes: 312, comments: 41 }
     ];
 
     return (
         <Layout>
             <div id="top"></div>
 
-            {/* 1. HERO SECTION (Exact Funtastic Clone) */}
-            <section className="relative w-full min-h-[500px] md:min-h-[600px] lg:min-h-[750px] bg-black overflow-hidden flex items-center">
-                {/* Background Video/Image */}
-                <div className="absolute inset-0 z-0">
-                    <img src="/images/upscaled/Image-1-1.png" alt="Perimagico Hero" className="w-full h-full object-cover opacity-60" />
-                </div>
+            {/* 1. HERO SECTION (Video background + Horarios Box Overlay) */}
+            <section className="relative w-full h-[650px] md:h-[750px] lg:h-[850px] bg-black overflow-hidden flex items-center justify-center">
+                {/* Background Video */}
+                <video
+                    ref={videoRef}
+                    src="/videos/int.mp4"
+                    loop
+                    muted
+                    autoPlay
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover z-0 opacity-75"
+                />
                 
-                {/* Floating Logo Superpuesto in Hero */}
-                <div className="absolute top-24 right-10 lg:right-32 z-20 hidden md:block opacity-60">
-                     <img src="https://piccolomondo.com.mx/wp-content/uploads/2024/01/Recurso-1-e1705974571200.png" alt="Logo Flotante" className="w-64" style={{ filter: 'grayscale(100%) brightness(200%)' }} />
-                </div>
+                {/* Dark Vignette Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/40 z-10" />
 
-                <div className="container relative z-10 w-full h-full flex flex-col md:flex-row items-stretch pt-28 pb-10 gap-12">
-                    {/* Left: Days & Hours with Yellow accent bar */}
-                    <div className="w-full md:w-5/12 lg:w-4/12 bg-black/80 text-white p-8 md:p-10 flex flex-col justify-center relative border-l-[4px] border-secondary">
-                        <div className="pl-2">
-                            <h2 className="text-3xl font-black uppercase mb-8 border-b-2 border-gray-700 pb-4">Horarios</h2>
-                            
-                            <div className="space-y-6">
-                                <div>
-                                    <h3 className="text-xl font-bold uppercase text-secondary mb-1">LUNES</h3>
-                                    <p className="text-primary font-black uppercase">Cerrado</p>
-                                </div>
-                                <div>
-                                    <h3 className="text-xl font-bold uppercase text-secondary mb-1">MARTES - JUEVES</h3>
-                                    <p className="text-white font-bold text-lg">1:00 pm - 8:00 pm</p>
-                                </div>
-                                <div>
-                                    <h3 className="text-xl font-bold uppercase text-secondary mb-1">VIERNES</h3>
-                                    <p className="text-white font-bold text-lg">1:00 pm - 8:30 pm</p>
-                                </div>
-                                <div>
-                                    <h3 className="text-xl font-bold uppercase text-secondary mb-1">SÁBADO - DOMINGO</h3>
-                                    <p className="text-white font-bold text-lg">12:00 pm - 9:00 pm</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Right: Main Headline & CTA matching Funtastic text */}
-                    <div className="w-full md:w-7/12 lg:w-8/12 flex flex-col items-start justify-center pl-8 md:pl-16">
-                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-white uppercase tracking-tighter leading-none mb-6 drop-shadow-[4px_4px_0_rgba(0,0,0,1)]">
-                            ¡La magia <br/><span className="text-secondary">comienza aquí!</span>
-                        </h1>
-                        <p className="text-xl md:text-2xl text-white font-bold mb-10 max-w-xl drop-shadow-lg leading-snug">
-                            Vive una experiencia inolvidable. Diversión para toda la familia en el mejor parque techado.
-                        </p>
+                {/* Hero Interactive Elements */}
+                <div className="container relative z-20 w-full h-full flex flex-col md:flex-row items-center justify-between pt-32 pb-12 gap-8">
+                    
+                    {/* Left: Floating Horarios Card */}
+                    <div className="w-full sm:w-[360px] glass-panel rounded-3xl p-6 md:p-8 text-white shadow-neon-blue border-4 border-secondary transform hover:scale-102 transition-transform duration-300 self-start md:self-center mt-4">
+                        <h2 className="text-2xl md:text-3xl font-black uppercase text-center mb-6 tracking-wider border-b-2 border-white/20 pb-3">
+                            Horarios
+                        </h2>
                         
-                        <div className="flex flex-col gap-4 w-full sm:w-auto items-start">
-                            <a href="#eventos" className="bg-transparent text-secondary border-[4px] border-secondary text-lg hover:bg-secondary hover:text-black hover:border-transparent uppercase shadow-[4px_4px_0_0_rgba(255,194,14,1)] hover:translate-y-1 hover:shadow-none font-black text-center px-10 py-3 rounded-full transition-all flex justify-center items-center">
-                                Fiestas de Cumpleaños
-                            </a>
-                            <a href="#precios" className="bg-primary text-white text-lg uppercase hover:brightness-110 font-black text-center shadow-[4px_4px_0_0_rgba(0,0,0,1)] hover:translate-y-1 hover:shadow-none border-[4px] border-transparent px-14 py-3 rounded-full transition-all flex justify-center items-center">
-                                Reservar Ahora
-                            </a>
+                        <div className="space-y-4">
+                            <div className="flex justify-between items-center border-b border-white/10 pb-2">
+                                <span className="font-black text-secondary tracking-wide text-sm md:text-base">LUNES</span>
+                                <span className="bg-primary text-white text-xs md:text-sm font-black uppercase px-3 py-1 rounded-full animate-pulse">
+                                    Cerrado
+                                </span>
+                            </div>
+                            <div className="flex flex-col border-b border-white/10 pb-2">
+                                <span className="font-black text-secondary tracking-wide text-xs">MARTES - JUEVES</span>
+                                <span className="font-bold text-base md:text-lg">1:00 pm - 8:00 pm</span>
+                            </div>
+                            <div className="flex flex-col border-b border-white/10 pb-2">
+                                <span className="font-black text-secondary tracking-wide text-xs">VIERNES</span>
+                                <span className="font-bold text-base md:text-lg">1:00 pm - 8:30 pm</span>
+                            </div>
+                            <div className="flex flex-col">
+                                <span className="font-black text-secondary tracking-wide text-xs">SÁBADO - DOMINGO</span>
+                                <span className="font-bold text-base md:text-lg text-yellow-300">12:00 pm - 10:00 pm</span>
+                            </div>
                         </div>
                     </div>
+
+                    {/* Center: Large Interactive Play Button */}
+                    <div className="flex-1 flex items-center justify-center">
+                        <button 
+                            onClick={togglePlay}
+                            className="w-24 h-24 md:w-32 md:h-32 bg-white/10 backdrop-blur-md hover:bg-white/30 text-white rounded-full flex items-center justify-center border-4 border-white transition-all duration-300 hover:scale-110 shadow-neon-blue group relative"
+                            aria-label={isPlaying ? "Pause video" : "Play video"}
+                        >
+                            <span className="absolute inset-0 rounded-full border-4 border-white animate-ping opacity-25"></span>
+                            {isPlaying ? (
+                                <Pause size={48} className="md:w-16 md:h-16 group-hover:scale-95 transition-transform" fill="currentColor" />
+                            ) : (
+                                <Play size={48} className="ml-2 md:w-16 md:h-16 group-hover:scale-95 transition-transform" fill="currentColor" />
+                            )}
+                        </button>
+                    </div>
+
+                    {/* Bottom Right Mute Toggle */}
+                    <button 
+                        onClick={toggleMute}
+                        className="absolute bottom-6 right-6 md:bottom-12 md:right-12 z-25 bg-black/60 backdrop-blur-sm border-2 border-white/20 text-white p-3.5 rounded-full hover:bg-white hover:text-black hover:border-white transition-all shadow-md"
+                        aria-label={isMuted ? "Unmute video" : "Mute video"}
+                    >
+                        {isMuted ? <VolumeX size={22} /> : <Volume2 size={22} />}
+                    </button>
+
                 </div>
             </section>
 
-            {/* 2. VIVE LA EXPERIENCIA (Overlapping Cards over Colored Stripes) */}
-            <section id="experiencia" className="bg-white pt-20 pb-32 relative overflow-hidden">
-                {/* Geometric Diagonal Decorations (Red + Yellow) */}
-                <svg className="absolute top-0 right-0 w-64 h-64 text-primary opacity-20 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <polygon fill="currentColor" points="100,0 100,100 0,0" />
-                </svg>
-                <svg className="absolute top-0 right-0 w-48 h-48 text-secondary opacity-30 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <polygon fill="currentColor" points="100,0 100,100 0,0" />
-                </svg>
-                
-                <div className="container relative z-10 px-4 md:px-8">
-                    <div className="flex flex-col lg:flex-row justify-between items-end gap-8 mb-12">
-                        <div className="max-w-3xl flex flex-col justify-start">
-                            <h2 className="text-primary text-[56px] font-black uppercase tracking-tighter leading-[1] mb-4">
-                                VIVE LA EXPERIENCIA
-                            </h2>
-                            <p className="text-lg md:text-xl font-bold text-gray-600 leading-snug">
-                                Experiencia única y original en Galerías Perinorte. Nuestro parque techado de diversiones combina <i>thrill rides</i> con un ambiente incomparable. Diversión total.
-                            </p>
-                        </div>
-                        <div className="shrink-0 mb-2">
-                            <a href="#atracciones" className="bg-primary text-white text-base font-black uppercase py-4 px-10 rounded-full shadow-[4px_4px_0_0_rgba(0,0,0,1)] hover:-translate-y-1 transition-all border-2 border-transparent inline-block">
-                                Ver Más
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                {/* The distinct Funtastic background stripes behind the overlapping cards */}
-                <div className="absolute left-0 w-full h-[300px] mt-8 flex z-0">
-                    <div className="w-1/3 h-full bg-secondary"></div>
-                    <div className="w-1/3 h-full bg-primary"></div>
-                    <div className="w-1/3 h-full" style={{ backgroundColor: 'var(--color-accent-green)' }}></div>
-                </div>
-
-                {/* Overlapping Vertical Image Cards (4 Cards) */}
-                <div className="container relative z-10 px-4 md:px-8 pt-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {/* Card 1 */}
-                        <div className="bg-white border-4 border-black p-3 transform hover:-translate-y-2 transition-transform duration-300 shadow-[12px_12px_0_0_rgba(0,0,0,1)] h-[400px]">
-                            <div className="w-full h-full bg-black relative overflow-hidden group">
-                                <img src="/images/upscaled/Image-1-4.png" alt="Juntos" className="w-full h-full object-cover opacity-90 group-hover:scale-110 transition-transform duration-500" />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-                                <h3 className="absolute bottom-6 left-6 text-white font-black text-3xl uppercase tracking-tighter">
-                                    JUNTOS
-                                </h3>
-                            </div>
-                        </div>
-                        {/* Card 2 */}
-                        <div className="bg-white border-4 border-black p-3 transform lg:translate-y-8 hover:translate-y-6 transition-transform duration-300 shadow-[12px_12px_0_0_rgba(0,0,0,1)] h-[400px]">
-                            <div className="w-full h-full bg-black relative overflow-hidden group">
-                                <img src="/images/upscaled/Image-1-5.png" alt="Diversión" className="w-full h-full object-cover opacity-90 group-hover:scale-110 transition-transform duration-500" />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-                                <h3 className="absolute bottom-6 left-6 text-white font-black text-3xl uppercase tracking-tighter">
-                                    DIVERSIÓN
-                                </h3>
-                            </div>
-                        </div>
-                        {/* Card 3 */}
-                        <div className="bg-white border-4 border-black p-3 transform hover:-translate-y-2 transition-transform duration-300 shadow-[12px_12px_0_0_rgba(0,0,0,1)] h-[400px]">
-                            <div className="w-full h-full bg-black relative overflow-hidden group">
-                                <img src="/images/upscaled/Image-1-9.png" alt="Familia" className="w-full h-full object-cover opacity-90 group-hover:scale-110 transition-transform duration-500" />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-                                <h3 className="absolute bottom-6 left-6 text-white font-black text-3xl uppercase tracking-tighter">
-                                    FAMILIA
-                                </h3>
-                            </div>
-                        </div>
-                        {/* Card 4 (Added as requested to match Funtastic's 4 cards) */}
-                        <div className="bg-white border-4 border-black p-3 transform lg:translate-y-8 hover:translate-y-6 transition-transform duration-300 shadow-[12px_12px_0_0_rgba(0,0,0,1)] h-[400px]">
-                            <div className="w-full h-full bg-black relative overflow-hidden group">
-                                <img src="/images/upscaled/Image-1-2.png" alt="Amigos" className="w-full h-full object-cover opacity-90 group-hover:scale-110 transition-transform duration-500" />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-                                <h3 className="absolute bottom-6 left-6 text-white font-black text-3xl uppercase tracking-tighter">
-                                    AMIGOS
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* 3. PRECIOS & PAQUETES */}
-            <section id="precios" className="bg-[#8b0000] relative py-24 sm:py-32 overflow-hidden border-y-8 border-black">
-                {/* Geometric Red/Yellow decor background */}
-                <svg className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
-                    <circle cx="20" cy="20" r="15" fill="var(--color-secondary)" />
-                    <polygon points="80,20 100,50 60,50" fill="var(--color-primary)" />
-                    <rect x="10" y="70" width="30" height="30" fill="var(--color-primary)" transform="rotate(45 25 85)" />
-                    <polygon points="90,80 100,100 80,100" fill="var(--color-secondary)" />
-                </svg>
-
-                <div className="container px-4 relative z-10">
-                    <div className="flex flex-col lg:flex-row gap-12 items-start">
-                        
-                        <div className="w-full lg:w-1/4">
-                            <h2 className="text-white text-5xl md:text-6xl font-black uppercase mb-6 leading-[0.9] tracking-tighter drop-shadow-lg">
-                                PRECIOS Y<br/>PAQUETES
-                            </h2>
-                            <p className="text-white font-bold mb-8 uppercase tracking-wide text-lg drop-shadow-md">
-                                ¡Diviértete HOY!<br/>
-                                La diversión está a un clic de distancia.
-                            </p>
-                            <a href="#contacto" className="btn bg-black text-white px-8 py-3 rounded-full uppercase hover:brightness-110 transition-all text-sm font-black shadow-[4px_4px_0_0_rgba(0,0,0,0.5)] border-2 border-white/20 inline-block">
-                                VER MÁS
-                            </a>
-                        </div>
-
-                        {/* Funtastic Two-Tone Pricing Cards */}
-                        <div className="w-full lg:w-3/4 grid grid-cols-1 md:grid-cols-3 gap-6">
-                            {pricingPackages.map((pkg, idx) => (
-                                <div key={idx} className="flex flex-col h-full border-4 border-black shadow-[8px_8px_0_0_rgba(0,0,0,0.5)] hover:-translate-y-2 transition-all duration-300">
-                                    <div className="bg-[#1a1a1a] text-white p-8 flex flex-col justify-center items-center h-48 border-b-4 border-black">
-                                        <h3 className="text-2xl md:text-3xl font-black uppercase text-center leading-tight tracking-tighter">
-                                            {pkg.title}
-                                        </h3>
-                                        <span className="text-gray-400 text-sm font-bold mt-2 uppercase">Starting at</span>
-                                    </div>
-                                    <div className="p-8 flex-1 flex flex-col items-center justify-between" style={{ backgroundColor: pkg.bottomColor, color: pkg.textColor || 'white' }}>
-                                        <div className="text-[48px] md:text-[56px] text-secondary font-black mb-6 tracking-tighter leading-none drop-shadow-md">{pkg.price}</div>
-                                        <p className="font-bold text-center text-sm md:text-base leading-relaxed mb-8 opacity-95 flex-1">
-                                            {pkg.desc}
-                                        </p>
-                                        <button className="w-full py-4 text-lg font-black rounded-full uppercase transition-all bg-primary text-white border-2 border-white/20 shadow-[4px_4px_0_0_rgba(0,0,0,0.3)] hover:-translate-y-1 hover:brightness-110">
-                                            Reservar Ahora
-                                        </button>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* 4. SECCIÓN ATRACCIONES (Con descripciones largas) */}
-            <section id="atracciones" className="bg-[#f8f9fa] relative py-24 border-b-8 border-black overflow-hidden">
-                {/* Geometric Diagonal Decorations (Red + Yellow) */}
-                <svg className="absolute top-0 right-0 w-64 h-64 text-secondary opacity-30 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <polygon fill="currentColor" points="100,0 100,100 0,0" />
-                </svg>
-                <svg className="absolute bottom-0 left-0 w-48 h-48 text-primary opacity-20 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <polygon fill="currentColor" points="0,0 0,100 100,100" />
-                </svg>
-
-                <div className="container px-4 relative z-10">
-                    <div className="text-left mb-16 flex flex-col lg:flex-row justify-between items-end gap-6 border-b-[4px] border-black pb-8">
+            {/* 2. ATRACCIONES & JUEGOS CAROUSEL SECTION */}
+            <section id="juegos-atracciones" className="bg-white py-20 relative overflow-hidden border-b-8 border-black">
+                <div className="container px-4 md:px-8">
+                    {/* Header */}
+                    <div className="text-center md:text-left mb-12 flex flex-col md:flex-row justify-between items-end gap-6">
                         <div className="max-w-2xl">
-                            <h2 className="text-primary text-[56px] font-black uppercase mb-4 tracking-tighter leading-none shadow-sm">
-                                ATRACCIONES
+                            <h2 className="text-primary text-5xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-4">
+                                ATRACCIONES <span className="text-primary font-black lowercase text-4xl md:text-5xl font-sans inline-block rotate-[-2deg] bg-secondary text-black px-4 py-1.5 rounded-xl border-4 border-black ml-2 shadow-[4px_4px_0_0_rgba(0,0,0,1)]">Juegos</span>
                             </h2>
                             <p className="text-gray-700 font-bold text-lg md:text-xl">
-                                Descubre nuestras atracciones únicas diseñadas para que tus hijos y toda la familia pasen un rato inolvidable llenos de adrenalina y alegría.
+                                Descubre nuestras atracciones únicas diseñadas para que tus hijos y toda la familia pasen un rato inolvidable.
                             </p>
                         </div>
-                        <a href="#" className="bg-primary text-white text-base font-black uppercase py-4 px-10 rounded-full shadow-[4px_4px_0_0_rgba(0,0,0,1)] hover:-translate-y-1 transition-all border-2 border-transparent inline-block shrink-0">
-                            Ver Más
-                        </a>
+                        {/* Carousel Navigation Buttons */}
+                        <div className="flex gap-3 shrink-0">
+                            <button 
+                                onClick={() => scrollCarousel('left')}
+                                className="w-14 h-14 bg-primary text-white hover:bg-secondary hover:text-black border-4 border-black rounded-full flex items-center justify-center transition-all shadow-[4px_4px_0_0_rgba(0,0,0,1)] active:translate-y-1 active:shadow-none"
+                                aria-label="Atracción anterior"
+                            >
+                                <ChevronLeft size={28} strokeWidth={3} />
+                            </button>
+                            <button 
+                                onClick={() => scrollCarousel('right')}
+                                className="w-14 h-14 bg-primary text-white hover:bg-secondary hover:text-black border-4 border-black rounded-full flex items-center justify-center transition-all shadow-[4px_4px_0_0_rgba(0,0,0,1)] active:translate-y-1 active:shadow-none"
+                                aria-label="Siguiente atracción"
+                            >
+                                <ChevronRight size={28} strokeWidth={3} />
+                            </button>
+                        </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
-                        {attractions.map((attr, idx) => (
-                            <a href="#" key={idx} className="group flex flex-col border-4 border-black bg-white shadow-[8px_8px_0_0_rgba(0,0,0,1)] hover:shadow-[12px_12px_0_0_rgba(0,0,0,1)] transform hover:-translate-y-2 transition-all duration-300">
-                                {/* Image with Title Overlay */}
-                                <div className="h-56 bg-black border-b-4 border-black overflow-hidden relative">
-                                    <img src={attr.img} alt={attr.title} className="w-full h-full object-cover opacity-90 group-hover:scale-110 group-hover:opacity-100 transition-transform duration-500" />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
-                                    <h3 className="absolute bottom-4 left-5 text-white text-2xl font-black uppercase tracking-tight drop-shadow-md pr-4 leading-tight">
-                                        {attr.title}
-                                    </h3>
+                    {/* Scrollable Carousel Wrapper */}
+                    <div 
+                        ref={carouselRef}
+                        className="flex overflow-x-auto gap-6 pb-8 pt-4 px-2 no-scrollbar scroll-smooth snap-x snap-mandatory"
+                    >
+                        {games.map((game, idx) => (
+                            <div 
+                                key={idx}
+                                className="w-[290px] sm:w-[330px] md:w-[360px] shrink-0 bg-white border-4 border-black rounded-3xl overflow-hidden shadow-[8px_8px_0_0_rgba(0,0,0,1)] hover:shadow-[12px_12px_0_0_rgba(0,0,0,1)] hover:-translate-y-2 transition-all duration-300 snap-start flex flex-col h-[520px]"
+                            >
+                                {/* Game Image */}
+                                <div className="h-60 bg-gray-200 border-b-4 border-black overflow-hidden relative group">
+                                    <img 
+                                        src={game.img} 
+                                        alt={game.title} 
+                                        className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" 
+                                    />
+                                    <div className="absolute top-4 left-4 bg-secondary text-black font-black uppercase text-xs px-3 py-1.5 rounded-lg border-2 border-black shadow-[2px_2px_0_0_rgba(0,0,0,1)]">
+                                        Perimágico
+                                    </div>
                                 </div>
-                                {/* White Description Box */}
-                                <div className="p-6 flex flex-col flex-1 bg-white relative">
-                                    {/* Small red decorative corner */}
-                                    <div className="absolute top-0 right-0 w-8 h-8 bg-primary clip-triangle opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                                    <p className="font-bold text-gray-600 text-[15px] leading-relaxed flex-1">
-                                        {attr.desc}
-                                    </p>
-                                    <div className="mt-6 text-primary font-black uppercase text-sm tracking-widest flex items-center gap-2 group-hover:text-black transition-colors">
-                                        Explorar <span className="transform group-hover:translate-x-2 transition-transform">&rarr;</span>
+                                {/* Game Content Info */}
+                                <div className="p-6 flex-1 flex flex-col justify-between">
+                                    <div>
+                                        <h3 className="text-2xl font-black uppercase tracking-tight text-black mb-3">
+                                            {game.title}
+                                        </h3>
+                                        <p className="text-gray-600 font-bold text-sm leading-relaxed">
+                                            {game.desc}
+                                        </p>
+                                    </div>
+                                    <a 
+                                        href="#contacto" 
+                                        className="inline-block mt-4 text-primary font-black uppercase text-sm tracking-widest hover:text-secondary hover:translate-x-1 transition-all"
+                                    >
+                                        MÁS INFORMACIÓN &rarr;
+                                    </a>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* 3. ACCESOS SECTION (Blue background + Tickets) */}
+            <section id="accesos" className="bg-[#009bfb] py-20 text-white relative overflow-hidden border-b-8 border-black">
+                {/* Decorative Elements */}
+                <div className="absolute -top-12 -right-12 w-48 h-48 bg-white/5 rounded-full blur-2xl pointer-events-none" />
+                <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-black/10 rounded-full blur-3xl pointer-events-none" />
+
+                <div className="container px-4 md:px-8 relative z-10 text-center">
+                    <h2 className="text-secondary text-5xl md:text-6xl font-black uppercase tracking-tight mb-2 drop-shadow-md">
+                        Accesos
+                    </h2>
+                    <p className="text-white font-bold text-lg md:text-xl uppercase tracking-wider mb-12 opacity-95">
+                        La diversión está a un día de distancia
+                    </p>
+
+                    {/* Cards Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto items-stretch">
+                        {tickets.map((t, idx) => (
+                            <div 
+                                key={idx} 
+                                className={`bg-white rounded-3xl overflow-hidden shadow-[8px_8px_0_0_rgba(0,0,0,0.25)] border-4 border-black flex flex-col justify-between transform hover:-translate-y-3 hover:scale-102 hover:shadow-neon-blue transition-all duration-300 ${t.isRecommended ? 'relative ring-4 ring-secondary border-secondary ring-offset-4 ring-offset-brandblue' : ''}`}
+                            >
+                                {t.isRecommended && (
+                                    <div className="absolute top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black uppercase px-4 py-1.5 rounded-full border-2 border-black shadow-[2px_2px_0_0_rgba(0,0,0,1)] z-10 tracking-widest whitespace-nowrap animate-bounce">
+                                        EL MÁS RECOMENDADO
+                                    </div>
+                                )}
+                                
+                                <div className="p-3 bg-white flex-1 flex items-center justify-center">
+                                    <img 
+                                        src={t.img} 
+                                        alt={t.name} 
+                                        className="w-full h-auto object-contain rounded-2xl" 
+                                    />
+                                </div>
+                                
+                                <div className="p-4 bg-gray-50 border-t-2 border-gray-100">
+                                    <a 
+                                        href={t.path} 
+                                        className="w-full block bg-primary text-white py-3 rounded-full text-center font-black text-sm uppercase hover:bg-secondary hover:text-black border-2 border-black shadow-[3px_3px_0_0_rgba(0,0,0,1)] hover:translate-y-0.5 hover:shadow-[1px_1px_0_0_rgba(0,0,0,1)] transition-all"
+                                    >
+                                        RESERVAR AHORA
+                                    </a>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <p className="mt-12 text-white/90 font-black uppercase text-base tracking-widest">
+                        Seleccione el paquete que quieras reservar.
+                    </p>
+                </div>
+            </section>
+
+            {/* 4. CUMPLEAÑOS SECTION */}
+            <section id="cumpleanos" className="relative w-full h-[500px] md:h-[600px] bg-black overflow-hidden flex items-center border-b-8 border-black">
+                {/* Background Image */}
+                <img 
+                    src="/images/banner/Cumpleaños.png" 
+                    alt="Cumpleaños en Perimágico" 
+                    className="absolute inset-0 w-full h-full object-cover z-0" 
+                />
+                
+                {/* Dark Vignette mask */}
+                <div className="absolute inset-0 bg-black/40 z-10" />
+
+                <div className="container px-4 md:px-8 relative z-20">
+                    {/* Left overlay text box */}
+                    <div className="w-full max-w-[460px] bg-black/85 backdrop-blur-md border-4 border-black p-8 rounded-3xl shadow-[12px_12px_0_0_rgba(0,0,0,0.6)] transform hover:scale-102 transition-transform duration-300">
+                        <h2 className="text-secondary text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-4">
+                            CUMPLEAÑOS
+                        </h2>
+                        <p className="text-gray-200 font-bold text-base md:text-lg leading-relaxed mb-8">
+                            Tu evento con nosotros será inolvidable. Celebra tu cumpleaños con la mejor diversión, áreas exclusivas y paquetes a tu medida diseñados para sorprender a todos.
+                        </p>
+                        <a 
+                            href="#contacto" 
+                            className="inline-block bg-primary text-white border-2 border-black px-10 py-3.5 rounded-full font-black text-sm uppercase tracking-widest hover:bg-secondary hover:text-black shadow-[4px_4px_0_0_rgba(0,0,0,0.5)] transition-all"
+                        >
+                            VER MÁS
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            {/* 5. FOOD COURT SECTION */}
+            <section id="restaurante" className="relative w-full h-[500px] md:h-[600px] bg-black overflow-hidden flex items-center border-b-8 border-black">
+                {/* Background Image */}
+                <img 
+                    src="/images/banner/Food Court.png" 
+                    alt="Food Court de Perimágico" 
+                    className="absolute inset-0 w-full h-full object-cover z-0" 
+                />
+                
+                {/* Dark Vignette mask */}
+                <div className="absolute inset-0 bg-black/45 z-10" />
+
+                <div className="container px-4 md:px-8 relative z-20 flex justify-start">
+                    {/* Left overlay text box */}
+                    <div className="w-full max-w-[460px] bg-black/85 backdrop-blur-md border-4 border-black p-8 rounded-3xl shadow-[12px_12px_0_0_rgba(0,0,0,0.6)] transform hover:scale-102 transition-transform duration-300">
+                        <div className="h-16 md:h-20 mb-6 flex justify-start items-center">
+                            <img 
+                                src="/images/banner/Food Court text.png" 
+                                alt="Food Court Logo" 
+                                className="h-full object-contain filter brightness-200" 
+                            />
+                        </div>
+                        <p className="text-gray-200 font-bold text-base md:text-lg leading-relaxed mb-8">
+                            Recarga toda esa energía perdida después de tanta diversión. Contamos con una amplia variedad de alimentos deliciosos como pizzas calientitas, hamburguesas, paninis, snacks y las bebidas más refrescantes.
+                        </p>
+                        <a 
+                            href="#contacto" 
+                            className="inline-block bg-primary text-white border-2 border-black px-10 py-3.5 rounded-full font-black text-sm uppercase tracking-widest hover:bg-secondary hover:text-black shadow-[4px_4px_0_0_rgba(0,0,0,0.5)] transition-all"
+                        >
+                            VER MÁS
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            {/* 6. INSTAGRAM FEED SECTION */}
+            <section id="feed-instagram" className="bg-white py-16 border-b-8 border-black">
+                <div className="container px-4 md:px-8 text-center">
+                    {/* Instagram Header */}
+                    <a 
+                        href="https://www.instagram.com/perimagicooficial" 
+                        target="_blank" 
+                        rel="noreferrer" 
+                        className="inline-flex items-center gap-3 mb-10 hover:scale-105 transition-transform"
+                    >
+                        <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center shadow-md">
+                            <Instagram size={26} strokeWidth={2.5} />
+                        </div>
+                        <span className="text-black text-2xl md:text-3xl font-black uppercase tracking-tight">
+                            @perimagico
+                        </span>
+                    </a>
+
+                    {/* Instagram Feed 5 Posts Row */}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 max-w-6xl mx-auto">
+                        {instagramPosts.map((post, idx) => (
+                            <a 
+                                key={idx} 
+                                href="https://www.instagram.com/perimagicooficial" 
+                                target="_blank" 
+                                rel="noreferrer" 
+                                className={`group bg-gray-100 border-4 border-black rounded-2xl overflow-hidden shadow-[5px_5px_0_0_rgba(0,0,0,1)] hover:shadow-[8px_8px_0_0_rgba(0,0,0,1)] hover:-translate-y-1.5 transition-all duration-300 aspect-square relative ${idx >= 4 ? 'hidden lg:block' : ''} ${idx >= 3 ? 'hidden sm:block' : ''}`}
+                            >
+                                <img 
+                                    src={post.img} 
+                                    alt={`Instagram post ${idx + 1}`} 
+                                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" 
+                                />
+                                {/* Hover Mask */}
+                                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-6 text-white font-black text-lg">
+                                    <div className="flex items-center gap-2">
+                                        <span>❤️</span>
+                                        <span>{post.likes}</span>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <span>💬</span>
+                                        <span>{post.comments}</span>
                                     </div>
                                 </div>
                             </a>
@@ -286,81 +427,42 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* 5. SECCIÓN MEMBRESÍA (Equivalente: Eventos Especiales / Cumpleaños) */}
-            <section id="eventos" className="w-full bg-[#111] py-24 px-4 border-b-8 border-black relative overflow-hidden">
-                {/* Decorative dark background elements */}
-                <svg className="absolute top-0 right-0 w-full h-full opacity-5 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <polygon points="50,0 100,0 100,100 0,100" fill="var(--color-primary)" />
-                </svg>
-
-                <div className="container px-4 text-center max-w-4xl mx-auto relative z-10">
-                    <h2 className="text-white text-5xl md:text-7xl font-black uppercase mb-8 tracking-tighter leading-none drop-shadow-[2px_2px_0_rgba(220,38,38,0.5)]">
-                        EVENTOS ESPECIALES
-                    </h2>
-                    <p className="text-gray-300 font-bold text-lg md:text-xl mb-12 leading-relaxed max-w-2xl mx-auto">
-                        Únete a nuestro selecto grupo y accede a beneficios exclusivos, invitaciones ilimitadas y áreas privadas reservando uno de nuestros paquetes festivos. Haz de tu evento, cumpleaños o visita escolar algo verdaderamente mágico e inolvidable.
-                    </p>
-                    <a href="#contacto" className="btn bg-primary text-white text-xl py-4 px-12 rounded-full uppercase font-black shadow-[4px_4px_0_0_rgba(255,255,255,0.2)] hover:-translate-y-1 transition-all border-2 border-transparent hover:border-white/50 inline-block">
-                        Ver Más
-                    </a>
-                </div>
-            </section>
-
-            {/* 6. FOOD BAR SECTION (Textos detallados, fondo blanco, logos) */}
-            <section id="menu" className="w-full bg-white py-24 px-4 border-b-8 border-gray-200">
-                <div className="container max-w-5xl mx-auto flex flex-col items-center text-center">
-                    <h2 className="text-black text-5xl md:text-6xl font-black uppercase leading-[0.9] mb-8 tracking-tighter">
-                        PERIMÁGICO FOOD BAR
-                    </h2>
-                    <p className="text-gray-700 font-bold text-lg md:text-xl mb-12 leading-relaxed max-w-3xl">
-                        Recarga toda esa energía perdida después de tanta diversión. Contamos con una amplia variedad de alimentos deliciosos como Pizzas recién horneadas con los mejores ingredientes, Paninis crujientes y calientitos, Papas a la francesa perfectas para compartir, Hamburguesas al carbón jugosas, Nuggets de pollo crujientes y las bebidas más refrescantes para toda la familia.
-                    </p>
-                    
-                    <a href="#contacto" className="inline-block bg-primary text-white px-10 py-4 text-lg font-black uppercase rounded-full shadow-[4px_4px_0_0_rgba(0,0,0,1)] hover:-translate-y-1 transition-all border-2 border-black mb-16">
-                        Ver Más
-                    </a>
-
-                    {/* Partner Logos */}
-                    <div className="w-full border-t-2 border-gray-200 pt-12">
-                        <h3 className="text-sm font-black text-gray-400 uppercase tracking-widest mb-8">Nuestras Marcas Aliadas</h3>
-                        <div className="flex flex-wrap justify-center gap-6 md:gap-12 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-                            <div className="h-20 w-32 bg-gray-100 rounded-xl border border-gray-200 flex items-center justify-center font-black text-gray-400 text-lg hover:bg-white hover:shadow-md transition-all">ICE CREAM</div>
-                            <div className="h-20 w-32 bg-gray-100 rounded-xl border border-gray-200 flex items-center justify-center font-black text-gray-400 text-lg hover:bg-white hover:shadow-md transition-all">COLA</div>
-                            <div className="h-20 w-32 bg-gray-100 rounded-xl border border-gray-200 flex items-center justify-center font-black text-gray-400 text-lg hover:bg-white hover:shadow-md transition-all">CHURROS</div>
-                            <div className="h-20 w-32 bg-gray-100 rounded-xl border border-gray-200 flex items-center justify-center font-black text-gray-400 text-lg hover:bg-white hover:shadow-md transition-all">SNACKS</div>
-                            <div className="h-20 w-32 bg-gray-100 rounded-xl border border-gray-200 flex items-center justify-center font-black text-gray-400 text-lg hover:bg-white hover:shadow-md transition-all">COFFEE</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* 7. MAPA E INDICACIONES (Full width Funtastic style) */}
+            {/* 7. MAPA E INDICACIONES (Location section) */}
             <section id="ubicacion" className="relative w-full h-[500px] bg-gray-200 border-b-8 border-black">
-                {/* Full Width Map */}
+                {/* Full Width Google Map */}
                 <iframe 
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15031.543415848525!2d-99.1994646549301!3d19.610813972626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f568e61295db%3A0xeab5bc034d610010!2sGaler%C3%ADas%20Perinorte!5e0!3m2!1ses-419!2smx!4v1714588500203!5m2!1ses-419!2smx" 
                     width="100%" 
                     height="100%" 
-                    style={{ border: 0, filter: 'grayscale(0.2) contrast(1.1)' }} 
+                    style={{ border: 0, filter: 'grayscale(0.1) contrast(1.05)' }} 
                     allowFullScreen="" 
                     loading="lazy" 
-                    referrerPolicy="no-referrer-when-downgrade">
-                </iframe>
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Ubicación de Perimágico en Galerías Perinorte"
+                ></iframe>
 
                 {/* Overlaid Address Box */}
-                <div className="absolute top-8 left-1/2 -translate-x-1/2 md:left-12 md:translate-x-0 bg-white border-4 border-black p-6 md:p-8 shadow-[8px_8px_0_0_rgba(0,0,0,1)] max-w-sm w-[90%] md:w-auto z-10 flex flex-col items-center text-center">
-                    <div className="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mb-4 border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,0.2)]">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                <div className="absolute top-8 left-1/2 -translate-x-1/2 md:left-12 md:translate-x-0 bg-black/85 backdrop-blur-md border-4 border-black p-6 md:p-8 shadow-[8px_8px_0_0_rgba(0,0,0,0.6)] max-w-sm w-[90%] md:w-auto z-10 flex flex-col items-center text-center text-white rounded-3xl">
+                    <div className="w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center mb-4 border-2 border-black shadow-md">
+                        <MapPin size={28} />
                     </div>
-                    <h3 className="text-black text-2xl font-black uppercase tracking-tight mb-2">Location</h3>
-                    <p className="font-bold text-gray-700 text-sm leading-snug">
-                        Centro Comercial Galerias Perinorte,<br/>Cuautitlán Izcalli, Mex.
+                    <h3 className="text-secondary text-2xl font-black uppercase tracking-tight mb-2">Location</h3>
+                    <p className="font-bold text-gray-200 text-sm leading-relaxed mb-6">
+                        Centro Comercial Galerías Perinorte,<br/>Cuautitlán Izcalli, Estado de México.
                     </p>
-                    <a href="https://maps.google.com" target="_blank" rel="noreferrer" className="mt-6 bg-black text-white text-sm font-black uppercase py-3 px-8 rounded-full hover:bg-primary transition-colors inline-block w-full">
-                        Obtener Rutas
+                    <a 
+                        href="https://maps.app.goo.gl/wYcE2Z76iC8Rk5j59" 
+                        target="_blank" 
+                        rel="noreferrer" 
+                        className="bg-primary text-white text-sm font-black uppercase py-3.5 px-8 rounded-full border-2 border-black hover:bg-secondary hover:text-black transition-all inline-block w-full shadow-md"
+                    >
+                        CÓMO LLEGAR
                     </a>
                 </div>
             </section>
+
+            {/* 8. FORMULARIO DE CONTACTO */}
+            <ContactForm />
 
         </Layout>
     );
