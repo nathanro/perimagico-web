@@ -96,11 +96,11 @@ const Home = () => {
     ];
 
     const instagramPosts = [
-        { img: '/images/upscaled/Image-1-3.png', likes: 142, comments: 12 },
-        { img: '/images/upscaled/Image-1-4.png', likes: 98, comments: 5 },
-        { img: '/images/upscaled/Image-1-5.png', likes: 210, comments: 24 },
-        { img: '/images/upscaled/Image-1-6.png', likes: 185, comments: 15 },
-        { img: '/images/upscaled/Image-1-7.png', likes: 312, comments: 41 }
+        { img: '/images/insta_1.png', likes: 142, comments: 12 },
+        { img: '/images/insta_2.png', likes: 98, comments: 5 },
+        { img: '/images/insta_3.png', likes: 210, comments: 24 },
+        { img: '/images/insta_4.png', likes: 185, comments: 15 },
+        { img: '/images/insta_5.png', likes: 312, comments: 41 }
     ];
 
     return (
@@ -403,7 +403,7 @@ const Home = () => {
                                 href="https://www.instagram.com/perimagicooficial" 
                                 target="_blank" 
                                 rel="noreferrer" 
-                                className={`group bg-gray-100 border-4 border-black rounded-2xl overflow-hidden shadow-[5px_5px_0_0_rgba(0,0,0,1)] hover:shadow-[8px_8px_0_0_rgba(0,0,0,1)] hover:-translate-y-1.5 transition-all duration-300 aspect-square relative ${idx >= 4 ? 'hidden lg:block' : ''} ${idx >= 3 ? 'hidden sm:block' : ''}`}
+                                className={`group bg-gray-100 border-4 border-black rounded-3xl overflow-hidden shadow-premium hover:-translate-y-1.5 hover:shadow-neon-blue transition-all duration-300 aspect-square relative ${idx >= 4 ? 'hidden lg:block' : ''} ${idx >= 3 ? 'hidden sm:block' : ''}`}
                             >
                                 <img 
                                     src={post.img} 
