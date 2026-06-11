@@ -1,99 +1,66 @@
-import { Instagram, Facebook, Youtube } from 'lucide-react';
-
-const TikTokIcon = ({ size }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
-  </svg>
-);
+import { Mail, Phone, MapPin } from 'lucide-react';
 
 const Footer = () => {
     return (
-        <footer className="bg-black text-white w-full border-t-4 border-primary">
-            <div className="container py-12">
-                
-                {/* Horizontal Top Row: Logo | Nav Links | Social Icons */}
-                <div className="flex flex-col lg:flex-row items-center justify-between gap-8 pb-10 border-b border-white/10">
-                    
-                    {/* Left: Logo Container */}
-                    <div className="shrink-0 bg-white px-5 py-3 rounded-2xl border-2 border-primary shadow-md hover:scale-105 transition-transform duration-300">
-                        <a href="#top">
-                            <img
-                                src="/images/logo.png"
-                                alt="Perimágico Logo"
-                                className="h-12 md:h-14 object-contain"
-                            />
+        <footer className="bg-white text-gray-800 w-full border-t-2 border-gray-200">
+            <div className="container py-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12 pb-12 border-b border-gray-200">
+                    <div className="flex flex-col items-center md:items-start">
+                        <a href="#top" className="inline-block mb-4 hover:opacity-80 transition-opacity">
+                            <img src="/images/logo.png" alt="Perimágico Logo" className="h-16 object-contain" />
                         </a>
+                        <p className="text-sm text-gray-600 text-center md:text-left">El mejor parque de diversiones familiar</p>
                     </div>
-                    
-                    {/* Center: Inline Nav Links */}
-                    <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-3 font-black text-sm uppercase tracking-wider text-gray-300">
-                        <a href="#top" className="hover:text-secondary transition-colors">Inicio</a>
-                        <span className="text-white/20 select-none">|</span>
-                        <a href="#juegos-atracciones" className="hover:text-secondary transition-colors">Juegos</a>
-                        <span className="text-white/20 select-none">|</span>
-                        <a href="#juegos-atracciones" className="hover:text-secondary transition-colors">Atracciones</a>
-                        <span className="text-white/20 select-none">|</span>
-                        <a href="#restaurante" className="hover:text-secondary transition-colors">Restaurante</a>
-                        <span className="text-white/20 select-none">|</span>
-                        <a href="#contacto" className="hover:text-secondary transition-colors">Contacto</a>
+                    <div className="flex flex-col items-center md:items-start">
+                        <h3 className="font-bold text-lg text-gray-900 mb-4 uppercase tracking-wide">Contacto</h3>
+                        <div className="space-y-3 text-sm text-gray-700">
+                            <div className="flex items-center gap-2 justify-center md:justify-start">
+                                <Phone size={18} className="text-gray-600 flex-shrink-0" />
+                                <a href="tel:+525558182348" className="hover:text-gray-900 transition-colors font-semibold">55 5818 2348</a>
+                            </div>
+                            <div className="flex items-center gap-2 justify-center md:justify-start">
+                                <Mail size={18} className="text-gray-600 flex-shrink-0" />
+                                <a href="mailto:ventas@perimagico.com.mx" className="hover:text-gray-900 transition-colors font-semibold break-all">ventas@perimagico.com.mx</a>
+                            </div>
+                        </div>
                     </div>
-                    
-                    {/* Right: Social Media Red Circles */}
-                    <div className="flex gap-3">
-                        <a 
-                            href="https://www.facebook.com/perimagico" 
-                            target="_blank"
-                            rel="noreferrer"
-                            className="w-11 h-11 bg-[#fb0e08] hover:bg-secondary text-white hover:text-black flex items-center justify-center rounded-full transition-all duration-300 hover:-translate-y-1 shadow-md"
-                            aria-label="Facebook"
-                        >
-                            <Facebook size={20} strokeWidth={2.5} />
-                        </a>
-                        <a 
-                            href="https://www.instagram.com/perimagicooficial" 
-                            target="_blank"
-                            rel="noreferrer"
-                            className="w-11 h-11 bg-[#fb0e08] hover:bg-secondary text-white hover:text-black flex items-center justify-center rounded-full transition-all duration-300 hover:-translate-y-1 shadow-md"
-                            aria-label="Instagram"
-                        >
-                            <Instagram size={20} strokeWidth={2.5} />
-                        </a>
-                        <a 
-                            href="https://www.youtube.com" 
-                            target="_blank"
-                            rel="noreferrer"
-                            className="w-11 h-11 bg-[#fb0e08] hover:bg-secondary text-white hover:text-black flex items-center justify-center rounded-full transition-all duration-300 hover:-translate-y-1 shadow-md"
-                            aria-label="YouTube"
-                        >
-                            <Youtube size={20} strokeWidth={2.5} />
-                        </a>
-                        <a 
-                            href="https://www.tiktok.com" 
-                            target="_blank"
-                            rel="noreferrer"
-                            className="w-11 h-11 bg-[#fb0e08] hover:bg-secondary text-white hover:text-black flex items-center justify-center rounded-full transition-all duration-300 hover:-translate-y-1 shadow-md"
-                            aria-label="TikTok"
-                        >
-                            <TikTokIcon size={20} />
-                        </a>
+                    <div className="flex flex-col items-center md:items-start">
+                        <h3 className="font-bold text-lg text-gray-900 mb-4 uppercase tracking-wide">Ubicación</h3>
+                        <div className="flex items-start gap-2">
+                            <MapPin size={18} className="text-gray-600 flex-shrink-0 mt-1" />
+                            <p className="text-sm text-gray-700 text-center md:text-left">Centro Comercial Galerías Perinorte<br />Cuautitlán Izcalli<br />Estado de México</p>
+                        </div>
                     </div>
-
+                    <div className="flex flex-col items-center md:items-start">
+                        <h3 className="font-bold text-lg text-gray-900 mb-4 uppercase tracking-wide">Horarios</h3>
+                        <div className="space-y-2 text-sm text-gray-700">
+                            <div className="text-center md:text-left">
+                                <p className="font-semibold">Mar - Jue</p>
+                                <p>1:00 pm - 8:00 pm</p>
+                            </div>
+                            <div className="text-center md:text-left">
+                                <p className="font-semibold">Viernes</p>
+                                <p>1:00 pm - 8:30 pm</p>
+                            </div>
+                            <div className="text-center md:text-left">
+                                <p className="font-semibold">Sáb - Dom</p>
+                                <p>12:00 pm - 10:00 pm</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                {/* Bottom Row: Contact Info & Copyright */}
-                <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-gray-500 font-bold tracking-wide text-center md:text-left">
+                <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-gray-600 font-semibold tracking-wide">
                     <div className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-2">
-                        <span>📍 Centro Comercial Galerías Perinorte, Cuautitlán Izcalli, Mex.</span>
-                        <span className="hidden sm:inline">•</span>
-                        <span>📞 55 5818 2348</span>
-                        <span className="hidden sm:inline">•</span>
-                        <span>✉️ ventas@perimagico.com.mx</span>
+                        <a href="#inicio" className="hover:text-gray-900 transition-colors">Inicio</a>
+                        <span className="text-gray-300">|</span>
+                        <a href="#juegos-atracciones" className="hover:text-gray-900 transition-colors">Atracciones</a>
+                        <span className="text-gray-300">|</span>
+                        <a href="#restaurante" className="hover:text-gray-900 transition-colors">Restaurante</a>
+                        <span className="text-gray-300">|</span>
+                        <a href="#contacto" className="hover:text-gray-900 transition-colors">Contacto</a>
                     </div>
-                    <div className="uppercase tracking-widest text-[10px]">
-                        © 2026 Perimágico. Todos los derechos reservados.
-                    </div>
+                    <div className="text-center md:text-right">© 2026 Perimágico. Todos los derechos reservados.</div>
                 </div>
-
             </div>
         </footer>
     );
