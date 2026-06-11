@@ -27,10 +27,9 @@ const Home = () => {
         }
     };
 
-    // Scroll carousel left/right
     const scrollCarousel = (direction) => {
         if (carouselRef.current) {
-            const scrollAmount = 350; // width of card + gap
+            const scrollAmount = 350;
             carouselRef.current.scrollBy({
                 left: direction === 'left' ? -scrollAmount : scrollAmount,
                 behavior: 'smooth'
@@ -107,9 +106,7 @@ const Home = () => {
         <Layout>
             <div id="top"></div>
 
-            {/* 1. HERO SECTION (Video background + Horarios Box Overlay) */}
             <section className="relative w-full h-[650px] md:h-[750px] lg:h-[850px] bg-black overflow-hidden flex items-center justify-center">
-                {/* Background Video */}
                 <video
                     ref={videoRef}
                     src="/videos/int.mp4"
@@ -120,13 +117,10 @@ const Home = () => {
                     className="absolute inset-0 w-full h-full object-cover z-0 opacity-75"
                 />
                 
-                {/* Dark Vignette Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/40 z-10" />
 
-                {/* Hero Interactive Elements */}
                 <div className="container relative z-20 w-full h-full flex flex-col md:flex-row items-center justify-between pt-32 pb-12 gap-8">
                     
-                    {/* Left: Floating Horarios Card */}
                     <div className="w-full sm:w-[360px] glass-panel rounded-3xl p-6 md:p-8 text-white shadow-neon-blue border-4 border-secondary transform hover:scale-102 transition-transform duration-300 self-start md:self-center mt-4">
                         <h2 className="text-2xl md:text-3xl font-black uppercase text-center mb-6 tracking-wider border-b-2 border-white/20 pb-3">
                             Horarios
@@ -152,9 +146,15 @@ const Home = () => {
                                 <span className="font-bold text-base md:text-lg text-yellow-300">12:00 pm - 10:00 pm</span>
                             </div>
                         </div>
+                        
+                        <div className="mt-6 pt-6 border-t-2 border-white/20">
+                            <p className="text-secondary font-black text-xs uppercase tracking-wide mb-2">Contáctanos</p>
+                            <a href="tel:+525558182348" className="text-white font-black text-lg hover:text-yellow-300 transition-colors">
+                                📞 55 5818 2348
+                            </a>
+                        </div>
                     </div>
 
-                    {/* Center: Large Interactive Play Button */}
                     <div className="flex-1 flex items-center justify-center">
                         <button 
                             onClick={togglePlay}
@@ -170,7 +170,6 @@ const Home = () => {
                         </button>
                     </div>
 
-                    {/* Bottom Right Mute Toggle */}
                     <button 
                         onClick={toggleMute}
                         className="absolute bottom-6 right-6 md:bottom-12 md:right-12 z-25 bg-black/60 backdrop-blur-sm border-2 border-white/20 text-white p-3.5 rounded-full hover:bg-white hover:text-black hover:border-white transition-all shadow-md"
@@ -182,10 +181,8 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* 2. ATRACCIONES & JUEGOS CAROUSEL SECTION */}
             <section id="juegos-atracciones" className="bg-white py-20 relative overflow-hidden border-b-8 border-black">
                 <div className="container px-4 md:px-8">
-                    {/* Header */}
                     <div className="text-center md:text-left mb-12 flex flex-col md:flex-row justify-between items-end gap-6">
                         <div className="max-w-2xl">
                             <h2 className="text-primary text-5xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-4">
@@ -195,7 +192,6 @@ const Home = () => {
                                 Descubre nuestras atracciones únicas diseñadas para que tus hijos y toda la familia pasen un rato inolvidable.
                             </p>
                         </div>
-                        {/* Carousel Navigation Buttons */}
                         <div className="flex gap-3 shrink-0">
                             <button 
                                 onClick={() => scrollCarousel('left')}
@@ -214,7 +210,6 @@ const Home = () => {
                         </div>
                     </div>
 
-                    {/* Scrollable Carousel Wrapper */}
                     <div 
                         ref={carouselRef}
                         className="flex overflow-x-auto gap-6 pb-8 pt-4 px-2 no-scrollbar scroll-smooth snap-x snap-mandatory"
@@ -222,10 +217,9 @@ const Home = () => {
                         {games.map((game, idx) => (
                             <div 
                                 key={idx}
-                                className="w-[290px] sm:w-[330px] md:w-[360px] shrink-0 bg-white border-4 border-black rounded-3xl overflow-hidden shadow-[8px_8px_0_0_rgba(0,0,0,1)] hover:shadow-[12px_12px_0_0_rgba(0,0,0,1)] hover:-translate-y-2 transition-all duration-300 snap-start flex flex-col h-[520px]"
+                                className="w-[300px] sm:w-[380px] md:w-[420px] shrink-0 bg-white border-4 border-black rounded-3xl overflow-hidden shadow-[8px_8px_0_0_rgba(0,0,0,1)] hover:shadow-[12px_12px_0_0_rgba(0,0,0,1)] hover:-translate-y-2 transition-all duration-300 snap-start flex flex-col h-[600px] md:h-[680px]"
                             >
-                                {/* Game Image */}
-                                <div className="h-60 bg-gray-200 border-b-4 border-black overflow-hidden relative group">
+                                <div className="h-80 md:h-96 bg-gray-200 border-b-4 border-black overflow-hidden relative group">
                                     <img 
                                         src={game.img} 
                                         alt={game.title} 
@@ -235,7 +229,6 @@ const Home = () => {
                                         Perimágico
                                     </div>
                                 </div>
-                                {/* Game Content Info */}
                                 <div className="p-6 flex-1 flex flex-col justify-between">
                                     <div>
                                         <h3 className="text-2xl font-black uppercase tracking-tight text-black mb-3">
@@ -258,9 +251,7 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* 3. ACCESOS SECTION (Blue background + Tickets) */}
             <section id="accesos" className="bg-[#009bfb] py-20 text-white relative overflow-hidden border-b-8 border-black">
-                {/* Decorative Elements */}
                 <div className="absolute -top-12 -right-12 w-48 h-48 bg-white/5 rounded-full blur-2xl pointer-events-none" />
                 <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-black/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -272,63 +263,51 @@ const Home = () => {
                         La diversión está a un día de distancia
                     </p>
 
-                    {/* Cards Grid */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto items-stretch">
                         {tickets.map((t, idx) => (
                             <div 
                                 key={idx} 
                                 className={`bg-white rounded-3xl overflow-hidden shadow-[8px_8px_0_0_rgba(0,0,0,0.25)] border-4 border-black flex flex-col justify-between transform hover:-translate-y-3 hover:scale-102 hover:shadow-neon-blue transition-all duration-300 ${t.isRecommended ? 'relative ring-4 ring-secondary border-secondary ring-offset-4 ring-offset-brandblue' : ''}`}
                             >
-                                {t.isRecommended && (
-                                    <div className="absolute top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black uppercase px-4 py-1.5 rounded-full border-2 border-black shadow-[2px_2px_0_0_rgba(0,0,0,1)] z-10 tracking-widest whitespace-nowrap animate-bounce">
-                                        EL MÁS RECOMENDADO
-                                    </div>
-                                )}
-                                
-                                <div className="p-3 bg-white flex-1 flex items-center justify-center">
-                                    <img 
-                                        src={t.img} 
-                                        alt={t.name} 
-                                        className="w-full h-auto object-contain rounded-2xl" 
-                                    />
+                                <div className="h-48 bg-gray-300 border-b-4 border-black overflow-hidden">
+                                    <img src={t.img} alt={t.name} className="w-full h-full object-cover" />
                                 </div>
-                                
-                                <div className="p-4 bg-gray-50 border-t-2 border-gray-100">
+                                <div className="p-6 flex flex-col gap-4">
+                                    {t.isRecommended && (
+                                        <div className="bg-secondary text-black font-black uppercase text-xs px-3 py-2 rounded-lg text-center border-2 border-black shadow-[2px_2px_0_0_rgba(0,0,0,1)]">
+                                            ⭐ Más Recomendado
+                                        </div>
+                                    )}
+                                    <h3 className="text-black font-black text-lg uppercase tracking-tight">
+                                        {t.name}
+                                    </h3>
                                     <a 
-                                        href={t.path} 
-                                        className="w-full block bg-primary text-white py-3 rounded-full text-center font-black text-sm uppercase hover:bg-secondary hover:text-black border-2 border-black shadow-[3px_3px_0_0_rgba(0,0,0,1)] hover:translate-y-0.5 hover:shadow-[1px_1px_0_0_rgba(0,0,0,1)] transition-all"
+                                        href={t.path}
+                                        className="bg-primary text-white border-2 border-black px-6 py-3 rounded-full font-black uppercase text-sm tracking-widest hover:bg-secondary hover:text-black shadow-[4px_4px_0_0_rgba(0,0,0,0.5)] transition-all self-center"
                                     >
-                                        RESERVAR AHORA
+                                        Reservar
                                     </a>
                                 </div>
                             </div>
                         ))}
                     </div>
-
-                    <p className="mt-12 text-white/90 font-black uppercase text-base tracking-widest">
-                        Seleccione el paquete que quieras reservar.
-                    </p>
                 </div>
             </section>
 
-            {/* 4. CUMPLEAÑOS SECTION */}
             <section id="cumpleanos" className="relative w-full h-[500px] md:h-[600px] bg-black overflow-hidden flex items-center border-b-8 border-black">
-                {/* Background Image */}
                 <img 
-                    src="/images/banner/Cumpleaños.png" 
+                    src="/images/banner/Birthday.png" 
                     alt="Cumpleaños en Perimágico" 
                     className="absolute inset-0 w-full h-full object-cover z-0" 
                 />
                 
-                {/* Dark Vignette mask */}
-                <div className="absolute inset-0 bg-black/40 z-10" />
+                <div className="absolute inset-0 bg-black/45 z-10" />
 
-                <div className="container px-4 md:px-8 relative z-20">
-                    {/* Left overlay text box */}
+                <div className="container px-4 md:px-8 relative z-20 flex justify-end">
                     <div className="w-full max-w-[460px] bg-black/85 backdrop-blur-md border-4 border-black p-8 rounded-3xl shadow-[12px_12px_0_0_rgba(0,0,0,0.6)] transform hover:scale-102 transition-transform duration-300">
-                        <h2 className="text-secondary text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-4">
-                            CUMPLEAÑOS
-                        </h2>
+                        <div className="h-16 md:h-20 mb-6 flex justify-start items-center">
+                            <span className="text-white font-black text-3xl md:text-4xl">CUMPLEAÑOS</span>
+                        </div>
                         <p className="text-gray-200 font-bold text-base md:text-lg leading-relaxed mb-8">
                             Tu evento con nosotros será inolvidable. Celebra tu cumpleaños con la mejor diversión, áreas exclusivas y paquetes a tu medida diseñados para sorprender a todos.
                         </p>
@@ -342,20 +321,16 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* 5. FOOD COURT SECTION */}
             <section id="restaurante" className="relative w-full h-[500px] md:h-[600px] bg-black overflow-hidden flex items-center border-b-8 border-black">
-                {/* Background Image */}
                 <img 
                     src="/images/banner/Food Court.png" 
                     alt="Food Court de Perimágico" 
                     className="absolute inset-0 w-full h-full object-cover z-0" 
                 />
                 
-                {/* Dark Vignette mask */}
                 <div className="absolute inset-0 bg-black/45 z-10" />
 
                 <div className="container px-4 md:px-8 relative z-20 flex justify-start">
-                    {/* Left overlay text box */}
                     <div className="w-full max-w-[460px] bg-black/85 backdrop-blur-md border-4 border-black p-8 rounded-3xl shadow-[12px_12px_0_0_rgba(0,0,0,0.6)] transform hover:scale-102 transition-transform duration-300">
                         <div className="h-16 md:h-20 mb-6 flex justify-start items-center">
                             <img 
@@ -377,10 +352,8 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* 6. INSTAGRAM FEED SECTION */}
             <section id="feed-instagram" className="bg-white py-16 border-b-8 border-black">
                 <div className="container px-4 md:px-8 text-center">
-                    {/* Instagram Header */}
                     <a 
                         href="https://www.instagram.com/perimagicooficial" 
                         target="_blank" 
@@ -391,79 +364,56 @@ const Home = () => {
                             <Instagram size={26} strokeWidth={2.5} />
                         </div>
                         <span className="text-black text-2xl md:text-3xl font-black uppercase tracking-tight">
-                            @perimagico
+                            @perimagicooficial
                         </span>
                     </a>
 
-                    {/* Instagram Feed 5 Posts Row */}
-                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 max-w-6xl mx-auto">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-0 max-w-6xl mx-auto">
                         {instagramPosts.map((post, idx) => (
                             <a 
                                 key={idx} 
                                 href="https://www.instagram.com/perimagicooficial" 
                                 target="_blank" 
                                 rel="noreferrer" 
-                                className={`group bg-gray-100 border-4 border-black rounded-3xl overflow-hidden shadow-premium hover:-translate-y-1.5 hover:shadow-neon-blue transition-all duration-300 aspect-square relative ${idx >= 4 ? 'hidden lg:block' : ''} ${idx >= 3 ? 'hidden sm:block' : ''}`}
+                                className={`group overflow-hidden hover:opacity-80 transition-opacity duration-300 aspect-square relative ${idx >= 4 ? 'hidden lg:block' : ''} ${idx >= 3 ? 'hidden sm:block' : ''}`}
                             >
                                 <img 
                                     src={post.img} 
                                     alt={`Instagram post ${idx + 1}`} 
-                                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" 
+                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
                                 />
-                                {/* Hover Mask */}
-                                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-6 text-white font-black text-lg">
-                                    <div className="flex items-center gap-2">
-                                        <span>❤️</span>
-                                        <span>{post.likes}</span>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <span>💬</span>
-                                        <span>{post.comments}</span>
-                                    </div>
-                                </div>
                             </a>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* 7. MAPA E INDICACIONES (Location section) */}
-            <section id="ubicacion" className="relative w-full h-[500px] bg-gray-200 border-b-8 border-black">
-                {/* Full Width Google Map */}
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15031.543415848525!2d-99.1994646549301!3d19.610813972626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f568e61295db%3A0xeab5bc034d610010!2sGaler%C3%ADas%20Perinorte!5e0!3m2!1ses-419!2smx!4v1714588500203!5m2!1ses-419!2smx" 
-                    width="100%" 
-                    height="100%" 
-                    style={{ border: 0, filter: 'grayscale(0.1) contrast(1.05)' }} 
-                    allowFullScreen="" 
-                    loading="lazy" 
-                    referrerPolicy="no-referrer-when-downgrade"
-                    title="Ubicación de Perimágico en Galerías Perinorte"
-                ></iframe>
-
-                {/* Overlaid Address Box */}
-                <div className="absolute top-8 left-1/2 -translate-x-1/2 md:left-12 md:translate-x-0 bg-black/85 backdrop-blur-md border-4 border-black p-6 md:p-8 shadow-[8px_8px_0_0_rgba(0,0,0,0.6)] max-w-sm w-[90%] md:w-auto z-10 flex flex-col items-center text-center text-white rounded-3xl">
-                    <div className="w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center mb-4 border-2 border-black shadow-md">
-                        <MapPin size={28} />
+            <section id="ubicacion" className="relative w-full h-[500px] bg-gray-200 border-b-8 border-black flex items-center">
+                <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent z-10" />
+                
+                <div className="container px-4 md:px-8 relative z-20 flex justify-start">
+                    <div className="w-full max-w-md">
+                        <h2 className="text-white text-4xl md:text-5xl font-black uppercase tracking-tight mb-6">
+                            Ubicación
+                        </h2>
+                        <div className="flex items-start gap-3 mb-8 text-white">
+                            <MapPin size={28} className="flex-shrink-0 mt-1" />
+                            <p className="font-bold text-lg">
+                                Centro Comercial Galerías Perinorte<br />
+                                Cuautitlán Izcalli, Estado de México
+                            </p>
+                        </div>
+                        <a 
+                            href="#contacto" 
+                            className="inline-block bg-primary text-white border-2 border-black px-10 py-3.5 rounded-full font-black text-sm uppercase tracking-widest hover:bg-secondary hover:text-black shadow-[4px_4px_0_0_rgba(0,0,0,0.5)] transition-all"
+                        >
+                            Cómo llegar
+                        </a>
                     </div>
-                    <h3 className="text-secondary text-2xl font-black uppercase tracking-tight mb-2">Location</h3>
-                    <p className="font-bold text-gray-200 text-sm leading-relaxed mb-6">
-                        Centro Comercial Galerías Perinorte,<br/>Cuautitlán Izcalli, Estado de México.
-                    </p>
-                    <a 
-                        href="https://maps.app.goo.gl/wYcE2Z76iC8Rk5j59" 
-                        target="_blank" 
-                        rel="noreferrer" 
-                        className="bg-primary text-white text-sm font-black uppercase py-3.5 px-8 rounded-full border-2 border-black hover:bg-secondary hover:text-black transition-all inline-block w-full shadow-md"
-                    >
-                        CÓMO LLEGAR
-                    </a>
                 </div>
             </section>
 
-            {/* 8. FORMULARIO DE CONTACTO */}
             <ContactForm />
-
         </Layout>
     );
 };
