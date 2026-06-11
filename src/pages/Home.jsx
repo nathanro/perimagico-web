@@ -1,32 +1,11 @@
 import { useState, useRef, useCallback } from 'react';
-import { Play, Pause, ChevronLeft, ChevronRight, Instagram, MapPin, Volume2, VolumeX } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Instagram, MapPin } from 'lucide-react';
 import Layout from '../components/Layout';
 import ContactForm from '../components/ContactForm';
 
 const Home = () => {
-    const [isPlaying, setIsPlaying] = useState(true);
-    const [isMuted, setIsMuted] = useState(true);
     const [activeSlide, setActiveSlide] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
-    const videoRef = useRef(null);
-
-    const togglePlay = () => {
-        if (videoRef.current) {
-            if (isPlaying) {
-                videoRef.current.pause();
-            } else {
-                videoRef.current.play().catch(err => console.log("Play failed: ", err));
-            }
-            setIsPlaying(!isPlaying);
-        }
-    };
-
-    const toggleMute = () => {
-        if (videoRef.current) {
-            videoRef.current.muted = !isMuted;
-            setIsMuted(!isMuted);
-        }
-    };
 
     const goToSlide = useCallback((direction) => {
         if (isAnimating) return;
@@ -112,7 +91,6 @@ const Home = () => {
             <section className="relative w-full h-[650px] md:h-[750px] lg:h-[850px] bg-black overflow-hidden flex items-center justify-center">
                 {/* Background Video */}
                 <video
-                    ref={videoRef}
                     src="/videos/int.mp4"
                     loop
                     muted
@@ -154,31 +132,6 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-
-                    {/* Center: Large Interactive Play Button */}
-                    <div className="flex-1 flex items-center justify-center">
-                        <button 
-                            onClick={togglePlay}
-                            className="w-24 h-24 md:w-32 md:h-32 bg-white/10 backdrop-blur-md hover:bg-white/30 text-white rounded-full flex items-center justify-center border-4 border-white transition-all duration-300 hover:scale-110 shadow-neon-blue group relative"
-                            aria-label={isPlaying ? "Pause video" : "Play video"}
-                        >
-                            <span className="absolute inset-0 rounded-full border-4 border-white animate-ping opacity-25"></span>
-                            {isPlaying ? (
-                                <Pause size={48} className="md:w-16 md:h-16 group-hover:scale-95 transition-transform" fill="currentColor" />
-                            ) : (
-                                <Play size={48} className="ml-2 md:w-16 md:h-16 group-hover:scale-95 transition-transform" fill="currentColor" />
-                            )}
-                        </button>
-                    </div>
-
-                    {/* Bottom Right Mute Toggle */}
-                    <button 
-                        onClick={toggleMute}
-                        className="absolute bottom-6 right-6 md:bottom-12 md:right-12 z-25 bg-black/60 backdrop-blur-sm border-2 border-white/20 text-white p-3.5 rounded-full hover:bg-white hover:text-black hover:border-white transition-all shadow-md"
-                        aria-label={isMuted ? "Unmute video" : "Mute video"}
-                    >
-                        {isMuted ? <VolumeX size={22} /> : <Volume2 size={22} />}
-                    </button>
 
                 </div>
             </section>
@@ -385,23 +338,7 @@ const Home = () => {
                 {/* Dark Vignette mask */}
                 <div className="absolute inset-0 bg-black/40 z-10" />
 
-                <div className="container px-4 md:px-8 relative z-20">
-                    {/* Left overlay text box */}
-                    <div className="w-full max-w-[460px] bg-black/85 backdrop-blur-md border-4 border-black p-8 rounded-3xl shadow-[12px_12px_0_0_rgba(0,0,0,0.6)] transform hover:scale-102 transition-transform duration-300">
-                        <h2 className="text-secondary text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-4">
-                            CUMPLEAÑOS
-                        </h2>
-                        <p className="text-gray-200 font-bold text-base md:text-lg leading-relaxed mb-8">
-                            Tu evento con nosotros será inolvidable. Celebra tu cumpleaños con la mejor diversión, áreas exclusivas y paquetes a tu medida diseñados para sorprender a todos.
-                        </p>
-                        <a 
-                            href="#contacto" 
-                            className="inline-block bg-primary text-white border-2 border-black px-10 py-3.5 rounded-full font-black text-sm uppercase tracking-widest hover:bg-secondary hover:text-black shadow-[4px_4px_0_0_rgba(0,0,0,0.5)] transition-all"
-                        >
-                            VER MÁS
-                        </a>
-                    </div>
-                </div>
+
             </section>
 
             {/* 5. FOOD COURT SECTION */}
@@ -416,27 +353,7 @@ const Home = () => {
                 {/* Dark Vignette mask */}
                 <div className="absolute inset-0 bg-black/45 z-10" />
 
-                <div className="container px-4 md:px-8 relative z-20 flex justify-start">
-                    {/* Left overlay text box */}
-                    <div className="w-full max-w-[460px] bg-black/85 backdrop-blur-md border-4 border-black p-8 rounded-3xl shadow-[12px_12px_0_0_rgba(0,0,0,0.6)] transform hover:scale-102 transition-transform duration-300">
-                        <div className="h-16 md:h-20 mb-6 flex justify-start items-center">
-                            <img 
-                                src="/images/banner/Food Court text.png" 
-                                alt="Food Court Logo" 
-                                className="h-full object-contain filter brightness-200" 
-                            />
-                        </div>
-                        <p className="text-gray-200 font-bold text-base md:text-lg leading-relaxed mb-8">
-                            Recarga toda esa energía perdida después de tanta diversión. Contamos con una amplia variedad de alimentos deliciosos como pizzas calientitas, hamburguesas, paninis, snacks y las bebidas más refrescantes.
-                        </p>
-                        <a 
-                            href="#contacto" 
-                            className="inline-block bg-primary text-white border-2 border-black px-10 py-3.5 rounded-full font-black text-sm uppercase tracking-widest hover:bg-secondary hover:text-black shadow-[4px_4px_0_0_rgba(0,0,0,0.5)] transition-all"
-                        >
-                            VER MÁS
-                        </a>
-                    </div>
-                </div>
+
             </section>
 
             {/* 6. INSTAGRAM FEED SECTION */}
@@ -465,7 +382,7 @@ const Home = () => {
                                 href="https://www.instagram.com/perimagicooficial" 
                                 target="_blank" 
                                 rel="noreferrer" 
-                                className={`group bg-gray-100 border-4 border-black rounded-3xl overflow-hidden shadow-premium hover:-translate-y-1.5 hover:shadow-neon-blue transition-all duration-300 aspect-square relative ${idx >= 4 ? 'hidden lg:block' : ''} ${idx >= 3 ? 'hidden sm:block' : ''}`}
+                                className={`group bg-gray-100 rounded-2xl overflow-hidden hover:-translate-y-1.5 transition-all duration-300 aspect-square relative ${idx >= 4 ? 'hidden lg:block' : ''} ${idx >= 3 ? 'hidden sm:block' : ''}`}
                             >
                                 <img 
                                     src={post.img} 
