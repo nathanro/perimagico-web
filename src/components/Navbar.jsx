@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Phone } from 'lucide-react';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -21,10 +21,22 @@ const Navbar = () => {
 
     return (
         <div className="fixed w-full z-50 flex flex-col">
-            {/* Top Promo Banner (Cian with Yellow Text like brand colors) */}
-            <div className="bg-brandcyan text-white text-center font-black text-xs md:text-sm py-2 tracking-widest uppercase shadow-md relative z-10 flex items-center justify-center gap-2">
-                <span className="inline-block w-2 h-2 rounded-full bg-secondary animate-ping"></span>
-                <span>¡LA MAGIA COMIENZA AQUÍ!</span>
+            {/* Top Promo Banner */}
+            <div className="bg-brandcyan text-white font-black text-xs md:text-sm py-2 tracking-widest uppercase shadow-md relative z-10">
+                <div className="container flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                        <span className="inline-block w-2 h-2 rounded-full bg-secondary animate-ping shrink-0"></span>
+                        <span>¡LA MAGIA COMIENZA AQUÍ!</span>
+                    </div>
+                    <a
+                        href="tel:+525538861424"
+                        className="flex items-center gap-1.5 hover:text-secondary transition-colors shrink-0"
+                        aria-label="Llamar a Perimágico"
+                    >
+                        <Phone size={13} />
+                        <span>55 3886 1424</span>
+                    </a>
+                </div>
             </div>
 
             {/* Main Navbar (Solid Black) */}

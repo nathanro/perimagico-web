@@ -408,7 +408,7 @@ const Home = () => {
                             <Instagram size={26} strokeWidth={2.5} />
                         </div>
                         <span className="text-black text-2xl md:text-3xl font-black uppercase tracking-tight">
-                            @perimagico
+                            @perimagicooficial
                         </span>
                     </a>
 
