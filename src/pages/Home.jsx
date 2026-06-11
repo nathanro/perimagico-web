@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { Play, Pause, ChevronLeft, ChevronRight, Instagram, MapPin, Volume2, VolumeX } from 'lucide-react';
 import Layout from '../components/Layout';
 import ContactForm from '../components/ContactForm';
@@ -6,8 +6,9 @@ import ContactForm from '../components/ContactForm';
 const Home = () => {
     const [isPlaying, setIsPlaying] = useState(true);
     const [isMuted, setIsMuted] = useState(true);
+    const [activeSlide, setActiveSlide] = useState(0);
+    const [isAnimating, setIsAnimating] = useState(false);
     const videoRef = useRef(null);
-    const carouselRef = useRef(null);
 
     const togglePlay = () => {
         if (videoRef.current) {
@@ -27,16 +28,16 @@ const Home = () => {
         }
     };
 
-    // Scroll carousel left/right
-    const scrollCarousel = (direction) => {
-        if (carouselRef.current) {
-            const scrollAmount = 350; // width of card + gap
-            carouselRef.current.scrollBy({
-                left: direction === 'left' ? -scrollAmount : scrollAmount,
-                behavior: 'smooth'
-            });
-        }
-    };
+    const goToSlide = useCallback((direction) => {
+        if (isAnimating) return;
+        setIsAnimating(true);
+        setActiveSlide(prev => {
+            const total = 6; // games.length
+            if (direction === 'prev') return (prev - 1 + total) % total;
+            return (prev + 1) % total;
+        });
+        setTimeout(() => setIsAnimating(false), 500);
+    }, [isAnimating]);
 
     const games = [
         {
@@ -182,77 +183,138 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* 2. ATRACCIONES & JUEGOS CAROUSEL SECTION */}
-            <section id="juegos-atracciones" className="bg-white py-20 relative overflow-hidden border-b-8 border-black">
-                <div className="container px-4 md:px-8">
-                    {/* Header */}
-                    <div className="text-center md:text-left mb-12 flex flex-col md:flex-row justify-between items-end gap-6">
-                        <div className="max-w-2xl">
-                            <h2 className="text-primary text-5xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-4">
-                                ATRACCIONES <span className="text-primary font-black lowercase text-4xl md:text-5xl font-sans inline-block rotate-[-2deg] bg-secondary text-black px-4 py-1.5 rounded-xl border-4 border-black ml-2 shadow-[4px_4px_0_0_rgba(0,0,0,1)]">Juegos</span>
-                            </h2>
-                            <p className="text-gray-700 font-bold text-lg md:text-xl">
-                                Descubre nuestras atracciones únicas diseñadas para que tus hijos y toda la familia pasen un rato inolvidable.
-                            </p>
-                        </div>
-                        {/* Carousel Navigation Buttons */}
-                        <div className="flex gap-3 shrink-0">
-                            <button 
-                                onClick={() => scrollCarousel('left')}
-                                className="w-14 h-14 bg-primary text-white hover:bg-secondary hover:text-black border-4 border-black rounded-full flex items-center justify-center transition-all shadow-[4px_4px_0_0_rgba(0,0,0,1)] active:translate-y-1 active:shadow-none"
-                                aria-label="Atracción anterior"
-                            >
-                                <ChevronLeft size={28} strokeWidth={3} />
-                            </button>
-                            <button 
-                                onClick={() => scrollCarousel('right')}
-                                className="w-14 h-14 bg-primary text-white hover:bg-secondary hover:text-black border-4 border-black rounded-full flex items-center justify-center transition-all shadow-[4px_4px_0_0_rgba(0,0,0,1)] active:translate-y-1 active:shadow-none"
-                                aria-label="Siguiente atracción"
-                            >
-                                <ChevronRight size={28} strokeWidth={3} />
-                            </button>
+            {/* 2. ATRACCIONES & JUEGOS — COVERFLOW SLIDER (estilo Acuario Michin) */}
+            <section id="juegos-atracciones" className="bg-[#0a1628] py-16 md:py-20 relative overflow-hidden border-b-8 border-black">
+                {/* Background gradient */}
+                <div className="absolute inset-0 bg-gradient-to-b from-[#0d1f3c] to-[#060e1c] pointer-events-none" />
+
+                <div className="relative z-10">
+                    {/* Section Header */}
+                    <div className="text-center mb-10 px-4">
+                        <h2 className="text-white text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-3">
+                            ATRACCIONES <span className="bg-secondary text-black px-4 py-1 rounded-xl border-4 border-black inline-block rotate-[-1deg] shadow-[4px_4px_0_0_rgba(0,0,0,1)] text-3xl md:text-5xl lowercase ml-2">Juegos</span>
+                        </h2>
+                        <p className="text-white/70 font-bold text-base md:text-lg max-w-xl mx-auto">
+                            Descubre nuestras atracciones únicas diseñadas para que toda la familia pase un rato inolvidable.
+                        </p>
+                    </div>
+
+                    {/* Coverflow Slider Stage */}
+                    <div className="relative flex items-center justify-center" style={{ minHeight: '520px' }}>
+
+                        {/* LEFT ARROW */}
+                        <button
+                            onClick={() => goToSlide('prev')}
+                            className="absolute left-3 md:left-8 z-30 w-11 h-11 md:w-14 md:h-14 bg-secondary text-black rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.6)] hover:scale-110 active:scale-95 transition-all border-2 border-black"
+                            aria-label="Atracción anterior"
+                        >
+                            <ChevronLeft size={26} strokeWidth={3} />
+                        </button>
+
+                        {/* RIGHT ARROW */}
+                        <button
+                            onClick={() => goToSlide('next')}
+                            className="absolute right-3 md:right-8 z-30 w-11 h-11 md:w-14 md:h-14 bg-secondary text-black rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.6)] hover:scale-110 active:scale-95 transition-all border-2 border-black"
+                            aria-label="Siguiente atracción"
+                        >
+                            <ChevronRight size={26} strokeWidth={3} />
+                        </button>
+
+                        {/* SLIDES TRACK — overflow hidden so side cards are clipped */}
+                        <div className="w-full flex items-center justify-center overflow-hidden" style={{ height: '520px' }}>
+                            <div className="relative flex items-center justify-center w-full h-full">
+                                {games.map((game, idx) => {
+                                    const total = games.length;
+                                    let rel = idx - activeSlide;
+                                    if (rel > total / 2) rel -= total;
+                                    if (rel < -total / 2) rel += total;
+
+                                    // Only render -2 to +2
+                                    if (Math.abs(rel) > 2) return null;
+
+                                    const isActive = rel === 0;
+                                    const isSide = Math.abs(rel) === 1;
+
+                                    // Scale, opacity and translateX per position
+                                    const scale = isActive ? 1 : isSide ? 0.75 : 0.55;
+                                    const opacity = isActive ? 1 : isSide ? 0.55 : 0.25;
+                                    // translateX in % of the slide's own width — push sides outward
+                                    const tx = rel === 0 ? 0 : rel === 1 ? 82 : rel === -1 ? -82 : rel === 2 ? 145 : -145;
+
+                                    const activeW = 640;
+                                    const sideW = 260;
+                                    const farW = 180;
+                                    const w = isActive ? activeW : isSide ? sideW : farW;
+                                    const h = isActive ? 480 : isSide ? 400 : 300;
+
+                                    return (
+                                        <div
+                                            key={game.title}
+                                            onClick={() => !isActive && setActiveSlide(idx)}
+                                            className="absolute rounded-2xl md:rounded-3xl overflow-hidden cursor-pointer"
+                                            style={{
+                                                width: w,
+                                                height: h,
+                                                transform: `translateX(${tx}%) scale(${scale})`,
+                                                opacity,
+                                                transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                                                zIndex: isActive ? 20 : isSide ? 10 : 5,
+                                            }}
+                                        >
+                                            {/* Image */}
+                                            <img
+                                                src={game.img}
+                                                alt={game.title}
+                                                className="w-full h-full object-cover"
+                                                loading="lazy"
+                                            />
+
+                                            {/* Active: gradient + text overlay at bottom */}
+                                            {isActive && (
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex flex-col justify-end p-6 md:p-8">
+                                                    <span className="inline-block bg-secondary text-black text-xs font-black uppercase px-3 py-1 rounded-lg border-2 border-black w-fit mb-3 shadow-md">
+                                                        Perimágico
+                                                    </span>
+                                                    <h3 className="text-white text-2xl md:text-4xl font-black uppercase tracking-tight leading-tight mb-2">
+                                                        {game.title}
+                                                    </h3>
+                                                    <p className="text-white/80 text-sm md:text-base font-bold leading-relaxed mb-4 max-w-lg line-clamp-3">
+                                                        {game.desc}
+                                                    </p>
+                                                    <a
+                                                        href="#contacto"
+                                                        className="inline-flex items-center gap-2 text-secondary font-black uppercase text-sm tracking-widest hover:gap-4 transition-all w-fit"
+                                                        onClick={e => e.stopPropagation()}
+                                                    >
+                                                        MÁS INFORMACIÓN →
+                                                    </a>
+                                                </div>
+                                            )}
+
+                                            {/* Non-active: dark overlay */}
+                                            {!isActive && (
+                                                <div className="absolute inset-0 bg-black/50 hover:bg-black/30 transition-colors" />
+                                            )}
+                                        </div>
+                                    );
+                                })}
+                            </div>
                         </div>
                     </div>
 
-                    {/* Scrollable Carousel Wrapper */}
-                    <div 
-                        ref={carouselRef}
-                        className="flex overflow-x-auto gap-6 pb-8 pt-4 px-2 no-scrollbar scroll-smooth snap-x snap-mandatory"
-                    >
-                        {games.map((game, idx) => (
-                            <div 
+                    {/* Dot indicators */}
+                    <div className="flex justify-center gap-2.5 mt-8 pb-2">
+                        {games.map((_, idx) => (
+                            <button
                                 key={idx}
-                                className="w-[290px] sm:w-[330px] md:w-[360px] shrink-0 bg-white border-4 border-black rounded-3xl overflow-hidden shadow-[8px_8px_0_0_rgba(0,0,0,1)] hover:shadow-[12px_12px_0_0_rgba(0,0,0,1)] hover:-translate-y-2 transition-all duration-300 snap-start flex flex-col h-[520px]"
-                            >
-                                {/* Game Image */}
-                                <div className="h-60 bg-gray-200 border-b-4 border-black overflow-hidden relative group">
-                                    <img 
-                                        src={game.img} 
-                                        alt={game.title} 
-                                        className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" 
-                                    />
-                                    <div className="absolute top-4 left-4 bg-secondary text-black font-black uppercase text-xs px-3 py-1.5 rounded-lg border-2 border-black shadow-[2px_2px_0_0_rgba(0,0,0,1)]">
-                                        Perimágico
-                                    </div>
-                                </div>
-                                {/* Game Content Info */}
-                                <div className="p-6 flex-1 flex flex-col justify-between">
-                                    <div>
-                                        <h3 className="text-2xl font-black uppercase tracking-tight text-black mb-3">
-                                            {game.title}
-                                        </h3>
-                                        <p className="text-gray-600 font-bold text-sm leading-relaxed">
-                                            {game.desc}
-                                        </p>
-                                    </div>
-                                    <a 
-                                        href="#contacto" 
-                                        className="inline-block mt-4 text-primary font-black uppercase text-sm tracking-widest hover:text-secondary hover:translate-x-1 transition-all"
-                                    >
-                                        MÁS INFORMACIÓN &rarr;
-                                    </a>
-                                </div>
-                            </div>
+                                onClick={() => setActiveSlide(idx)}
+                                className={`rounded-full transition-all duration-300 border-2 ${
+                                    idx === activeSlide
+                                        ? 'w-8 h-3 bg-secondary border-secondary'
+                                        : 'w-3 h-3 bg-white/30 border-white/40 hover:bg-white/60'
+                                }`}
+                                aria-label={`Ir a ${games[idx].title}`}
+                            />
                         ))}
                     </div>
                 </div>
