@@ -193,7 +193,7 @@ const Home = () => {
                                 key={idx}
                                 className="w-[300px] sm:w-[380px] md:w-[420px] shrink-0 bg-white border-4 border-black rounded-3xl overflow-hidden shadow-[8px_8px_0_0_rgba(0,0,0,1)] hover:shadow-[12px_12px_0_0_rgba(0,0,0,1)] hover:-translate-y-2 transition-all duration-300 snap-start flex flex-col h-[600px] md:h-[680px]"
                             >
-                                <div className="h-80 md:h-96 bg-gray-200 border-b-4 border-black overflow-hidden relative group">
+                                <div className="h-96 md:h-[500px] bg-gray-200 border-b-4 border-black overflow-hidden relative group">
                                     <img 
                                         src={game.img} 
                                         alt={game.title} 
