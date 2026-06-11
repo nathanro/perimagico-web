@@ -1,24 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
-import { Play, Pause, ChevronLeft, ChevronRight, Instagram, MapPin, Volume2, VolumeX } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Instagram, MapPin, Volume2, VolumeX } from 'lucide-react';
 import Layout from '../components/Layout';
 import ContactForm from '../components/ContactForm';
 
 const Home = () => {
-    const [isPlaying, setIsPlaying] = useState(true);
     const [isMuted, setIsMuted] = useState(true);
     const videoRef = useRef(null);
     const carouselRef = useRef(null);
-
-    const togglePlay = () => {
-        if (videoRef.current) {
-            if (isPlaying) {
-                videoRef.current.pause();
-            } else {
-                videoRef.current.play().catch(err => console.log("Play failed: ", err));
-            }
-            setIsPlaying(!isPlaying);
-        }
-    };
 
     const toggleMute = () => {
         if (videoRef.current) {
@@ -155,20 +143,6 @@ const Home = () => {
                         </div>
                     </div>
 
-                    <div className="flex-1 flex items-center justify-center">
-                        <button 
-                            onClick={togglePlay}
-                            className="w-24 h-24 md:w-32 md:h-32 bg-white/10 backdrop-blur-md hover:bg-white/30 text-white rounded-full flex items-center justify-center border-4 border-white transition-all duration-300 hover:scale-110 shadow-neon-blue group relative"
-                            aria-label={isPlaying ? "Pause video" : "Play video"}
-                        >
-                            <span className="absolute inset-0 rounded-full border-4 border-white animate-ping opacity-25"></span>
-                            {isPlaying ? (
-                                <Pause size={48} className="md:w-16 md:h-16 group-hover:scale-95 transition-transform" fill="currentColor" />
-                            ) : (
-                                <Play size={48} className="ml-2 md:w-16 md:h-16 group-hover:scale-95 transition-transform" fill="currentColor" />
-                            )}
-                        </button>
-                    </div>
 
                     <button 
                         onClick={toggleMute}
