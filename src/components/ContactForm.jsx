@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { Phone, Mail, MessageCircle, Send, CheckCircle } from 'lucide-react';
 
 // TODO: Reemplazar con datos reales cuando estén disponibles
-const CONTACT_PHONE   = 'TODO_TELEFONO';          // ej. "+52 55 5818 2348"
-const CONTACT_EMAIL   = 'TODO_EMAIL';             // ej. "ventas@perimagico.com.mx"
-const CONTACT_WHATSAPP = 'TODO_WHATSAPP_NUMBER'; // solo números, ej. "525558182348"
+const CONTACT_PHONE   = '+52 55 3886 1424';
+const CONTACT_EMAIL   = 'Samantha.garcia.vare@gmail.com';
+const CONTACT_WHATSAPP = '5215538861424';
 
 const ContactForm = () => {
     const [formData, setFormData] = useState({

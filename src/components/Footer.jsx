@@ -1,8 +1,8 @@
 import { Instagram, Facebook, Youtube, MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 // TODO: Actualizar cuando estén disponibles los datos reales
-const CONTACT_PHONE = 'TODO_TELEFONO';          // ej. "+52 55 5818 2348"
-const CONTACT_EMAIL = 'TODO_EMAIL';             // ej. "ventas@perimagico.com.mx"
+const CONTACT_PHONE = '+52 55 3886 1424';
+const CONTACT_EMAIL = 'Samantha.garcia.vare@gmail.com';
 
 const TikTokIcon = ({ size = 20 }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
