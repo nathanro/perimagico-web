@@ -12,7 +12,7 @@ const TikTokIcon = ({ size = 20 }) => (
 
 const Footer = () => {
     return (
-        <footer className="bg-white text-black w-full border-t-4 border-black">
+        <footer className="bg-brandblue text-white w-full border-t-4 border-black">
 
             {/* Main footer grid */}
             <div className="container max-w-6xl px-4 md:px-8 py-14">
@@ -27,7 +27,7 @@ const Footer = () => {
                                 className="h-14 object-contain"
                             />
                         </a>
-                        <p className="text-gray-500 font-bold text-sm leading-relaxed">
+                        <p className="text-white/70 font-bold text-sm leading-relaxed">
                             El parque de diversiones más mágico del norte de la Ciudad de México, en Galerías Perinorte.
                         </p>
                         {/* Social icons */}
@@ -36,7 +36,7 @@ const Footer = () => {
                                 href="https://www.facebook.com/perimagico"
                                 target="_blank" rel="noreferrer"
                                 aria-label="Facebook"
-                                className="w-10 h-10 bg-black hover:bg-primary text-white rounded-full flex items-center justify-center transition-all hover:-translate-y-0.5"
+                                className="w-10 h-10 bg-white/20 hover:bg-secondary hover:text-black text-white rounded-full flex items-center justify-center transition-all hover:-translate-y-0.5"
                             >
                                 <Facebook size={18} />
                             </a>
@@ -44,7 +44,7 @@ const Footer = () => {
                                 href="https://www.instagram.com/perimagicooficial"
                                 target="_blank" rel="noreferrer"
                                 aria-label="Instagram"
-                                className="w-10 h-10 bg-black hover:bg-primary text-white rounded-full flex items-center justify-center transition-all hover:-translate-y-0.5"
+                                className="w-10 h-10 bg-white/20 hover:bg-secondary hover:text-black text-white rounded-full flex items-center justify-center transition-all hover:-translate-y-0.5"
                             >
                                 <Instagram size={18} />
                             </a>
@@ -52,7 +52,7 @@ const Footer = () => {
                                 href="https://www.tiktok.com"
                                 target="_blank" rel="noreferrer"
                                 aria-label="TikTok"
-                                className="w-10 h-10 bg-black hover:bg-primary text-white rounded-full flex items-center justify-center transition-all hover:-translate-y-0.5"
+                                className="w-10 h-10 bg-white/20 hover:bg-secondary hover:text-black text-white rounded-full flex items-center justify-center transition-all hover:-translate-y-0.5"
                             >
                                 <TikTokIcon size={18} />
                             </a>
@@ -60,7 +60,7 @@ const Footer = () => {
                                 href="https://www.youtube.com"
                                 target="_blank" rel="noreferrer"
                                 aria-label="YouTube"
-                                className="w-10 h-10 bg-black hover:bg-primary text-white rounded-full flex items-center justify-center transition-all hover:-translate-y-0.5"
+                                className="w-10 h-10 bg-white/20 hover:bg-secondary hover:text-black text-white rounded-full flex items-center justify-center transition-all hover:-translate-y-0.5"
                             >
                                 <Youtube size={18} />
                             </a>
@@ -69,7 +69,7 @@ const Footer = () => {
 
                     {/* COL 2: Navegación */}
                     <div>
-                        <h4 className="font-black uppercase tracking-widest text-xs text-gray-400 mb-5">
+                        <h4 className="font-black uppercase tracking-widest text-xs text-white/50 mb-5">
                             Navegación
                         </h4>
                         <ul className="space-y-3">
@@ -84,7 +84,7 @@ const Footer = () => {
                                 <li key={label}>
                                     <a
                                         href={href}
-                                        className="font-bold text-sm text-gray-600 hover:text-primary transition-colors flex items-center gap-1.5 group"
+                                        className="font-bold text-sm text-white/70 hover:text-secondary transition-colors flex items-center gap-1.5 group"
                                     >
                                         <span className="w-1 h-1 bg-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
                                         {label}
@@ -96,13 +96,13 @@ const Footer = () => {
 
                     {/* COL 3: Contacto */}
                     <div>
-                        <h4 className="font-black uppercase tracking-widest text-xs text-gray-400 mb-5">
+                        <h4 className="font-black uppercase tracking-widest text-xs text-white/50 mb-5">
                             Contacto
                         </h4>
                         <ul className="space-y-4">
                             <li className="flex items-start gap-3">
                                 <MapPin size={18} className="text-primary shrink-0 mt-0.5" />
-                                <span className="text-sm font-bold text-gray-600 leading-relaxed">
+                                <span className="text-sm font-bold text-white/70 leading-relaxed">
                                     Centro Comercial Galerías Perinorte,<br />
                                     Cuautitlán Izcalli, Estado de México
                                 </span>
@@ -110,21 +110,21 @@ const Footer = () => {
                             <li className="flex items-center gap-3">
                                 <Phone size={18} className="text-primary shrink-0" />
                                 {CONTACT_PHONE !== 'TODO_TELEFONO' ? (
-                                    <a href={`tel:${CONTACT_PHONE}`} className="text-sm font-bold text-gray-600 hover:text-primary transition-colors">
+                                    <a href={`tel:${CONTACT_PHONE}`} className="text-sm font-bold text-white/70 hover:text-secondary transition-colors">
                                         {CONTACT_PHONE}
                                     </a>
                                 ) : (
-                                    <span className="text-sm font-bold text-gray-300">Próximamente</span>
+                                    <span className="text-sm font-bold text-white/30">Próximamente</span>
                                 )}
                             </li>
                             <li className="flex items-center gap-3">
                                 <Mail size={18} className="text-primary shrink-0" />
                                 {CONTACT_EMAIL !== 'TODO_EMAIL' ? (
-                                    <a href={`mailto:${CONTACT_EMAIL}`} className="text-sm font-bold text-gray-600 hover:text-primary transition-colors break-all">
+                                    <a href={`mailto:${CONTACT_EMAIL}`} className="text-sm font-bold text-white/70 hover:text-secondary transition-colors break-all">
                                         {CONTACT_EMAIL}
                                     </a>
                                 ) : (
-                                    <span className="text-sm font-bold text-gray-300">Próximamente</span>
+                                    <span className="text-sm font-bold text-white/30">Próximamente</span>
                                 )}
                             </li>
                         </ul>
@@ -132,7 +132,7 @@ const Footer = () => {
 
                     {/* COL 4: Horarios */}
                     <div>
-                        <h4 className="font-black uppercase tracking-widest text-xs text-gray-400 mb-5 flex items-center gap-2">
+                        <h4 className="font-black uppercase tracking-widest text-xs text-white/50 mb-5 flex items-center gap-2">
                             <Clock size={14} />
                             Horarios
                         </h4>
@@ -144,7 +144,7 @@ const Footer = () => {
                                 { day: 'Sábado — Domingo', hours: '12:00 — 10:00 pm', bold: true },
                             ].map(({ day, hours, highlight, bold }) => (
                                 <li key={day} className="flex justify-between items-baseline gap-2 text-sm">
-                                    <span className="font-bold text-gray-500">{day}</span>
+                                    <span className="font-bold text-white/60">{day}</span>
                                     <span className={`font-black text-right ${highlight ? 'text-primary' : bold ? 'text-secondary' : 'text-black'}`}>
                                         {hours}
                                     </span>
@@ -157,13 +157,13 @@ const Footer = () => {
             </div>
 
             {/* Bottom bar */}
-            <div className="border-t-2 border-gray-100">
-                <div className="container max-w-6xl px-4 md:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-bold text-gray-400">
+            <div className="border-t-2 border-white/20">
+                <div className="container max-w-6xl px-4 md:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-bold text-white/50">
                     <span>© 2026 Perimágico. Todos los derechos reservados.</span>
                     <div className="flex gap-4">
-                        <a href="#" className="hover:text-primary transition-colors">Aviso de Privacidad</a>
+                        <a href="#" className="hover:text-secondary transition-colors">Aviso de Privacidad</a>
                         <span>·</span>
-                        <a href="#" className="hover:text-primary transition-colors">Términos y Condiciones</a>
+                        <a href="#" className="hover:text-secondary transition-colors">Términos y Condiciones</a>
                     </div>
                 </div>
             </div>

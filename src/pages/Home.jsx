@@ -338,6 +338,23 @@ const Home = () => {
                 {/* Dark Vignette mask */}
                 <div className="absolute inset-0 bg-black/40 z-10" />
 
+                <div className="container px-4 md:px-8 relative z-20">
+                    <div className="w-full max-w-[460px]">
+                        <h2 className="text-secondary text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-4 drop-shadow-lg">
+                            CUMPLEAÑOS
+                        </h2>
+                        <p className="text-white font-bold text-base md:text-lg leading-relaxed mb-8 drop-shadow-md">
+                            Tu evento con nosotros será inolvidable. Celebra tu cumpleaños con la mejor diversión, áreas exclusivas y paquetes a tu medida diseñados para sorprender a todos.
+                        </p>
+                        <a
+                            href="#contacto"
+                            className="inline-block bg-primary text-white border-2 border-black px-10 py-3.5 rounded-full font-black text-sm uppercase tracking-widest hover:bg-secondary hover:text-black shadow-[4px_4px_0_0_rgba(0,0,0,0.5)] transition-all"
+                        >
+                            VER MÁS
+                        </a>
+                    </div>
+                </div>
+
 
             </section>
 
@@ -352,6 +369,27 @@ const Home = () => {
                 
                 {/* Dark Vignette mask */}
                 <div className="absolute inset-0 bg-black/45 z-10" />
+
+                <div className="container px-4 md:px-8 relative z-20 flex justify-start">
+                    <div className="w-full max-w-[460px]">
+                        <div className="h-16 md:h-20 mb-6 flex justify-start items-center">
+                            <img
+                                src="/images/banner/Food Court text.png"
+                                alt="Food Court Logo"
+                                className="h-full object-contain filter brightness-200 drop-shadow-lg"
+                            />
+                        </div>
+                        <p className="text-white font-bold text-base md:text-lg leading-relaxed mb-8 drop-shadow-md">
+                            Recarga toda esa energía perdida después de tanta diversión. Contamos con una amplia variedad de alimentos deliciosos como pizzas calientitas, hamburguesas, paninis, snacks y las bebidas más refrescantes.
+                        </p>
+                        <a
+                            href="#contacto"
+                            className="inline-block bg-primary text-white border-2 border-black px-10 py-3.5 rounded-full font-black text-sm uppercase tracking-widest hover:bg-secondary hover:text-black shadow-[4px_4px_0_0_rgba(0,0,0,0.5)] transition-all"
+                        >
+                            VER MÁS
+                        </a>
+                    </div>
+                </div>
 
 
             </section>
