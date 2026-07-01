@@ -3,7 +3,7 @@ import { Phone, Mail, MessageCircle, Send, CheckCircle } from 'lucide-react';
 
 // TODO: Reemplazar con datos reales cuando estén disponibles
 const CONTACT_PHONE   = '+52 55 3886 1424';
-const CONTACT_EMAIL   = 'Samantha.garcia.vare@gmail.com';
+const CONTACT_EMAIL   = 'info@perimagico.com';
 const CONTACT_WHATSAPP = '5215538861424';
 
 const ContactForm = () => {

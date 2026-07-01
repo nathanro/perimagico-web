@@ -2,7 +2,7 @@ import { Instagram, Facebook, Youtube, MapPin, Phone, Mail, Clock } from 'lucide
 
 // TODO: Actualizar cuando estén disponibles los datos reales
 const CONTACT_PHONE = '+52 55 3886 1424';
-const CONTACT_EMAIL = 'Samantha.garcia.vare@gmail.com';
+const CONTACT_EMAIL = 'info@perimagico.com';
 
 const TikTokIcon = ({ size = 20 }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -75,8 +75,9 @@ const Footer = () => {
                         <ul className="space-y-3">
                             {[
                                 { label: 'Inicio', href: '#top' },
+                                { label: 'Galería', href: '#feed-instagram' },
                                 { label: 'Atracciones y Juegos', href: '#juegos-atracciones' },
-                                { label: 'Accesos', href: '#accesos' },
+                                { label: 'Boletos', href: '#boletos' },
                                 { label: 'Cumpleaños', href: '#cumpleanos' },
                                 { label: 'Restaurante', href: '#restaurante' },
                                 { label: 'Contacto', href: '#contacto' },

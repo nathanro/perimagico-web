@@ -51,7 +51,7 @@ const Contacto = () => {
                                 </div>
                                 <div>
                                     <h4 className="text-2xl font-black uppercase mb-1">Escríbenos</h4>
-                                    <p className="text-gray-800 font-bold text-lg">hola@perimagico.com</p>
+                                    <p className="text-gray-800 font-bold text-lg">info@perimagico.com</p>
                                 </div>
                             </div>
                         </div>

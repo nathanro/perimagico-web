@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Phone } from 'lucide-react';
+import { createPortal } from 'react-dom';
+import { Menu, X, Phone, ShoppingBag } from 'lucide-react';
+import { useCart } from '../context/CartContext';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const { count, setIsOpen: setCartOpen } = useCart();
 
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 0);
@@ -11,8 +14,21 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Bloquear scroll del body cuando el menú móvil está abierto
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [isOpen]);
+
     const navLinks = [
-        { name: 'Album', path: '#feed-instagram' },
+        { name: 'Galería', path: '#feed-instagram' },
+        { name: 'Boletos', path: '#boletos' },
         { name: 'Juegos', path: '#juegos-atracciones' },
         { name: 'Cumpleaños', path: '#cumpleanos' },
         { name: 'Restaurante', path: '#restaurante' },
@@ -69,7 +85,21 @@ const Navbar = () => {
                     </div>
 
                     {/* Right: CTA and Mobile Menu Toggle */}
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3">
+                        <button
+                            type="button"
+                            onClick={() => setCartOpen(true)}
+                            className="relative flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 border-white/30 text-white hover:border-secondary hover:text-secondary transition-colors"
+                            aria-label="Abrir carrito"
+                        >
+                            <ShoppingBag size={20} />
+                            {count > 0 && (
+                                <span className="absolute -top-1 -right-1 min-w-[1.1rem] h-[1.1rem] px-0.5 bg-primary text-white text-[10px] font-black rounded-full flex items-center justify-center border border-black">
+                                    {count}
+                                </span>
+                            )}
+                        </button>
+
                         <div className="hidden md:flex items-center">
                             <a href="#contacto" className="bg-primary text-white border-2 border-primary px-6 py-2.5 rounded-full font-black text-sm hover:bg-transparent hover:text-primary transition-all uppercase tracking-wider shadow-md hover:scale-105">
                                 Reservar
@@ -85,39 +115,55 @@ const Navbar = () => {
                 </div>
             </nav>
 
-            {/* Overlay Navigation Menu (Mobile) */}
-            <div className={`fixed inset-0 bg-black/98 z-[60] flex flex-col justify-between transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'} overflow-y-auto`}>
-                {/* Close Button top right */}
-                <div className="flex justify-between items-center p-6 border-b border-white/10 shrink-0">
-                    <img
-                        src="/images/logo.png"
-                        alt="Perimágico Logo"
-                        className="h-12 object-contain"
-                    />
-                    <button className="text-white p-2 hover:text-secondary transition-colors" onClick={() => setIsOpen(false)}>
-                        <X size={40} strokeWidth={2} />
-                    </button>
-                </div>
-
-                <div className="flex-1 flex flex-col justify-start px-8 py-10 gap-8 w-full">
-                    {navLinks.map((link) => (
-                        <a
-                            key={link.name}
-                            href={link.path}
-                            className="text-white text-3xl font-black uppercase tracking-wide hover:text-secondary transition-colors text-left"
+            {/* Overlay Navigation Menu (Mobile) — portal para evitar solapamiento con hero/horarios */}
+            {createPortal(
+                <div
+                    aria-hidden={!isOpen}
+                    className={`fixed inset-0 z-[9999] bg-black flex flex-col transition-transform duration-300 ease-in-out lg:hidden ${
+                        isOpen ? 'translate-x-0 pointer-events-auto' : 'translate-x-full pointer-events-none'
+                    }`}
+                >
+                    <div className="flex justify-between items-center p-6 border-b border-white/10 shrink-0">
+                        <img
+                            src="/images/logo.png"
+                            alt="Perimágico Logo"
+                            className="h-12 object-contain"
+                        />
+                        <button
+                            type="button"
+                            className="text-white p-2 hover:text-secondary transition-colors"
                             onClick={() => setIsOpen(false)}
+                            aria-label="Cerrar menú"
                         >
-                            {link.name}
-                        </a>
-                    ))}
-                    
-                    <div className="flex flex-col gap-4 mt-8">
-                        <a href="#contacto" className="bg-primary text-white w-full py-4 rounded-full font-black text-xl text-center hover:brightness-110 transition-all uppercase tracking-widest shadow-lg" onClick={() => setIsOpen(false)}>
-                            Reservar
-                        </a>
+                            <X size={40} strokeWidth={2} />
+                        </button>
                     </div>
-                </div>
-            </div>
+
+                    <div className="flex-1 overflow-y-auto overscroll-contain px-8 py-10">
+                        <nav className="flex flex-col gap-6 w-full max-w-md mx-auto">
+                            {navLinks.map((link) => (
+                                <a
+                                    key={link.name}
+                                    href={link.path}
+                                    className="text-white text-3xl font-black uppercase tracking-wide hover:text-secondary transition-colors text-left py-1"
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    {link.name}
+                                </a>
+                            ))}
+
+                            <a
+                                href="#contacto"
+                                className="bg-primary text-white w-full py-4 rounded-full font-black text-xl text-center hover:brightness-110 transition-all uppercase tracking-widest shadow-lg mt-4"
+                                onClick={() => setIsOpen(false)}
+                            >
+                                Reservar
+                            </a>
+                        </nav>
+                    </div>
+                </div>,
+                document.body
+            )}
             
         </div>
     );

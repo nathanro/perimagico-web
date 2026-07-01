@@ -1,9 +1,67 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Instagram, MapPin } from 'lucide-react';
 import Layout from '../components/Layout';
 import ContactForm from '../components/ContactForm';
+import TicketShop from '../components/TicketShop';
+
+/** Dimensiones del coverflow según ancho de viewport (evita overflow en móvil). */
+const getSlideDimensions = () => {
+    const vw = typeof window !== 'undefined' ? window.innerWidth : 1024;
+
+    if (vw < 480) {
+        const activeW = Math.min(vw - 72, 320);
+        return {
+            activeW,
+            sideW: Math.round(activeW * 0.52),
+            farW: Math.round(activeW * 0.38),
+            activeH: Math.round(activeW * 0.82),
+            sideH: Math.round(activeW * 0.66),
+            farH: Math.round(activeW * 0.5),
+            txSide: 58,
+            txFar: 98,
+            stageHeight: Math.round(activeW * 0.95),
+            maxRel: 0,
+        };
+    }
+
+    if (vw < 768) {
+        const activeW = Math.min(vw - 80, 420);
+        return {
+            activeW,
+            sideW: Math.round(activeW * 0.58),
+            farW: Math.round(activeW * 0.42),
+            activeH: Math.round(activeW * 0.78),
+            sideH: Math.round(activeW * 0.65),
+            farH: Math.round(activeW * 0.5),
+            txSide: 65,
+            txFar: 110,
+            stageHeight: Math.round(activeW * 0.92),
+            maxRel: 1,
+        };
+    }
+
+    return {
+        activeW: 640,
+        sideW: 260,
+        farW: 180,
+        activeH: 480,
+        sideH: 400,
+        farH: 300,
+        txSide: 82,
+        txFar: 145,
+        stageHeight: 520,
+        maxRel: 2,
+    };
+};
 
 const Home = () => {
+    const [slideDims, setSlideDims] = useState(getSlideDimensions);
+
+    useEffect(() => {
+        const handleResize = () => setSlideDims(getSlideDimensions());
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
     const [activeSlide, setActiveSlide] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
 
@@ -48,30 +106,6 @@ const Home = () => {
             title: 'Flotyland',
             img: '/images/juegos/Flotyland.png',
             desc: 'Espacio ideal para los más pequeños dentro de Perimágico. Un sector lleno de color, diversión y juegos diseñados para que los niños exploren, salten y disfruten en un entorno seguro y mágico junto a toda la familia.'
-        }
-    ];
-
-    const tickets = [
-        {
-            name: 'Acceso Adulto',
-            img: '/images/accesos/Acceso Adulto.png',
-            path: '#contacto'
-        },
-        {
-            name: 'Day Pass',
-            img: '/images/accesos/Day Pass.png',
-            path: '#contacto'
-        },
-        {
-            name: 'Day Pass Platinum',
-            img: '/images/accesos/Day Pass Platinum.png',
-            path: '#contacto'
-        },
-        {
-            name: 'Day Pass Familiar Platinum',
-            img: '/images/accesos/Day Pass Familiar Platinum.png',
-            isRecommended: true,
-            path: '#contacto'
         }
     ];
 
@@ -153,60 +187,74 @@ const Home = () => {
                     </div>
 
                     {/* Coverflow Slider Stage */}
-                    <div className="relative flex items-center justify-center" style={{ minHeight: '520px' }}>
+                    <div
+                        className="relative flex items-center justify-center w-full max-w-full px-2 sm:px-4 md:px-0 box-border"
+                        style={{ minHeight: slideDims.stageHeight }}
+                    >
 
                         {/* LEFT ARROW */}
                         <button
                             onClick={() => goToSlide('prev')}
-                            className="absolute left-3 md:left-8 z-30 w-11 h-11 md:w-14 md:h-14 bg-secondary text-black rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.6)] hover:scale-110 active:scale-95 transition-all border-2 border-black"
+                            className="absolute left-1 sm:left-3 md:left-8 z-30 w-10 h-10 sm:w-11 sm:h-11 md:w-14 md:h-14 bg-secondary text-black rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.6)] hover:scale-110 active:scale-95 transition-all border-2 border-black shrink-0"
                             aria-label="Atracción anterior"
                         >
-                            <ChevronLeft size={26} strokeWidth={3} />
+                            <ChevronLeft size={22} strokeWidth={3} className="md:w-[26px] md:h-[26px]" />
                         </button>
 
                         {/* RIGHT ARROW */}
                         <button
                             onClick={() => goToSlide('next')}
-                            className="absolute right-3 md:right-8 z-30 w-11 h-11 md:w-14 md:h-14 bg-secondary text-black rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.6)] hover:scale-110 active:scale-95 transition-all border-2 border-black"
+                            className="absolute right-1 sm:right-3 md:right-8 z-30 w-10 h-10 sm:w-11 sm:h-11 md:w-14 md:h-14 bg-secondary text-black rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.6)] hover:scale-110 active:scale-95 transition-all border-2 border-black shrink-0"
                             aria-label="Siguiente atracción"
                         >
-                            <ChevronRight size={26} strokeWidth={3} />
+                            <ChevronRight size={22} strokeWidth={3} className="md:w-[26px] md:h-[26px]" />
                         </button>
 
                         {/* SLIDES TRACK — overflow hidden so side cards are clipped */}
-                        <div className="w-full flex items-center justify-center overflow-hidden" style={{ height: '520px' }}>
-                            <div className="relative flex items-center justify-center w-full h-full">
+                        <div
+                            className="w-full max-w-full flex items-center justify-center overflow-hidden box-border"
+                            style={{ height: slideDims.stageHeight }}
+                        >
+                            <div className="relative flex items-center justify-center w-full max-w-full h-full mx-auto">
                                 {games.map((game, idx) => {
                                     const total = games.length;
                                     let rel = idx - activeSlide;
                                     if (rel > total / 2) rel -= total;
                                     if (rel < -total / 2) rel += total;
 
-                                    // Only render -2 to +2
-                                    if (Math.abs(rel) > 2) return null;
+                                    if (Math.abs(rel) > slideDims.maxRel) return null;
 
                                     const isActive = rel === 0;
                                     const isSide = Math.abs(rel) === 1;
 
-                                    // Scale, opacity and translateX per position
                                     const scale = isActive ? 1 : isSide ? 0.75 : 0.55;
                                     const opacity = isActive ? 1 : isSide ? 0.55 : 0.25;
-                                    // translateX in % of the slide's own width — push sides outward
-                                    const tx = rel === 0 ? 0 : rel === 1 ? 82 : rel === -1 ? -82 : rel === 2 ? 145 : -145;
+                                    const tx =
+                                        rel === 0 ? 0
+                                        : rel === 1 ? slideDims.txSide
+                                        : rel === -1 ? -slideDims.txSide
+                                        : rel === 2 ? slideDims.txFar
+                                        : -slideDims.txFar;
 
-                                    const activeW = 640;
-                                    const sideW = 260;
-                                    const farW = 180;
-                                    const w = isActive ? activeW : isSide ? sideW : farW;
-                                    const h = isActive ? 480 : isSide ? 400 : 300;
+                                    const w = isActive
+                                        ? slideDims.activeW
+                                        : isSide
+                                            ? slideDims.sideW
+                                            : slideDims.farW;
+                                    const h = isActive
+                                        ? slideDims.activeH
+                                        : isSide
+                                            ? slideDims.sideH
+                                            : slideDims.farH;
 
                                     return (
                                         <div
                                             key={game.title}
                                             onClick={() => !isActive && setActiveSlide(idx)}
-                                            className="absolute rounded-2xl md:rounded-3xl overflow-hidden cursor-pointer"
+                                            className="absolute rounded-2xl md:rounded-3xl overflow-hidden cursor-pointer max-w-full box-border"
                                             style={{
                                                 width: w,
+                                                maxWidth: 'calc(100vw - 4.5rem)',
                                                 height: h,
                                                 transform: `translateX(${tx}%) scale(${scale})`,
                                                 opacity,
@@ -218,25 +266,25 @@ const Home = () => {
                                             <img
                                                 src={game.img}
                                                 alt={game.title}
-                                                className="w-full h-full object-cover"
+                                                className="w-full h-full object-cover object-center"
                                                 loading="lazy"
                                             />
 
                                             {/* Active: gradient + text overlay at bottom */}
                                             {isActive && (
-                                                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex flex-col justify-end p-6 md:p-8">
-                                                    <span className="inline-block bg-secondary text-black text-xs font-black uppercase px-3 py-1 rounded-lg border-2 border-black w-fit mb-3 shadow-md">
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent flex flex-col justify-end p-4 sm:p-5 md:p-8 box-border">
+                                                    <span className="inline-block bg-secondary text-black text-[10px] sm:text-xs font-black uppercase px-2 sm:px-3 py-0.5 sm:py-1 rounded-lg border-2 border-black w-fit mb-2 sm:mb-3 shadow-md max-w-full">
                                                         Perimágico
                                                     </span>
-                                                    <h3 className="text-white text-2xl md:text-4xl font-black uppercase tracking-tight leading-tight mb-2">
+                                                    <h3 className="text-white text-lg sm:text-xl md:text-4xl font-black uppercase tracking-tight leading-tight mb-1.5 sm:mb-2 break-words">
                                                         {game.title}
                                                     </h3>
-                                                    <p className="text-white/80 text-sm md:text-base font-bold leading-relaxed mb-4 max-w-lg line-clamp-3">
+                                                    <p className="text-white/80 text-xs sm:text-sm md:text-base font-bold leading-snug sm:leading-relaxed mb-3 sm:mb-4 max-w-full line-clamp-3">
                                                         {game.desc}
                                                     </p>
                                                     <a
                                                         href="#contacto"
-                                                        className="inline-flex items-center gap-2 text-secondary font-black uppercase text-sm tracking-widest hover:gap-4 transition-all w-fit"
+                                                        className="inline-flex items-center gap-1.5 sm:gap-2 text-secondary font-black uppercase text-[11px] sm:text-xs md:text-sm tracking-wide sm:tracking-widest hover:gap-3 sm:hover:gap-4 transition-all w-fit max-w-full whitespace-nowrap"
                                                         onClick={e => e.stopPropagation()}
                                                     >
                                                         MÁS INFORMACIÓN →
@@ -273,58 +321,7 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* 3. ACCESOS SECTION (Blue background + Tickets) */}
-            <section id="accesos" className="bg-[#009bfb] py-20 text-white relative overflow-hidden border-b-8 border-black">
-                {/* Decorative Elements */}
-                <div className="absolute -top-12 -right-12 w-48 h-48 bg-white/5 rounded-full blur-2xl pointer-events-none" />
-                <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-black/10 rounded-full blur-3xl pointer-events-none" />
-
-                <div className="container px-4 md:px-8 relative z-10 text-center">
-                    <h2 className="text-secondary text-5xl md:text-6xl font-black uppercase tracking-tight mb-2 drop-shadow-md">
-                        Accesos
-                    </h2>
-                    <p className="text-white font-bold text-lg md:text-xl uppercase tracking-wider mb-12 opacity-95">
-                        La diversión está a un día de distancia
-                    </p>
-
-                    {/* Cards Grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto items-stretch">
-                        {tickets.map((t, idx) => (
-                            <div 
-                                key={idx} 
-                                className={`bg-white rounded-3xl overflow-hidden shadow-[8px_8px_0_0_rgba(0,0,0,0.25)] border-4 border-black flex flex-col justify-between transform hover:-translate-y-3 hover:scale-102 hover:shadow-neon-blue transition-all duration-300 ${t.isRecommended ? 'relative ring-4 ring-secondary border-secondary ring-offset-4 ring-offset-brandblue' : ''}`}
-                            >
-                                {t.isRecommended && (
-                                    <div className="absolute top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black uppercase px-4 py-1.5 rounded-full border-2 border-black shadow-[2px_2px_0_0_rgba(0,0,0,1)] z-10 tracking-widest whitespace-nowrap animate-bounce">
-                                        EL MÁS RECOMENDADO
-                                    </div>
-                                )}
-                                
-                                <div className="p-3 bg-white flex-1 flex items-center justify-center">
-                                    <img 
-                                        src={t.img} 
-                                        alt={t.name} 
-                                        className="w-full h-auto object-contain rounded-2xl" 
-                                    />
-                                </div>
-                                
-                                <div className="p-4 bg-gray-50 border-t-2 border-gray-100">
-                                    <a 
-                                        href={t.path} 
-                                        className="w-full block bg-primary text-white py-3 rounded-full text-center font-black text-sm uppercase hover:bg-secondary hover:text-black border-2 border-black shadow-[3px_3px_0_0_rgba(0,0,0,1)] hover:translate-y-0.5 hover:shadow-[1px_1px_0_0_rgba(0,0,0,1)] transition-all"
-                                    >
-                                        RESERVAR AHORA
-                                    </a>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    <p className="mt-12 text-white/90 font-black uppercase text-base tracking-widest">
-                        Seleccione el paquete que quieras reservar.
-                    </p>
-                </div>
-            </section>
+            <TicketShop />
 
             {/* 4. CUMPLEAÑOS SECTION */}
             <section id="cumpleanos" className="relative w-full h-[500px] md:h-[600px] bg-black overflow-hidden flex items-center border-b-8 border-black">
