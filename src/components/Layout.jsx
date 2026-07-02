@@ -1,12 +1,14 @@
 import Navbar from './Navbar';
 import Footer from './Footer';
+import WhatsAppFloat from './WhatsAppFloat';
 
 const Layout = ({ children }) => {
     return (
-        <div className="min-h-screen bg-bg">
+        <div className="pm-site">
             <Navbar />
             <main>{children}</main>
             <Footer />
+            <WhatsAppFloat />
         </div>
     );
 };
