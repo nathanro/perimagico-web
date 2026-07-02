@@ -1,6 +1,5 @@
-import { useMemo, useState } from 'react';
 import { ExternalLink, ShoppingCart } from 'lucide-react';
-import { TICKETS_BASE_URL, ticketPurchaseUrl } from '../utils/ticketsUrl';
+import { TICKETS_BASE_URL, ticketTypeUrl } from '../utils/ticketsUrl';
 
 const TICKETS = [
     {
@@ -30,44 +29,7 @@ const TICKETS = [
     },
 ];
 
-/** Fechas disponibles (sin lunes) — cálculo instantáneo, sin API. */
-const buildAvailableDates = (count = 21) => {
-    const dates = [];
-    const cursor = new Date();
-    cursor.setHours(12, 0, 0, 0);
-
-    while (dates.length < count) {
-        cursor.setDate(cursor.getDate() + 1);
-        if (cursor.getDay() !== 1) {
-            dates.push(cursor.toISOString().slice(0, 10));
-        }
-    }
-
-    return dates;
-};
-
-const AVAILABLE_DATES = buildAvailableDates();
-
-const formatChip = (isoDate) => {
-    const date = new Date(`${isoDate}T12:00:00`);
-    return {
-        weekday: date.toLocaleDateString('es-MX', { weekday: 'short' }).replace('.', '').toUpperCase(),
-        day: date.getDate(),
-        month: date.toLocaleDateString('es-MX', { month: 'short' }).replace('.', '').toUpperCase(),
-    };
-};
-
 const TicketShop = () => {
-    const [visitDate, setVisitDate] = useState(AVAILABLE_DATES[0]);
-
-    const selectedLabel = useMemo(() => {
-        const date = new Date(`${visitDate}T12:00:00`);
-        return date
-            .toLocaleDateString('es-MX', { weekday: 'short', day: 'numeric', month: 'short' })
-            .replace(/\./g, '')
-            .toUpperCase();
-    }, [visitDate]);
-
     return (
         <section id="boletos" className="bg-[#005fa3] py-12 md:py-16 text-white relative overflow-x-hidden border-b-8 border-black">
             <div className="container relative z-10 px-4 md:px-8 max-w-3xl mx-auto">
@@ -94,41 +56,9 @@ const TicketShop = () => {
                     </a>
                 </div>
 
-                <div className="mb-8">
-                    <h3 className="text-center text-lg md:text-xl font-black uppercase tracking-wide mb-1">
-                        Elige tu fecha de visita
-                    </h3>
-                    <p className="text-center text-secondary font-black uppercase text-sm mb-4 tracking-wider">
-                        Selecciona una fecha
-                    </p>
-
-                    <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar snap-x snap-mandatory">
-                        {AVAILABLE_DATES.map((iso) => {
-                            const chip = formatChip(iso);
-                            const isActive = visitDate === iso;
-                            return (
-                                <button
-                                    key={iso}
-                                    type="button"
-                                    onClick={() => setVisitDate(iso)}
-                                    className={`snap-start shrink-0 min-w-[4.5rem] px-3 py-3 rounded-xl border-2 font-black text-center transition-all ${
-                                        isActive
-                                            ? 'bg-secondary text-black border-black shadow-[3px_3px_0_0_rgba(0,0,0,1)] scale-105'
-                                            : 'bg-white/15 text-white border-white/30 hover:bg-white/25'
-                                    }`}
-                                >
-                                    <span className="block text-[10px] opacity-80">{chip.weekday}</span>
-                                    <span className="block text-xl leading-none my-0.5">{chip.day}</span>
-                                    <span className="block text-[10px] opacity-80">{chip.month}</span>
-                                </button>
-                            );
-                        })}
-                    </div>
-                </div>
-
                 <div>
                     <p className="text-center text-white/90 font-black uppercase text-xs sm:text-sm tracking-widest mb-4">
-                        Boletos — {selectedLabel}
+                        Accesos disponibles
                     </p>
 
                     <div className="space-y-4">
@@ -167,7 +97,7 @@ const TicketShop = () => {
                                         </div>
 
                                         <a
-                                            href={ticketPurchaseUrl(ticket.id, visitDate)}
+                                            href={ticketTypeUrl()}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="ticket-add-btn shrink-0 w-full sm:w-auto flex items-center justify-center gap-2 bg-secondary hover:bg-primary hover:text-white text-black font-black uppercase text-xs sm:text-sm px-4 py-3 sm:py-2.5 rounded-xl border-2 border-black shadow-[2px_2px_0_0_rgba(0,0,0,1)] transition-all active:translate-y-0.5"
@@ -183,7 +113,7 @@ const TicketShop = () => {
                 </div>
 
                 <p className="mt-8 text-center text-white/80 text-sm font-bold">
-                    La compra y el pago se completan en{' '}
+                    Elige fecha y completa tu pago en{' '}
                     <a
                         href={TICKETS_BASE_URL}
                         target="_blank"
