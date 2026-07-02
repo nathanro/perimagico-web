@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Menu, X, Phone, ShoppingBag } from 'lucide-react';
-import { useCart } from '../context/CartContext';
+import { TICKETS_BASE_URL, TICKETS_CART_URL } from '../utils/ticketsUrl';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
-    const { count, setIsOpen: setCartOpen } = useCart();
 
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 0);
@@ -86,23 +85,19 @@ const Navbar = () => {
 
                     {/* Right: CTA and Mobile Menu Toggle */}
                     <div className="flex items-center gap-2 sm:gap-3">
-                        <button
-                            type="button"
-                            onClick={() => setCartOpen(true)}
+                        <a
+                            href={TICKETS_CART_URL}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="relative flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 border-white/30 text-white hover:border-secondary hover:text-secondary transition-colors"
-                            aria-label="Abrir carrito"
+                            aria-label="Ver carrito de boletos"
                         >
                             <ShoppingBag size={20} />
-                            {count > 0 && (
-                                <span className="absolute -top-1 -right-1 min-w-[1.1rem] h-[1.1rem] px-0.5 bg-primary text-white text-[10px] font-black rounded-full flex items-center justify-center border border-black">
-                                    {count}
-                                </span>
-                            )}
-                        </button>
+                        </a>
 
                         <div className="hidden md:flex items-center">
-                            <a href="#contacto" className="bg-primary text-white border-2 border-primary px-6 py-2.5 rounded-full font-black text-sm hover:bg-transparent hover:text-primary transition-all uppercase tracking-wider shadow-md hover:scale-105">
-                                Reservar
+                            <a href={TICKETS_BASE_URL} target="_blank" rel="noopener noreferrer" className="bg-primary text-white border-2 border-primary px-6 py-2.5 rounded-full font-black text-sm hover:bg-transparent hover:text-primary transition-all uppercase tracking-wider shadow-md hover:scale-105">
+                                Comprar boletos
                             </a>
                         </div>
                         
@@ -153,11 +148,13 @@ const Navbar = () => {
                             ))}
 
                             <a
-                                href="#contacto"
+                                href={TICKETS_BASE_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="bg-primary text-white w-full py-4 rounded-full font-black text-xl text-center hover:brightness-110 transition-all uppercase tracking-widest shadow-lg mt-4"
                                 onClick={() => setIsOpen(false)}
                             >
-                                Reservar
+                                Comprar boletos
                             </a>
                         </nav>
                     </div>
