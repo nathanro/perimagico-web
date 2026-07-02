@@ -122,47 +122,57 @@ const Home = () => {
             <div id="top"></div>
 
             {/* 1. HERO SECTION (Video background + Horarios Box Overlay) */}
-            <section className="relative w-full h-[650px] md:h-[750px] lg:h-[850px] bg-black overflow-hidden flex items-center justify-center">
-                {/* Background Video */}
+            <section className="relative w-full min-h-[calc(100svh-7.5rem)] md:min-h-[750px] lg:min-h-[850px] bg-black overflow-hidden flex items-end md:items-center justify-center pt-[7.5rem] md:pt-32 pb-8 md:pb-12">
+                {/* Imagen estática en móvil (carga rápida) */}
+                <img
+                    src="/images/banner/Cumpleaños.png"
+                    alt=""
+                    aria-hidden="true"
+                    className="absolute inset-0 w-full h-full object-cover z-0 opacity-80 md:hidden"
+                />
+
+                {/* Video en desktop/tablet */}
                 <video
                     src="/videos/int.mp4"
                     loop
                     muted
                     autoPlay
                     playsInline
-                    className="absolute inset-0 w-full h-full object-cover z-0 opacity-75"
+                    preload="metadata"
+                    poster="/images/banner/Cumpleaños.png"
+                    className="absolute inset-0 w-full h-full object-cover z-0 opacity-75 hidden md:block"
                 />
                 
                 {/* Dark Vignette Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/40 z-10" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/50 z-10" />
 
                 {/* Hero Interactive Elements */}
-                <div className="container relative z-20 w-full h-full flex flex-col md:flex-row items-center justify-between pt-32 pb-12 gap-8">
+                <div className="container relative z-20 w-full flex flex-col items-center md:items-start justify-end md:justify-center gap-6">
                     
-                    {/* Left: Floating Horarios Card */}
-                    <div className="w-full sm:w-[360px] glass-panel rounded-3xl p-6 md:p-8 text-white shadow-neon-blue border-4 border-secondary transform hover:scale-102 transition-transform duration-300 self-start md:self-center mt-4">
-                        <h2 className="text-2xl md:text-3xl font-black uppercase text-center mb-6 tracking-wider border-b-2 border-white/20 pb-3">
+                    {/* Horarios Card — compacto en móvil */}
+                    <div className="w-full max-w-[340px] sm:max-w-[360px] glass-panel rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-8 text-white shadow-neon-blue border-[3px] md:border-4 border-secondary mx-auto md:mx-0 md:self-center">
+                        <h2 className="text-xl sm:text-2xl md:text-3xl font-black uppercase text-center mb-4 md:mb-6 tracking-wider border-b-2 border-white/20 pb-2 md:pb-3">
                             Horarios
                         </h2>
                         
-                        <div className="space-y-4">
+                        <div className="space-y-3 md:space-y-4">
                             <div className="flex justify-between items-center border-b border-white/10 pb-2">
-                                <span className="font-black text-secondary tracking-wide text-sm md:text-base">LUNES</span>
-                                <span className="bg-primary text-white text-xs md:text-sm font-black uppercase px-3 py-1 rounded-full animate-pulse">
+                                <span className="font-black text-secondary tracking-wide text-xs sm:text-sm md:text-base">LUNES</span>
+                                <span className="bg-primary text-white text-[10px] sm:text-xs md:text-sm font-black uppercase px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full">
                                     Cerrado
                                 </span>
                             </div>
                             <div className="flex flex-col border-b border-white/10 pb-2">
-                                <span className="font-black text-secondary tracking-wide text-xs">MARTES - JUEVES</span>
-                                <span className="font-bold text-base md:text-lg">1:00 pm - 8:00 pm</span>
+                                <span className="font-black text-secondary tracking-wide text-[10px] sm:text-xs">MARTES - JUEVES</span>
+                                <span className="font-bold text-sm sm:text-base md:text-lg">1:00 pm - 8:00 pm</span>
                             </div>
                             <div className="flex flex-col border-b border-white/10 pb-2">
-                                <span className="font-black text-secondary tracking-wide text-xs">VIERNES</span>
-                                <span className="font-bold text-base md:text-lg">1:00 pm - 8:30 pm</span>
+                                <span className="font-black text-secondary tracking-wide text-[10px] sm:text-xs">VIERNES</span>
+                                <span className="font-bold text-sm sm:text-base md:text-lg">1:00 pm - 8:30 pm</span>
                             </div>
                             <div className="flex flex-col">
-                                <span className="font-black text-secondary tracking-wide text-xs">SÁBADO - DOMINGO</span>
-                                <span className="font-bold text-base md:text-lg text-yellow-300">12:00 pm - 10:00 pm</span>
+                                <span className="font-black text-secondary tracking-wide text-[10px] sm:text-xs">SÁBADO - DOMINGO</span>
+                                <span className="font-bold text-sm sm:text-base md:text-lg text-yellow-300">12:00 pm - 10:00 pm</span>
                             </div>
                         </div>
                     </div>

@@ -2,16 +2,21 @@ import { createContext, useContext, useMemo, useState, useCallback } from 'react
 
 const CartContext = createContext(null);
 
+const itemKey = (id, visitDate) => `${id}::${visitDate || ''}`;
+
 export const CartProvider = ({ children }) => {
     const [items, setItems] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
 
     const addItem = useCallback((ticket) => {
         setItems((prev) => {
-            const existing = prev.find((item) => item.id === ticket.id);
+            const key = itemKey(ticket.id, ticket.visitDate);
+            const existing = prev.find((item) => itemKey(item.id, item.visitDate) === key);
             if (existing) {
                 return prev.map((item) =>
-                    item.id === ticket.id ? { ...item, qty: item.qty + 1 } : item
+                    itemKey(item.id, item.visitDate) === key
+                        ? { ...item, qty: item.qty + 1 }
+                        : item
                 );
             }
             return [...prev, { ...ticket, qty: 1 }];
@@ -19,17 +24,21 @@ export const CartProvider = ({ children }) => {
         setIsOpen(true);
     }, []);
 
-    const removeItem = useCallback((id) => {
-        setItems((prev) => prev.filter((item) => item.id !== id));
+    const removeItem = useCallback((id, visitDate) => {
+        const key = itemKey(id, visitDate);
+        setItems((prev) => prev.filter((item) => itemKey(item.id, item.visitDate) !== key));
     }, []);
 
-    const updateQty = useCallback((id, qty) => {
+    const updateQty = useCallback((id, qty, visitDate) => {
+        const key = itemKey(id, visitDate);
         if (qty < 1) {
-            setItems((prev) => prev.filter((item) => item.id !== id));
+            setItems((prev) => prev.filter((item) => itemKey(item.id, item.visitDate) !== key));
             return;
         }
         setItems((prev) =>
-            prev.map((item) => (item.id === id ? { ...item, qty } : item))
+            prev.map((item) =>
+                itemKey(item.id, item.visitDate) === key ? { ...item, qty } : item
+            )
         );
     }, []);
 
