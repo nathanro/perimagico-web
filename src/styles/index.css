@@ -27,7 +27,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 7.5rem;
+  scroll-padding-top: var(--site-header-offset, 120px);
 }
 
 body {
