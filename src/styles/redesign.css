@@ -466,14 +466,15 @@ ul { list-style: none; }
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
   transition: transform 0.5s ease;
 }
-.attraction-card:hover img { transform: scale(1.08); }
+.attraction-card:hover img { transform: scale(1.05); }
 .attraction-card::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(6,14,28,0) 30%, rgba(6,14,28,0.95) 100%);
+  background: linear-gradient(180deg, rgba(6,14,28,0) 45%, rgba(6,14,28,0.92) 100%);
   z-index: 1;
 }
 .attraction-body {
@@ -612,7 +613,7 @@ ul { list-style: none; }
 /* ===== Galería ===== */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 }
 .gallery-grid a {
@@ -625,6 +626,23 @@ ul { list-style: none; }
 .gallery-grid img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
 .gallery-grid a:hover img { transform: scale(1.1); }
 .gallery-cta { text-align: center; margin-top: 36px; }
+.gallery-skeleton {
+  aspect-ratio: 1/1;
+  border-radius: var(--radius-md);
+  background: linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.1), rgba(255,255,255,0.04));
+  background-size: 200% 100%;
+  animation: gallery-shimmer 1.2s infinite;
+}
+.gallery-empty {
+  text-align: center;
+  color: var(--gray-400);
+  padding: 24px 0;
+}
+.gallery-empty a { color: var(--blue-500); }
+@keyframes gallery-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
 
 /* ===== Ubicación ===== */
 .location-grid {
@@ -820,7 +838,6 @@ ul { list-style: none; }
   .tickets-grid { grid-template-columns: repeat(2, 1fr); }
   .banners-wrap { grid-template-columns: 1fr; }
   .gallery-grid { grid-template-columns: repeat(3, 1fr); }
-  .location-grid { grid-template-columns: 1fr; }
   .map-frame { height: 320px; }
   .contact-grid { grid-template-columns: 1fr; }
   .footer-top { grid-template-columns: 1fr 1fr; }

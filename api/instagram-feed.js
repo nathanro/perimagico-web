@@ -1,0 +1,17 @@
+import { fetchInstagramPosts } from '../lib/instagram.js';
+
+/** Endpoint serverless (Vercel) — feed en vivo de @perimagicooficial */
+export default async function handler(_req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate=86400');
+
+    try {
+        const posts = await fetchInstagramPosts(6);
+        res.status(200).json({ username: 'perimagicooficial', posts });
+    } catch (error) {
+        res.status(502).json({
+            error: 'No se pudo cargar el feed de Instagram',
+            message: error.message,
+        });
+    }
+}

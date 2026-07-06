@@ -1,11 +1,11 @@
 import Layout from '../components/Layout';
 import ContactForm from '../components/ContactForm';
 import TicketShop from '../components/TicketShop';
+import InstagramFeed from '../components/InstagramFeed';
 import useReveal from '../hooks/useReveal';
 import {
     ATTRACTIONS,
     HOURS,
-    INSTAGRAM_POSTS,
     LOCATION,
     SOCIAL,
     CONTACT,
@@ -190,19 +190,7 @@ const Home = () => {
                         <p>Síguenos en Instagram y descubre la magia del parque.</p>
                     </div>
 
-                    <div className="gallery-grid reveal">
-                        {INSTAGRAM_POSTS.map((post, idx) => (
-                            <a
-                                key={post.img}
-                                href={SOCIAL.instagram}
-                                target="_blank"
-                                rel="noreferrer"
-                                aria-label={`Publicación ${idx + 1} en Instagram`}
-                            >
-                                <img src={post.img} alt={`Instagram Perimágico ${idx + 1}`} loading="lazy" />
-                            </a>
-                        ))}
-                    </div>
+                    <InstagramFeed />
 
                     <div className="gallery-cta reveal">
                         <a href={SOCIAL.instagram} target="_blank" rel="noreferrer" className="btn btn-outline">

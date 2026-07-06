@@ -126,14 +126,6 @@ export const TICKETS = [
     },
 ];
 
-export const INSTAGRAM_POSTS = [
-    { img: '/images/insta_1.png', likes: 142, comments: 12 },
-    { img: '/images/insta_2.png', likes: 98, comments: 5 },
-    { img: '/images/insta_3.png', likes: 210, comments: 24 },
-    { img: '/images/insta_4.png', likes: 185, comments: 15 },
-    { img: '/images/insta_5.png', likes: 312, comments: 41 },
-];
-
 export const CONTACT_REASONS = [
     'Fiestas / Eventos',
     'Boletos / Tickets',
