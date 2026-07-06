@@ -3,6 +3,8 @@ import { SOCIAL } from '../data/siteContent';
 
 const FALLBACK_FEED = '/data/instagram-feed.json';
 
+const proxyImg = (shortcode) => `/api/instagram-image?shortcode=${encodeURIComponent(shortcode)}`;
+
 const InstagramFeed = () => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -44,6 +46,13 @@ const InstagramFeed = () => {
         };
     }, []);
 
+    const handleImgError = (event, post) => {
+        const fallback = post.proxyImg || proxyImg(post.shortcode);
+        if (event.currentTarget.src !== fallback) {
+            event.currentTarget.src = fallback;
+        }
+    };
+
     if (loading) {
         return (
             <div className="gallery-grid reveal in" aria-busy="true" aria-label="Cargando galería de Instagram">
@@ -75,8 +84,15 @@ const InstagramFeed = () => {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={post.alt}
+                    className="gallery-item"
                 >
-                    <img src={post.img} alt={post.alt} loading="lazy" referrerPolicy="no-referrer" />
+                    <img
+                        src={post.img}
+                        alt={post.alt}
+                        loading="lazy"
+                        decoding="async"
+                        onError={(event) => handleImgError(event, post)}
+                    />
                 </a>
             ))}
         </div>
