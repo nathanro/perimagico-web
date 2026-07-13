@@ -1,6 +1,6 @@
 /** Contenido publicado en perimagico.com */
 
-export const BRAND_NAME = 'Perimagico';
+export const BRAND_NAME = 'Perimágico';
 
 export const CONTACT = {
     phone: '+52 55 5818 2348',
