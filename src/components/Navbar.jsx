@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { ShoppingBag, MessageCircle } from 'lucide-react';
-import { NAV_LINKS, CONTACT, BRAND_NAME } from '../data/siteContent';
+import { NAV_LINKS, CONTACT, BRAND_NAME, whatsappChatUrl } from '../data/siteContent';
 import { TICKETS_BASE_URL, TICKETS_CART_URL } from '../utils/ticketsUrl';
 
 const Navbar = () => {
@@ -51,7 +51,7 @@ const Navbar = () => {
                     <div className="wrap">
                         <span>✦ ¡La magia comienza aquí!</span>
                     <a
-                        href={`https://wa.me/${CONTACT.whatsapp}`}
+                        href={whatsappChatUrl()}
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="WhatsApp atención a clientes"

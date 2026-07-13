@@ -1,15 +1,16 @@
 import { MessageCircle } from 'lucide-react';
-import { CONTACT } from '../data/siteContent';
+import { whatsappChatUrl } from '../data/siteContent';
 
 const WhatsAppFloat = () => (
     <a
-        href={`https://wa.me/${CONTACT.whatsapp}`}
+        href={whatsappChatUrl()}
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
         className="wa-float"
-        aria-label="Contactar por WhatsApp"
+        aria-label="Chatear por WhatsApp — atención a clientes"
     >
-        <MessageCircle size={28} color="#fff" fill="#fff" />
+        <MessageCircle size={24} color="#fff" fill="#fff" strokeWidth={0} />
+        <span className="wa-float-label">WhatsApp</span>
     </a>
 );
 

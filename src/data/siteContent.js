@@ -10,6 +10,11 @@ export const CONTACT = {
     whatsapp: '5215558182348',
 };
 
+/** Abre chat de WhatsApp con mensaje inicial de atención a clientes. */
+export const whatsappChatUrl = (
+    text = 'Hola, me gustaría recibir atención de Perimágico.'
+) => `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(text)}`;
+
 export const SOCIAL = {
     instagram: 'https://www.instagram.com/perimagicooficial',
     facebook: 'https://www.facebook.com/perimagico',

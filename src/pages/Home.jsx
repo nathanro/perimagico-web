@@ -10,6 +10,7 @@ import {
     SOCIAL,
     CONTACT,
     BRAND_NAME,
+    whatsappChatUrl,
 } from '../data/siteContent';
 import { TICKETS_BASE_URL } from '../utils/ticketsUrl';
 
@@ -58,6 +59,14 @@ const Home = () => {
                             </a>
                             <a href="#atracciones" className="btn btn-outline">
                                 Ver atracciones
+                            </a>
+                            <a
+                                href={whatsappChatUrl()}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn btn-whatsapp"
+                            >
+                                Chatear por WhatsApp
                             </a>
                         </div>
 

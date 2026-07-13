@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Phone, Mail, MessageCircle, Send, CheckCircle, Instagram, Facebook } from 'lucide-react';
-import { CONTACT, CONTACT_REASONS, SOCIAL } from '../data/siteContent';
+import { CONTACT, CONTACT_REASONS, SOCIAL, whatsappChatUrl } from '../data/siteContent';
 
 const ContactForm = () => {
     const [formData, setFormData] = useState({
@@ -42,7 +42,7 @@ const ContactForm = () => {
                     <div className="contact-direct reveal">
                         <a
                             className="direct-card whatsapp"
-                            href={`https://wa.me/${CONTACT.whatsapp}`}
+                            href={whatsappChatUrl()}
                             target="_blank"
                             rel="noreferrer"
                         >
