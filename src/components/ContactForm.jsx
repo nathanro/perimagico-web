@@ -51,7 +51,7 @@ const ContactForm = () => {
                             </span>
                             <div>
                                 <strong>WhatsApp</strong>
-                                <span>Escríbenos</span>
+                                <span>{CONTACT.phoneDisplay}</span>
                             </div>
                         </a>
 
@@ -119,7 +119,7 @@ const ContactForm = () => {
                                             value={formData.phone}
                                             onChange={handleChange}
                                             required
-                                            placeholder="55 3886 1424"
+                                            placeholder={CONTACT.phoneDisplay}
                                         />
                                     </div>
                                 </div>

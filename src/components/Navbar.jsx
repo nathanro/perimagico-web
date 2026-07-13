@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { Phone, ShoppingBag } from 'lucide-react';
-import { NAV_LINKS, CONTACT } from '../data/siteContent';
+import { ShoppingBag, MessageCircle } from 'lucide-react';
+import { NAV_LINKS, CONTACT, BRAND_NAME } from '../data/siteContent';
 import { TICKETS_BASE_URL, TICKETS_CART_URL } from '../utils/ticketsUrl';
 
 const Navbar = () => {
@@ -50,17 +50,22 @@ const Navbar = () => {
                 <div className="promo-bar">
                     <div className="wrap">
                         <span>✦ ¡La magia comienza aquí!</span>
-                        <a href={`tel:${CONTACT.phoneTel}`}>
-                            <Phone size={14} />
-                            55 3886 1424
-                        </a>
+                    <a
+                        href={`https://wa.me/${CONTACT.whatsapp}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="WhatsApp atención a clientes"
+                    >
+                        <MessageCircle size={14} />
+                        {CONTACT.phoneDisplay}
+                    </a>
                     </div>
                 </div>
 
                 <header className={`header ${scrolled ? 'scrolled' : ''}`}>
                     <div className="wrap">
                         <a href="#inicio" className="logo" onClick={closeMenu}>
-                            <img src="/images/logo.png" alt="Perimágico" />
+                            <img src="/images/logo.png" alt={BRAND_NAME} />
                         </a>
 
                         <nav className="nav-links" aria-label="Principal">

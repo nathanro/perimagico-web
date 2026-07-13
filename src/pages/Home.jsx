@@ -9,6 +9,7 @@ import {
     LOCATION,
     SOCIAL,
     CONTACT,
+    BRAND_NAME,
 } from '../data/siteContent';
 import { TICKETS_BASE_URL } from '../utils/ticketsUrl';
 
@@ -136,7 +137,7 @@ const Home = () => {
                             <img
                                 className="bg"
                                 src="/images/banner/Cumpleaños.png"
-                                alt="Cumpleaños en Perimágico"
+                                alt={`Cumpleaños en ${BRAND_NAME}`}
                             />
                             <div className="overlay" />
                             <div className="banner-content">
@@ -157,7 +158,7 @@ const Home = () => {
                             <img
                                 className="bg"
                                 src="/images/banner/Food Court.png"
-                                alt="Food Court de Perimágico"
+                                alt={`Food Court de ${BRAND_NAME}`}
                             />
                             <div className="overlay" />
                             <div className="banner-content">
@@ -247,7 +248,7 @@ const Home = () => {
                                 src={LOCATION.mapsEmbed}
                                 loading="lazy"
                                 referrerPolicy="no-referrer-when-downgrade"
-                                title="Ubicación de Perimágico en Galerías Perinorte"
+                                title={`Ubicación de ${BRAND_NAME} en Galerías Perinorte`}
                             />
                         </div>
                     </div>

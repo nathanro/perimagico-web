@@ -6,6 +6,7 @@ import {
     HOURS,
     LOCATION,
     FOOTER_TAGLINE,
+    BRAND_NAME,
 } from '../data/siteContent';
 
 const Footer = () => {
@@ -16,7 +17,7 @@ const Footer = () => {
             <div className="wrap footer-top">
                 <div className="footer-brand">
                     <a href="#inicio" className="logo">
-                        <img src="/images/logo.png" alt="Perimágico" />
+                        <img src="/images/logo.png" alt={BRAND_NAME} />
                     </a>
                     <p>{FOOTER_TAGLINE}</p>
                     <div className="social-row">
@@ -67,7 +68,7 @@ const Footer = () => {
             </div>
 
             <div className="wrap footer-bottom">
-                <span>© {new Date().getFullYear()} Perimágico. Todos los derechos reservados.</span>
+                <span>© {new Date().getFullYear()} {BRAND_NAME}. Todos los derechos reservados.</span>
                 <div style={{ display: 'flex', gap: '16px' }}>
                     <a href="#contacto">Aviso de Privacidad</a>
                     <span>·</span>

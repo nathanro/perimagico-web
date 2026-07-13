@@ -276,10 +276,10 @@ ul { list-style: none; }
 }
 
 .attraction-body p {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  font-size: 14px;
+  color: var(--gray-300);
+  margin-top: 6px;
+  line-height: 1.45;
 }
 
 .contact-success {

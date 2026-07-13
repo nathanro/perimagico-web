@@ -1,10 +1,13 @@
-/** Contenido real publicado en perimagico.com */
+/** Contenido publicado en perimagico.com */
+
+export const BRAND_NAME = 'Perimagico';
 
 export const CONTACT = {
-    phone: '+52 55 3886 1424',
-    phoneTel: '+525538861424',
+    phone: '+52 55 5818 2348',
+    phoneDisplay: '55 5818 2348',
+    phoneTel: '+52558182348',
     email: 'info@perimagico.com',
-    whatsapp: '5215538861424',
+    whatsapp: '5215558182348',
 };
 
 export const SOCIAL = {
@@ -43,37 +46,37 @@ export const ATTRACTIONS = [
         title: 'Reptour',
         tag: 'Naturaleza',
         img: '/images/juegos/Reptour.png',
-        desc: 'Espacio único donde descubrirás de cerca la majestuosidad de serpientes, lagartos y reptiles asombrosos. Aprende sobre sus misterios, rompe mitos y vive una experiencia cara a cara con la naturaleza más salvaje.',
+        desc: 'Descubre de cerca serpientes, lagartos y reptiles asombrosos. Vive una experiencia cara a cara con la naturaleza más salvaje.',
     },
     {
         title: 'Piccolo Ludo',
         tag: 'Kids',
         img: '/images/juegos/Piccolo Ludo.png',
-        desc: 'Pensado para los más pequeños, donde la diversión, el juego y la imaginación se combinan en un entorno seguro, colorido e interactivo. Un lugar ideal para explorar, aprender y disfrutar en familia.',
+        desc: 'Diversión, juego e imaginación en un entorno seguro, colorido e interactivo pensado para los más pequeños.',
     },
     {
         title: 'Juegos Mecánicos',
         tag: 'Para todos',
         img: '/images/juegos/Juegos mecanicos.png',
-        desc: 'Los Juegos Mecánicos de Perimágico ofrecen adrenalina, diversión y experiencias inolvidables para todas las edades. Desde atracciones familiares hasta juegos llenos de emoción, cada experiencia está diseñada para disfrutar en un ambiente seguro, dinámico y lleno de energía.',
+        desc: 'Adrenalina y diversión para todas las edades, en un ambiente seguro, dinámico y lleno de energía.',
     },
     {
         title: 'Sendero Jurásico',
         tag: 'Aventura',
         img: '/images/juegos/Sendero Jurasico.png',
-        desc: '¡Rugidos, ruedas y velocidad! Ven a competir en la pista más divertida de Perimágico a bordo de increíbles cuatriciclos con diseño de dinosaurio. Una carrera prehistórica pensada para toda la familia.',
+        desc: 'Compite en cuatriciclos con diseño de dinosaurio en la pista más divertida del parque.',
     },
     {
         title: 'Arcade',
         tag: 'Retos',
         img: '/images/juegos/Arcade.png',
-        desc: 'Nuestro sector de juegos arcade combina diversión, adrenalina y tecnología para todas las edades. Disfruta de videojuegos clásicos y modernos, desafíos interactivos y experiencias llenas de emoción en un ambiente vibrante y familiar.',
+        desc: 'Videojuegos clásicos y modernos, retos interactivos y pura emoción en un ambiente vibrante y familiar.',
     },
     {
         title: 'Flotyland',
-        tag: 'Acuático',
+        tag: 'Inflables',
         img: '/images/juegos/Flotyland.png',
-        desc: 'Espacio ideal para los más pequeños dentro de Perimágico. Un sector lleno de color, diversión y juegos diseñados para que los niños exploren, salten y disfruten en un entorno seguro y mágico junto a toda la familia.',
+        desc: 'Sector lleno de color donde los niños exploran, saltan y disfrutan en un entorno seguro y mágico.',
     },
 ];
 
